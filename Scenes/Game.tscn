@@ -1,14 +1,28 @@
 [gd_scene format=3 uid="uid://l6lx0at0fxeg"]
 
+[ext_resource type="Script" uid="uid://ciskn3kh6rmmo" path="res://Scripts/Game.cs" id="1_gl6un"]
 [ext_resource type="PackedScene" uid="uid://cw3x8fe8c2ghf" path="res://Scenes/Player.tscn" id="1_iukft"]
+[ext_resource type="Texture2D" uid="uid://rg2h3v1uq5wj" path="res://icon.svg" id="3_j5yw3"]
 
 [node name="Game" type="Node2D" unique_id=1856028451]
+script = ExtResource("1_gl6un")
 
 [node name="Player" parent="." unique_id=1070629133 instance=ExtResource("1_iukft")]
 position = Vector2(199.6, 220)
+MovementSpeed = 200.0
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=349511445]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=362546810]
 position = Vector2(199.6, 220)
 polygon = PackedVector2Array(-108, 144, 1054, 144, 1053, 255, -104, 256)
+
+[node name="Layers" type="Node2D" parent="." unique_id=52674329]
+
+[node name="Sprite2D" type="Sprite2D" parent="Layers" unique_id=1255256663]
+rotation = 3.1415927
+texture = ExtResource("3_j5yw3")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Layers" unique_id=1318230436]
+rotation = 1.5707964
+texture = ExtResource("3_j5yw3")
