@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://d2rcj02dpqrfb"]
+
+[ext_resource type="Texture2D" uid="uid://cnt5jrui71e8x" path="res://Assets/PlaceholderGraphics/3 Objects/Checkpoints/Checkpoint_No_Flag.png" id="1_f2lml"]
+[ext_resource type="Script" uid="uid://b3gj8u63kv8yd" path="res://Scripts/BuildingBlocks/LevelFinish.cs" id="1_haonk"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_haonk"]
+height = 54.0
+
+[node name="LevelFinish" type="Area2D" unique_id=1423001190]
+collision_layer = 0
+script = ExtResource("1_haonk")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1405159091]
+texture = ExtResource("1_f2lml")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=895781790]
+shape = SubResource("CapsuleShape2D_haonk")

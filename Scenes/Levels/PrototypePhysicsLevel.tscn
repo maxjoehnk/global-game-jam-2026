@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://baecr5xqo2qyj" path="res://Scenes/BuildingBlocks/Bridge.tscn" id="2_fcs4b"]
 [ext_resource type="PackedScene" uid="uid://d3ylock0hdv0d" path="res://Scenes/UI/GameHUD.tscn" id="2_hy146"]
 [ext_resource type="PackedScene" uid="uid://cw3x8fe8c2ghf" path="res://Scenes/Player.tscn" id="2_qms24"]
+[ext_resource type="PackedScene" uid="uid://d2rcj02dpqrfb" path="res://Scenes/BuildingBlocks/LevelFinish.tscn" id="5_hy146"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_qms24"]
 
@@ -89,3 +90,6 @@ position = Vector2(74, 1010)
 [node name="HUD" parent="UI" unique_id=385332768 instance=ExtResource("2_hy146")]
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="LevelFinish" parent="." unique_id=441139755 instance=ExtResource("5_hy146")]
+position = Vector2(1564, 1056)
