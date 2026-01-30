@@ -53,7 +53,6 @@ public partial class Game : Node2D
 
     private void UpdateActiveLayer()
     {
-        GD.Print($"Active Layer: {this.activeLayerIndex}");
         for (int i = 0; i < this.LayerContainer.GetChildren().Count; i++)
         {
             Node2D layer = this.LayerContainer.GetChild<Node2D>(i);
