@@ -3,61 +3,69 @@ using GlobalGameJam.Scripts.Core;
 
 public partial class Player : CharacterBody2D
 {
-    private const uint BaseCollisionLayer = 0b1110;
+	private const uint BaseCollisionLayer = 0b1110;
+	private const float ResetHeight = 1200f;
 
-    [Export] public float MovementSpeed = 100f;
+	[Export] public float MovementSpeed = 100f;
 
-    [Export] public float JumpSpeed = -500f;
+	[Export] public float JumpSpeed = -500f;
 
-    public float Gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
+	public float Gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
 
-    private AnimationPlayer AnimationPlayer => GetNode<AnimationPlayer>("AnimationPlayer");
-    
-    private Sprite2D Head => GetNode<Sprite2D>("Kopf");
+	private AnimationPlayer AnimationPlayer => GetNode<AnimationPlayer>("AnimationPlayer");
+	
+	private Sprite2D Head => GetNode<Sprite2D>("Sprites/Kopf");
 
-    public void SetActiveCollisionLayer(uint layer)
-    {
-        this.CollisionMask = BaseCollisionLayer | layer;
-    }
+	[Signal]
+	public delegate void PlayerNeedsToBeResetEventHandler();
 
-    public override void _Ready()
-    {
-        this.Rotation = 0;
-    }
+	public void SetActiveCollisionLayer(uint layer)
+	{
+		this.CollisionMask = BaseCollisionLayer | layer;
+	}
 
-    public override void _PhysicsProcess(double delta)
-    {
-        Vector2 velocity = this.Velocity;
-        velocity.Y += this.Gravity * (float)delta;
-        if (Input.IsActionJustPressed(InputAction.Jump) && this.IsOnFloor())
-        {
-            velocity.Y = this.JumpSpeed;
-        }
+	public override void _Ready()
+	{
+		this.Rotation = 0;
+	}
 
-        float direction = Input.GetAxis(InputAction.MoveLeft, InputAction.MoveRight);
-        if (direction > 0)
-        {
-            Head.FlipH = true;
-        }
+	public override void _PhysicsProcess(double delta)
+	{
+		Vector2 velocity = this.Velocity;
+		velocity.Y += this.Gravity * (float)delta;
+		if (Input.IsActionJustPressed(InputAction.Jump) && this.IsOnFloor())
+		{
+			velocity.Y = this.JumpSpeed;
+		}
 
-        if (direction < 0)
-        {
-            Head.FlipH = false;
-        }
+		float direction = Input.GetAxis(InputAction.MoveLeft, InputAction.MoveRight);
+		if (direction > 0)
+		{
+			Head.FlipH = true;
+		}
 
-        if (Mathf.Abs(direction) > 0)
-        {
-            this.AnimationPlayer.Play("walking");
-        }
-        else
-        {
-            this.Rotation = 0;
-            this.AnimationPlayer.Play("idle");
-        }
+		if (direction < 0)
+		{
+			Head.FlipH = false;
+		}
 
-        velocity.X = direction * this.MovementSpeed;
-        this.Velocity = velocity;
+		if (Mathf.Abs(direction) > 0)
+		{
+			this.AnimationPlayer.Play("walking");
+		}
+		else
+		{
+			this.Rotation = 0;
+			this.AnimationPlayer.Play("idle");
+		}
 
-        this.MoveAndSlide();
-    }
+		velocity.X = direction * this.MovementSpeed;
+		this.Velocity = velocity;
+
+		this.MoveAndSlide();
+
+		if (this.GlobalPosition.Y > ResetHeight){
+			this.EmitSignalPlayerNeedsToBeReset();
+		}
+	}
 }

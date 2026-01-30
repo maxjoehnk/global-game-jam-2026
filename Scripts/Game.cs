@@ -9,7 +9,6 @@ public partial class Game : Node2D
 	[Export]
 	public int InitialLayer = 0;
 
-
 	private const int PhysicsBaseLayer = 8;
 
 	private Node2D LayerContainer => GetNode<Node2D>("Layers");
@@ -39,8 +38,10 @@ public partial class Game : Node2D
 			}
 			physicsLayer++;
 		}
-		this.activeLayerIndex = self.InitialLayer;
+		this.activeLayerIndex = this.InitialLayer;
 		this.UpdateActiveLayer();
+
+		this.Player.PlayerNeedsToBeReset += this.RespawnPlayer;
 	}
 
 	public override void _Process(double delta)
@@ -91,8 +92,8 @@ public partial class Game : Node2D
 	}
 
 	private void RespawnPlayer(){
-		this.activeLayerIndex = self.InitialLayer;
+		this.activeLayerIndex = this.InitialLayer;
 		this.UpdateActiveLayer();
-		self.Player.global_position = self.RespawnMarker.global_position;
+		this.Player.GlobalPosition = this.RespawnMarker.GlobalPosition;
 	}
 }
