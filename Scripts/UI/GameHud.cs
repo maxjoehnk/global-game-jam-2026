@@ -10,6 +10,16 @@ public partial class GameHud : Control
     
     private Control LayerList => GetNode<Control>("Panel/VBoxContainer/Layers");
     
+    private Control PauseDialog => GetNode<Control>("PauseDialog");
+    
+    private Control WonDialog => GetNode<Control>("WonDialog");
+
+    public override void _Ready()
+    {
+        this.PauseDialog.ProcessMode = ProcessModeEnum.WhenPaused;
+        this.WonDialog.ProcessMode = ProcessModeEnum.WhenPaused;
+    }
+
     public void SetActiveLayer(int layerIndex)
     {
         foreach (LayerEntry child in this.LayerList.GetChildren().Cast<LayerEntry>())
@@ -28,5 +38,15 @@ public partial class GameHud : Control
             layer.LayerName = layerName;
             this.LayerList.AddChild(layer);
         }
+    }
+
+    public void TogglePauseMenu()
+    {
+        this.PauseDialog.Visible = !this.PauseDialog.Visible;
+    }
+
+    public void ShowWonMenu()
+    {
+        this.WonDialog.Visible = true;
     }
 }

@@ -7,4 +7,5 @@ public static class InputAction
     public const string Jump = "jump";
     public const string LayerUp = "layer_up";
     public const string LayerDown = "layer_down";
+    public const string Menu = "menu";
 }

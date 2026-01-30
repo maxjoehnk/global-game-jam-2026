@@ -6,7 +6,7 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_haonk"]
 height = 54.0
 
-[node name="LevelFinish" type="Area2D" unique_id=1423001190]
+[node name="LevelFinish" type="Area2D" unique_id=1423001190 groups=["LevelExits"]]
 collision_layer = 0
 script = ExtResource("1_haonk")
 

@@ -38,3 +38,84 @@ horizontal_alignment = 1
 
 [node name="Layers" type="VBoxContainer" parent="Panel/VBoxContainer" unique_id=246784075]
 layout_mode = 2
+
+[node name="PauseDialog" type="CenterContainer" parent="." unique_id=1388644047]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="PauseDialog" unique_id=11164926]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PauseDialog/Panel" unique_id=1436256633]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -140.0
+offset_top = -98.0
+offset_right = 140.0
+offset_bottom = 98.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseDialog/Panel/MarginContainer" unique_id=159247530]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="PauseDialog/Panel/MarginContainer/VBoxContainer" unique_id=1595150054]
+layout_mode = 2
+text = "Paused"
+horizontal_alignment = 1
+
+[node name="Resume" type="Button" parent="PauseDialog/Panel/MarginContainer/VBoxContainer" unique_id=1071615543]
+layout_mode = 2
+text = "Resume"
+
+[node name="Restart" type="Button" parent="PauseDialog/Panel/MarginContainer/VBoxContainer" unique_id=1243447041]
+layout_mode = 2
+text = "Restart"
+
+[node name="Exit" type="Button" parent="PauseDialog/Panel/MarginContainer/VBoxContainer" unique_id=2067158364]
+layout_mode = 2
+text = "Exit"
+
+[node name="WonDialog" type="CenterContainer" parent="." unique_id=1169035461]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="WonDialog" unique_id=1396333539]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="WonDialog/Panel" unique_id=893856825]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+alignment = 1
+
+[node name="Label" type="Label" parent="WonDialog/Panel/VBoxContainer" unique_id=1952101197]
+layout_mode = 2
+text = "Level Cleared"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="WonDialog/Panel/VBoxContainer" unique_id=807592425]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="WonDialog/Panel/VBoxContainer/HBoxContainer" unique_id=119221248]
+layout_mode = 2
+text = "Next Level"
