@@ -1,0 +1,87 @@
+[gd_scene format=3 uid="uid://l8qy2opve2bq"]
+
+[ext_resource type="Script" uid="uid://ciskn3kh6rmmo" path="res://Scripts/Game.cs" id="1_idyex"]
+[ext_resource type="PackedScene" uid="uid://baecr5xqo2qyj" path="res://Scenes/BuildingBlocks/Bridge.tscn" id="2_fcs4b"]
+[ext_resource type="PackedScene" uid="uid://d3ylock0hdv0d" path="res://Scenes/UI/GameHUD.tscn" id="2_hy146"]
+[ext_resource type="PackedScene" uid="uid://cw3x8fe8c2ghf" path="res://Scenes/Player.tscn" id="2_qms24"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_qms24"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hy146"]
+
+[node name="BaseLevel" type="Node2D" unique_id=14346899]
+script = ExtResource("1_idyex")
+
+[node name="UI" parent="." unique_id=385332768 instance=ExtResource("2_hy146")]
+
+[node name="FixedBoundary" type="Node2D" parent="." unique_id=1051847964]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="FixedBoundary" unique_id=2092206185]
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FixedBoundary/StaticBody2D" unique_id=487469855]
+position = Vector2(0, 1080)
+shape = SubResource("WorldBoundaryShape2D_qms24")
+
+[node name="Layers" type="Node2D" parent="." unique_id=1705662681]
+
+[node name="Layer 1" type="Node2D" parent="Layers" unique_id=1755139633]
+
+[node name="Node2D" type="Node2D" parent="Layers/Layer 1" unique_id=1992417536]
+position = Vector2(215, 999)
+
+[node name="Bridge" parent="Layers/Layer 1/Node2D" unique_id=58444093 instance=ExtResource("2_fcs4b")]
+
+[node name="PinJoint2D" type="PinJoint2D" parent="Layers/Layer 1/Node2D" unique_id=673774396]
+position = Vector2(-55, 0)
+node_a = NodePath("../Bridge")
+node_b = NodePath("../StaticBody2D")
+softness = 16.0
+
+[node name="PinJoint2D2" type="PinJoint2D" parent="Layers/Layer 1/Node2D" unique_id=1167741168]
+position = Vector2(57, 0)
+node_a = NodePath("../Bridge")
+node_b = NodePath("../StaticBody2D2")
+softness = 16.0
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Layers/Layer 1/Node2D" unique_id=515720864]
+position = Vector2(-55, 0)
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Layers/Layer 1/Node2D/StaticBody2D" unique_id=2125860744]
+shape = SubResource("CircleShape2D_hy146")
+disabled = true
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Layers/Layer 1/Node2D" unique_id=839013743]
+position = Vector2(57, 0)
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Layers/Layer 1/Node2D/StaticBody2D2" unique_id=749622704]
+shape = SubResource("CircleShape2D_hy146")
+disabled = true
+
+[node name="Layer 2" type="Node2D" parent="Layers" unique_id=1295163837]
+
+[node name="Node2D" type="Node2D" parent="Layers/Layer 2" unique_id=1620358969]
+position = Vector2(390, 996)
+
+[node name="Bridge" parent="Layers/Layer 2/Node2D" unique_id=1247177055 instance=ExtResource("2_fcs4b")]
+
+[node name="PinJoint2D3" type="PinJoint2D" parent="Layers/Layer 2/Node2D" unique_id=1620600466]
+node_a = NodePath("../Bridge")
+node_b = NodePath("../StaticBody2D3")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Layers/Layer 2/Node2D" unique_id=1935906477]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Layers/Layer 2/Node2D/StaticBody2D3" unique_id=1855504706]
+shape = SubResource("CircleShape2D_hy146")
+disabled = true
+
+[node name="Collectables" type="Node2D" parent="." unique_id=1371163365]
+
+[node name="Player" parent="." unique_id=1038420454 instance=ExtResource("2_qms24")]
+position = Vector2(74, 1010)

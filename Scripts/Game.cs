@@ -1,6 +1,7 @@
 using System.Linq;
 using Godot;
 using GlobalGameJam.Scripts.Core;
+using GlobalGameJam.Scripts.UI;
 
 public partial class Game : Node2D
 {
@@ -8,7 +9,7 @@ public partial class Game : Node2D
 
     private Node2D LayerContainer => GetNode<Node2D>("Layers");
     private Player Player => GetNode<Player>("Player");
-    private Label LayerIndicator => GetNode<Label>("LayerIndicator");
+    private GameHud Hud => GetNode<GameHud>("UI");
 
     private int LayerCount => LayerContainer.GetChildCount();
 
@@ -23,7 +24,7 @@ public partial class Game : Node2D
         int physicsLayer = PhysicsBaseLayer;
         foreach (Node child in this.LayerContainer.GetChildren())
         {
-            foreach (PhysicsBody2D physicsBody2D in child.GetChildren(includeInternal: true)
+            foreach (PhysicsBody2D physicsBody2D in child.FindChildren("*", type: nameof(PhysicsBody2D))
                          .Where(c => c is PhysicsBody2D)
                          .Cast<PhysicsBody2D>())
             {
@@ -80,6 +81,6 @@ public partial class Game : Node2D
         }
 
         Player.SetActiveCollisionLayer(this.ActivePhysicsLayer);
-        LayerIndicator.Text = $"Layer {this.activeLayerIndex + 1}";
+        this.Hud.SetActiveLayer(this.activeLayerIndex);
     }
 }

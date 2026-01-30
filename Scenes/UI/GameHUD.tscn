@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://d3ylock0hdv0d"]
+
+[node name="UI" type="Control" unique_id=385332768]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="LayerIndicator" type="Label" parent="." unique_id=1425996341]
+layout_mode = 0
+offset_right = 107.0
+offset_bottom = 23.0
+text = "Current Layer"
