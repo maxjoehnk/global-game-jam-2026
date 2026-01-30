@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://dhafagkibrbu2"]
+
+[ext_resource type="PackedScene" uid="uid://cb6vue6iaxmm3" path="res://Scenes/Physics/cutable_ridgid_body.tscn" id="2_0hexi"]
+[ext_resource type="PackedScene" uid="uid://ckjmwmvnnhh5u" path="res://Scenes/Physics/CutAreas/cut_stencil.tscn" id="4_hwa1x"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2yrf7"]
+size = Vector2(2000, 300)
+
+[node name="Node2D" type="Node2D" unique_id=1653084184]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1500284130]
+position = Vector2(-267, 369)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1257787216]
+position = Vector2(-23, -6)
+shape = SubResource("RectangleShape2D_2yrf7")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="." unique_id=1659257863]
+position = Vector2(846, 999)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2" unique_id=1073601615]
+position = Vector2(-23, -6)
+shape = SubResource("RectangleShape2D_2yrf7")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="." unique_id=1056828850]
+position = Vector2(2034, 377)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3" unique_id=1652529661]
+position = Vector2(-23, -6)
+shape = SubResource("RectangleShape2D_2yrf7")
+
+[node name="CutableRidgidBody" parent="." unique_id=1693820037 instance=ExtResource("2_0hexi")]
+position = Vector2(610, -303)
+freeze = true
+
+[node name="CollisionPolygon2D" parent="CutableRidgidBody" index="0" unique_id=1255628665]
+polygon = PackedVector2Array(0, 0, 500, 0, 500, 500, 0, 500)
+
+[node name="Polygon2D" parent="CutableRidgidBody" index="1" unique_id=507782235]
+polygon = PackedVector2Array(0, 0, 500, 0, 500, 500, 0, 500)
+uv = PackedVector2Array(0, 0, 128, 0, 128, 128, 0, 128)
+
+[node name="CutStencil" parent="." unique_id=246333530 instance=ExtResource("4_hwa1x")]
+
+[editable path="CutableRidgidBody"]
