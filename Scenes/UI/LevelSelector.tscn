@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://bdooyq2ealt65"]
+
+[ext_resource type="Script" uid="uid://b0vocoln4lnfo" path="res://Scripts/UI/LevelSelector.cs" id="1_o3ex8"]
+
+[node name="LevelSelector" type="Panel" unique_id=466009]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="." unique_id=1966198729]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="VBoxContainer2" unique_id=2111877510]
+layout_mode = 2
+text = "Back to Menu"
+
+[node name="FlowContainer" type="VFlowContainer" parent="VBoxContainer2" unique_id=1891231098]
+layout_mode = 2
+alignment = 1
+last_wrap_alignment = 1
+script = ExtResource("1_o3ex8")
+
+[connection signal="pressed" from="VBoxContainer2/Button" to="VBoxContainer2/FlowContainer" method="OnBackPressed"]

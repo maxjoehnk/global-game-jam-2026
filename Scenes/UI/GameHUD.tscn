@@ -1,10 +1,13 @@
 [gd_scene format=3 uid="uid://d3ylock0hdv0d"]
 
+[ext_resource type="Script" uid="uid://dmduxkrn46458" path="res://Scripts/UI/GameHud.cs" id="1_bg7v8"]
+
 [node name="UI" type="Control" unique_id=385332768]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+script = ExtResource("1_bg7v8")
 
 [node name="LayerIndicator" type="Label" parent="." unique_id=1425996341]
 layout_mode = 0
