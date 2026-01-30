@@ -1,16 +1,40 @@
 [gd_scene format=3 uid="uid://d3ylock0hdv0d"]
 
 [ext_resource type="Script" uid="uid://dmduxkrn46458" path="res://Scripts/UI/GameHud.cs" id="1_bg7v8"]
+[ext_resource type="LabelSettings" uid="uid://cs5xntv3h0phe" path="res://Themes/LabelSettings.tres" id="2_315wm"]
 
-[node name="UI" type="Control" unique_id=385332768]
+[node name="HUD" type="Control" unique_id=385332768]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_bg7v8")
 
-[node name="LayerIndicator" type="Label" parent="." unique_id=1425996341]
-layout_mode = 0
-offset_right = 107.0
-offset_bottom = 23.0
-text = "Current Layer"
+[node name="Panel" type="Panel" parent="." unique_id=1335263015]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=1334101662]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer" unique_id=854525752]
+layout_mode = 2
+text = "Layers"
+label_settings = ExtResource("2_315wm")
+horizontal_alignment = 1
+
+[node name="Layers" type="VBoxContainer" parent="Panel/VBoxContainer" unique_id=246784075]
+layout_mode = 2

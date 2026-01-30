@@ -37,6 +37,11 @@ window/size/viewport_height=1080
 
 project/assembly_name="2026 Global Game Jam"
 
+[gui]
+
+theme/custom="uid://cguqiur7fkn0g"
+theme/custom_font="uid://dwo1chvod5pr"
+
 [input]
 
 left={

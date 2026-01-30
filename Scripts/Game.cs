@@ -2,6 +2,7 @@ using System.Linq;
 using Godot;
 using GlobalGameJam.Scripts.Core;
 using GlobalGameJam.Scripts.UI;
+using Godot.Collections;
 
 public partial class Game : Node2D
 {
@@ -9,7 +10,7 @@ public partial class Game : Node2D
 
     private Node2D LayerContainer => GetNode<Node2D>("Layers");
     private Player Player => GetNode<Player>("Player");
-    private GameHud Hud => GetNode<GameHud>("UI");
+    private GameHud Hud => GetNode<GameHud>("UI/HUD");
 
     private int LayerCount => LayerContainer.GetChildCount();
 
@@ -20,9 +21,10 @@ public partial class Game : Node2D
 
     public override void _Ready()
     {
-        this.UpdateActiveLayer();
         int physicsLayer = PhysicsBaseLayer;
-        foreach (Node child in this.LayerContainer.GetChildren())
+        Array<Node> layers = this.LayerContainer.GetChildren();
+        this.Hud.SetLayers(new Array<string>(layers.Select(l => l.Name.ToString())));
+        foreach (Node child in layers)
         {
             foreach (PhysicsBody2D physicsBody2D in child.FindChildren("*", type: nameof(PhysicsBody2D))
                          .Where(c => c is PhysicsBody2D)
@@ -32,6 +34,7 @@ public partial class Game : Node2D
             }
             physicsLayer++;
         }
+        this.UpdateActiveLayer();
     }
 
     public override void _Process(double delta)
