@@ -10,6 +10,8 @@ atlas = ExtResource("1_47mh0")
 region = Rect2(0, 0, 256, 176)
 
 [node name="RigidBody2D" type="RigidBody2D" unique_id=58444093]
+collision_layer = 0
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1374988302]
 position = Vector2(0.23965454, -0.9399872)
