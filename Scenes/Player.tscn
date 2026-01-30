@@ -2,8 +2,113 @@
 
 [ext_resource type="Script" uid="uid://ccsfuebrfr65" path="res://Scripts/Player.cs" id="1_rpqav"]
 [ext_resource type="Texture2D" uid="uid://p8bf5il28n0f" path="res://Assets/Character/Spahn.png" id="2_kyqiw"]
+[ext_resource type="Texture2D" uid="uid://c4ywtwlnwcvwe" path="res://Assets/Character/SpahnBody.png" id="3_dewec"]
+[ext_resource type="Texture2D" uid="uid://c3qqe2ap7tgh" path="res://Assets/Character/SpahnKopf.png" id="3_gntrk"]
+
+[sub_resource type="Animation" id="Animation_kyqiw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.17627825]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Kopf:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Kopf:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_dewec"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath("Kopf:flip_h")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Kopf:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2595503, 0.40000004, 0.6666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0.0, -0.08028515, 0.015707964, -0.14486232]
+}
+
+[sub_resource type="Animation" id="Animation_gntrk"]
+resource_name = "walking"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0.0, 0.1134464, -0.05235988, 0.0715585]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Kopf:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.13333334, 0.36666667, 0.5666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0.0, -0.08028515, 0.040142573, -0.064577185]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dewec"]
+_data = {
+&"RESET": SubResource("Animation_kyqiw"),
+&"idle": SubResource("Animation_dewec"),
+&"walking": SubResource("Animation_gntrk")
+}
 
 [node name="Player" type="CharacterBody2D" unique_id=1038420454]
+rotation = -0.17627825
 collision_mask = 65294
 platform_floor_layers = 4294967288
 script = ExtResource("1_rpqav")
@@ -13,5 +118,20 @@ MovementSpeed = 200.0
 polygon = PackedVector2Array(58, 28, 31, -45, 33, 93, 63, 197, 7, 189, -10, 58, -28, 188, -82, 195, -86, 182, -76, 171, -64, 130, -55, 87, -57.90857, 38.20073, -81, 37, -75, -53, -61, -109, -40, -119, -49, -137, -45, -186, -23, -197, 6, -194, 22, -168, 17, -125, 39, -111, 46, -84, 75, -30, 83, 32)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1649439057]
+visible = false
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_kyqiw")
+
+[node name="Body" type="Sprite2D" parent="." unique_id=1712788532]
+position = Vector2(1.9999996, 0.9999995)
+scale = Vector2(0.20539889, 0.20539889)
+texture = ExtResource("3_dewec")
+
+[node name="Kopf" type="Sprite2D" parent="." unique_id=1014666892]
+position = Vector2(-12.999999, -142)
+scale = Vector2(0.059061065, 0.059061065)
+texture = ExtResource("3_gntrk")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=542213054]
+libraries/ = SubResource("AnimationLibrary_dewec")
+autoplay = &"idle"
