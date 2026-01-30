@@ -1,14 +1,16 @@
 using System.Linq;
 using Godot;
 using GlobalGameJam.Scripts.Core;
+using GlobalGameJam.Scripts.UI;
+using Godot.Collections;
 
 public partial class Game : Node2D
 {
 	private const int PhysicsBaseLayer = 8;
 
-	private Node2D LayerContainer => GetNode<Node2D>("Layers");
-	private Player Player => GetNode<Player>("Player");
-	private Label LayerIndicator => GetNode<Label>("LayerIndicator");
+    private Node2D LayerContainer => GetNode<Node2D>("Layers");
+    private Player Player => GetNode<Player>("Player");
+    private GameHud Hud => GetNode<GameHud>("UI/HUD");
 
 	private int LayerCount => LayerContainer.GetChildCount();
 
@@ -17,21 +19,23 @@ public partial class Game : Node2D
 	private Node2D ActiveLayer => LayerContainer.GetChild<Node2D>(this.activeLayerIndex);
 	private uint ActivePhysicsLayer => (uint)1 << (PhysicsBaseLayer + this.activeLayerIndex);
 
-	public override void _Ready()
-	{
-		this.UpdateActiveLayer();
-		int physicsLayer = PhysicsBaseLayer;
-		foreach (Node child in this.LayerContainer.GetChildren())
-		{
-			foreach (PhysicsBody2D physicsBody2D in child.GetChildren(includeInternal: true)
-						 .Where(c => c is PhysicsBody2D)
-						 .Cast<PhysicsBody2D>())
-			{
-				physicsBody2D.CollisionLayer = (uint)1 << physicsLayer;
-			}
-			physicsLayer++;
-		}
-	}
+    public override void _Ready()
+    {
+        int physicsLayer = PhysicsBaseLayer;
+        Array<Node> layers = this.LayerContainer.GetChildren();
+        this.Hud.SetLayers(new Array<string>(layers.Select(l => l.Name.ToString())));
+        foreach (Node child in layers)
+        {
+            foreach (PhysicsBody2D physicsBody2D in child.FindChildren("*", type: nameof(PhysicsBody2D))
+                         .Where(c => c is PhysicsBody2D)
+                         .Cast<PhysicsBody2D>())
+            {
+                physicsBody2D.CollisionLayer = (uint)1 << physicsLayer;
+            }
+            physicsLayer++;
+        }
+        this.UpdateActiveLayer();
+    }
 
 	public override void _Process(double delta)
 	{
@@ -79,7 +83,7 @@ public partial class Game : Node2D
 			layer.Visible = i == this.activeLayerIndex;
 		}
 
-		Player.SetActiveCollisionLayer(this.ActivePhysicsLayer);
-		LayerIndicator.Text = $"Layer {this.activeLayerIndex + 1}";
-	}
+        Player.SetActiveCollisionLayer(this.ActivePhysicsLayer);
+        this.Hud.SetActiveLayer(this.activeLayerIndex);
+    }
 }

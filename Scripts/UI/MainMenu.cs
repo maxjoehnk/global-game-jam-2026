@@ -5,6 +5,11 @@ namespace GlobalGameJam.Scripts.UI;
 
 public partial class MainMenu : Panel
 {
+	public void OnOpenLevelSelector()
+	{
+		SceneManager.Instance.OpenLevelSelector();
+	}
+	
 	public void OnOpenSettings()
 	{
 		SceneManager.Instance.OpenSettings();

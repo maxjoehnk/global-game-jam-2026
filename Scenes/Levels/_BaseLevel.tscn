@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://blynp6b41ixkp"]
+
+[ext_resource type="Script" uid="uid://ciskn3kh6rmmo" path="res://Scripts/Game.cs" id="1_n8wt5"]
+[ext_resource type="PackedScene" uid="uid://cw3x8fe8c2ghf" path="res://Scenes/Player.tscn" id="2_1rdqr"]
+[ext_resource type="PackedScene" uid="uid://d3ylock0hdv0d" path="res://Scenes/UI/GameHUD.tscn" id="2_qawov"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_n8wt5"]
+
+[node name="BaseLevel" type="Node2D" unique_id=14346899]
+script = ExtResource("1_n8wt5")
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=73609627]
+
+[node name="HUD" parent="UI" unique_id=385332768 instance=ExtResource("2_qawov")]
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="FixedBoundary" type="Node2D" parent="." unique_id=1051847964]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="FixedBoundary" unique_id=1330150538]
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FixedBoundary/StaticBody2D" unique_id=1417060749]
+position = Vector2(0, 1080)
+shape = SubResource("WorldBoundaryShape2D_n8wt5")
+
+[node name="Layers" type="Node2D" parent="." unique_id=1705662681]
+
+[node name="Collectables" type="Node2D" parent="." unique_id=1371163365]
+
+[node name="Player" parent="." unique_id=1038420454 instance=ExtResource("2_1rdqr")]
+position = Vector2(73, 1012)

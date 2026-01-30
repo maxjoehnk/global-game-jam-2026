@@ -15,7 +15,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="2026 Global Game Jam"
-run/main_scene="uid://l6lx0at0fxeg"
+run/main_scene="uid://b4grxs5ftqxs5"
 config/features=PackedStringArray("4.6", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -36,6 +36,11 @@ window/size/viewport_height=1080
 [dotnet]
 
 project/assembly_name="2026 Global Game Jam"
+
+[gui]
+
+theme/custom="uid://cguqiur7fkn0g"
+theme/custom_font="uid://dwo1chvod5pr"
 
 [input]
 

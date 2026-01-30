@@ -18,6 +18,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="LevelSelector" type="Button" parent="VBoxContainer" unique_id=304777106]
+layout_mode = 2
+text = "Levels"
+
 [node name="Settings" type="Button" parent="VBoxContainer" unique_id=458406655]
 layout_mode = 2
 text = "Settings"
@@ -26,5 +30,6 @@ text = "Settings"
 layout_mode = 2
 text = "Exit"
 
+[connection signal="pressed" from="VBoxContainer/LevelSelector" to="." method="OnOpenLevelSelector"]
 [connection signal="pressed" from="VBoxContainer/Settings" to="." method="OnOpenSettings"]
 [connection signal="pressed" from="VBoxContainer/Exit" to="." method="OnExit"]
