@@ -21,6 +21,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+SceneManager="*uid://dgn7o3w1fqeof"
 SettingsManager="*uid://cevmr74cfk1w"
 
 [dotnet]
