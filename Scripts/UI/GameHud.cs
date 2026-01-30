@@ -18,6 +18,8 @@ public partial class GameHud : Control
     {
         this.PauseDialog.ProcessMode = ProcessModeEnum.WhenPaused;
         this.WonDialog.ProcessMode = ProcessModeEnum.WhenPaused;
+        this.WonDialog.Visible = false;
+        this.PauseDialog.Visible = false;
     }
 
     public void SetActiveLayer(int layerIndex)

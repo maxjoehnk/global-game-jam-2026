@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://bfmertmbklj7h"]
+
+[ext_resource type="Script" uid="uid://y4ek6m5qeius" path="res://Scripts/UI/WonMenu.cs" id="1_f7pny"]
+
+[node name="WonDialog" type="CenterContainer" unique_id=1947197841]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_f7pny")
+
+[node name="Panel" type="Panel" parent="." unique_id=1050469547]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=677558793]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -66.0
+offset_top = -46.0
+offset_right = 66.0
+offset_bottom = 46.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer" unique_id=1997865733]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer" unique_id=715402957]
+layout_mode = 2
+text = "Level Cleared"
+horizontal_alignment = 1
+
+[node name="Restart" type="Button" parent="Panel/MarginContainer/VBoxContainer" unique_id=770999740]
+layout_mode = 2
+text = "Restart
+"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer" unique_id=1231641066]
+layout_mode = 2
+
+[node name="Exit" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1453490010]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Exit
+"
+
+[node name="NextLevel" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer" unique_id=497711695]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Next Level"
+
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/Restart" to="." method="Restart"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/HBoxContainer/Exit" to="." method="OnExit"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/HBoxContainer/NextLevel" to="." method="NextLevel"]

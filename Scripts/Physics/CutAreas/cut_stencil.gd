@@ -15,7 +15,7 @@ func _ready():
 
 func _physics_process(_delta):
 	self.global_position = self.get_global_mouse_position()
-	if self.is_hovering and Input.is_action_just_pressed("MouseLeft"):
+	if self.is_hovering and Input.is_action_just_pressed("cut"):
 		self.cut_intersection()
 		self.physics_body = null
 		self.is_hovering = false
