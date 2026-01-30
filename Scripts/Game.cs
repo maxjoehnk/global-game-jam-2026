@@ -79,8 +79,7 @@ public partial class Game : Node2D
 		for (int i = 0; i < this.LayerContainer.GetChildren().Count; i++)
 		{
 			Node2D layer = this.LayerContainer.GetChild<Node2D>(i);
-			// layer.ProcessMode = i == this.activeLayerIndex ? ProcessModeEnum.Inherit : ProcessModeEnum.Disabled;
-			layer.Visible = i == this.activeLayerIndex;
+			layer.Modulate = i == this.activeLayerIndex ? Color.FromHsv(0, 0, 1) : Color.FromHsv(0, 0, 1, 0.25f);
 		}
 
         Player.SetActiveCollisionLayer(this.ActivePhysicsLayer);
