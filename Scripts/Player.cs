@@ -3,6 +3,8 @@ using GlobalGameJam.Scripts.Core;
 
 public partial class Player : Node2D
 {
+    private const uint BaseCollisionLayer = 0b1110;
+    
     [Export]
     public float MovementSpeed = 100f;
     
@@ -12,7 +14,12 @@ public partial class Player : Node2D
     public float Gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
     
     private CharacterBody2D Character => this.GetNode<CharacterBody2D>("CharacterBody2D");
-    
+
+    public void SetActiveCollisionLayer(uint layer)
+    {
+        this.Character.CollisionMask = BaseCollisionLayer | layer;
+    }
+
     public override void _PhysicsProcess(double delta)
     {
         Vector2 velocity = this.Character.Velocity;

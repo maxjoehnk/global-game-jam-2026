@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://baecr5xqo2qyj"]
+
+[ext_resource type="Texture2D" uid="uid://b40g6erylfe3y" path="res://Assets/PlaceholderGraphics/7 Levels/Tiled/Tileset.png" id="1_47mh0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_plvmg"]
+size = Vector2(132, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wb47l"]
+atlas = ExtResource("1_47mh0")
+region = Rect2(0, 0, 256, 176)
+
+[node name="RigidBody2D" type="RigidBody2D" unique_id=58444093]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1374988302]
+position = Vector2(0.23965454, -0.9399872)
+shape = SubResource("RectangleShape2D_plvmg")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1781831470]
+position = Vector2(0.23965454, -0.43997192)
+scale = Vector2(2.7599854, 2.6400049)
+texture = SubResource("AtlasTexture_wb47l")
+region_enabled = true
+region_rect = Rect2(192, 144, 48, 8)
