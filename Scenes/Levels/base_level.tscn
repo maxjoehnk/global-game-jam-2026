@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://blynp6b41ixkp"]
+
+[node name="BaseLevel" type="Node2D" unique_id=14346899]
+
+[node name="FixedBoundary" type="Node2D" parent="." unique_id=1051847964]
+
+[node name="Layers" type="Node2D" parent="." unique_id=1705662681]
+
+[node name="Collectables" type="Node2D" parent="." unique_id=1371163365]

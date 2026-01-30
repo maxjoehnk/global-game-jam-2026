@@ -5,13 +5,13 @@ namespace GlobalGameJam.Scripts.UI;
 
 public partial class MainMenu : Panel
 {
-    public void OnOpenSettings()
-    {
-        SceneManager.Instance.OpenSettings();
-    }
+	public void OnOpenSettings()
+	{
+		SceneManager.Instance.OpenSettings();
+	}
 
-    public void OnExit()
-    {
-        GetTree().Quit();
-    }
+	public void OnExit()
+	{
+		GetTree().Quit();
+	}
 }
