@@ -20,6 +20,8 @@ func copy_texture_data(other_body: CutableRidgidBody):
 		other_body.polygon_2d.uv.append(scale_factor * vec)
 	other_body.texture_size = texture_size
 	other_body.polygon_bounding_box = polygon_bounding_box
+	other_body.collision_layer = self.collision_layer
+	other_body.collision_mask = self.collision_mask
 
 func set_shape(polygon_shape : PackedVector2Array):
 	self.collision_polygon_2d.set_deferred("polygon", polygon_shape)

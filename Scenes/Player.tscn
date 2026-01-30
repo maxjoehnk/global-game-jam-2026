@@ -3,15 +3,20 @@
 [ext_resource type="Script" uid="uid://ccsfuebrfr65" path="res://Scripts/Player.cs" id="1_rpqav"]
 [ext_resource type="Texture2D" uid="uid://p8bf5il28n0f" path="res://Assets/Character/Spahn.png" id="2_kyqiw"]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kyqiw"]
+radius = 37.0
+height = 196.0
+
 [node name="Player" type="CharacterBody2D" unique_id=1038420454]
 collision_mask = 65294
 platform_floor_layers = 4294967288
 script = ExtResource("1_rpqav")
 MovementSpeed = 200.0
 
-[node name="Polygon2D" type="CollisionPolygon2D" parent="." unique_id=132271453]
-polygon = PackedVector2Array(58, 28, 31, -45, 33, 93, 63, 197, 7, 189, -10, 58, -28, 188, -82, 195, -86, 182, -76, 171, -64, 130, -55, 87, -57.90857, 38.20073, -81, 37, -75, -53, -61, -109, -40, -119, -49, -137, -45, -186, -23, -197, 6, -194, 22, -168, 17, -125, 39, -111, 46, -84, 75, -30, 83, 32)
+[node name="Polygon2D" type="CollisionShape2D" parent="." unique_id=791607480]
+shape = SubResource("CapsuleShape2D_kyqiw")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1649439057]
-scale = Vector2(0.2, 0.2)
+position = Vector2(3.9999998, 0)
+scale = Vector2(0.1, 0.1)
 texture = ExtResource("2_kyqiw")

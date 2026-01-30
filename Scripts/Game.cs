@@ -6,11 +6,16 @@ using Godot.Collections;
 
 public partial class Game : Node2D
 {
+	[Export]
+	public int InitialLayer = 0;
+
+
 	private const int PhysicsBaseLayer = 8;
 
-    private Node2D LayerContainer => GetNode<Node2D>("Layers");
-    private Player Player => GetNode<Player>("Player");
-    private GameHud Hud => GetNode<GameHud>("UI/HUD");
+	private Node2D LayerContainer => GetNode<Node2D>("Layers");
+	private Player Player => GetNode<Player>("Player");
+	private GameHud Hud => GetNode<GameHud>("UI/HUD");
+	private Marker2D RespawnMarker => GetNode<Marker2D>("RespawnPoint");
 
 	private int LayerCount => LayerContainer.GetChildCount();
 
@@ -19,23 +24,24 @@ public partial class Game : Node2D
 	private Node2D ActiveLayer => LayerContainer.GetChild<Node2D>(this.activeLayerIndex);
 	private uint ActivePhysicsLayer => (uint)1 << (PhysicsBaseLayer + this.activeLayerIndex);
 
-    public override void _Ready()
-    {
-        int physicsLayer = PhysicsBaseLayer;
-        Array<Node> layers = this.LayerContainer.GetChildren();
-        this.Hud.SetLayers(new Array<string>(layers.Select(l => l.Name.ToString())));
-        foreach (Node child in layers)
-        {
-            foreach (PhysicsBody2D physicsBody2D in child.FindChildren("*", type: nameof(PhysicsBody2D))
-                         .Where(c => c is PhysicsBody2D)
-                         .Cast<PhysicsBody2D>())
-            {
-                physicsBody2D.CollisionLayer = (uint)1 << physicsLayer;
-            }
-            physicsLayer++;
-        }
-        this.UpdateActiveLayer();
-    }
+	public override void _Ready()
+	{
+		int physicsLayer = PhysicsBaseLayer;
+		Array<Node> layers = this.LayerContainer.GetChildren();
+		this.Hud.SetLayers(new Array<string>(layers.Select(l => l.Name.ToString())));
+		foreach (Node child in layers)
+		{
+			foreach (PhysicsBody2D physicsBody2D in child.FindChildren("*", type: nameof(PhysicsBody2D))
+						 .Where(c => c is PhysicsBody2D)
+						 .Cast<PhysicsBody2D>())
+			{
+				physicsBody2D.CollisionLayer |= (uint)1 << physicsLayer;
+			}
+			physicsLayer++;
+		}
+		this.activeLayerIndex = self.InitialLayer;
+		this.UpdateActiveLayer();
+	}
 
 	public override void _Process(double delta)
 	{
@@ -83,7 +89,13 @@ public partial class Game : Node2D
 			layer.Visible = i == this.activeLayerIndex;
 		}
 
-        Player.SetActiveCollisionLayer(this.ActivePhysicsLayer);
-        this.Hud.SetActiveLayer(this.activeLayerIndex);
-    }
+		Player.SetActiveCollisionLayer(this.ActivePhysicsLayer);
+		this.Hud.SetActiveLayer(this.activeLayerIndex);
+	}
+
+	private void RespawnPlayer(){
+		this.activeLayerIndex = self.InitialLayer;
+		this.UpdateActiveLayer();
+		self.Player.global_position = self.RespawnMarker.global_position;
+	}
 }
