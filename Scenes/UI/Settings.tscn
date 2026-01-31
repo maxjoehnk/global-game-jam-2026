@@ -10,10 +10,106 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_mj2lg")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1156685422]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=495377600]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1156685422]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer" unique_id=234807790]
+layout_mode = 2
+text = "Settings"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1064750278]
+layout_mode = 2
+text = "Audio"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=801846608]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=358713059]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Main Volume"
+
+[node name="MainVolume" type="HSlider" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1337686170]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+max_value = 1.2
+step = 0.1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=900100125]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=925270389]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Music"
+
+[node name="MusicVolume" type="HSlider" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1128197148]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+max_value = 1.2
+step = 0.01
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=588586360]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer3" unique_id=1180068141]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Effects"
+
+[node name="EffectsVolume" type="HSlider" parent="MarginContainer/VBoxContainer/HBoxContainer3" unique_id=626440828]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+max_value = 1.2
+step = 0.01
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1679638204]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer4" unique_id=723479222]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Quotes"
+
+[node name="QuotesVolume" type="HSlider" parent="MarginContainer/VBoxContainer/HBoxContainer4" unique_id=531906819]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+max_value = 1.2
+step = 0.01
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=842632934]
+layout_mode = 2
+alignment = 1
+
+[node name="Cancel" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer5" unique_id=1441208169]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Abbrechen"
+
+[node name="Save" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer5" unique_id=1492382582]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Speichern"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer5/Cancel" to="." method="OnBackPressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer5/Save" to="." method="OnSaveSettings"]

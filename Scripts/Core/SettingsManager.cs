@@ -9,6 +9,7 @@ public partial class SettingsManager : Node
 	private const int MasterBus = 0;
 	private const int EffectsBus = 1;
 	private const int MusicBus = 2;
+	private const int QuotesBus = 3;
 
 	public override void _Ready()
 	{
@@ -32,8 +33,14 @@ public partial class SettingsManager : Node
 		get => AudioServer.Singleton.GetBusVolumeLinear(MusicBus);
 		set => AudioServer.Singleton.SetBusVolumeLinear(MusicBus, (float)value);
 	}
+	
+	public static double QuotesVolume
+	{
+		get => AudioServer.Singleton.GetBusVolumeLinear(QuotesBus);
+		set => AudioServer.Singleton.SetBusVolumeLinear(QuotesBus, (float)value);
+	}
 
-	private static void LoadSettings()
+	public static void LoadSettings()
 	{
 		if (!FileAccess.FileExists(SettingsFilePath))
 		{
@@ -51,15 +58,17 @@ public partial class SettingsManager : Node
 		MainVolume = settings.MainVolume;
 		EffectsVolume = settings.EffectsVolume;
 		MusicVolume = settings.MusicVolume;
+		QuotesVolume = settings.QuotesVolume;
 	}
 	
-	private static void SaveSettings()
+	public static void SaveSettings()
 	{
 		UserData.Settings settings = new()
 		{
 			MainVolume = MainVolume,
 			EffectsVolume = EffectsVolume,
-			MusicVolume = MusicVolume
+			MusicVolume = MusicVolume,
+			QuotesVolume = QuotesVolume,
 		};
 		
 		ResourceSaver.Save(settings, SettingsFilePath);

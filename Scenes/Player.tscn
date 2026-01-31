@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://p8bf5il28n0f" path="res://Assets/Character/Spahn.png" id="2_kyqiw"]
 [ext_resource type="Texture2D" uid="uid://c4ywtwlnwcvwe" path="res://Assets/Character/SpahnBody.png" id="3_dewec"]
 [ext_resource type="Texture2D" uid="uid://c3qqe2ap7tgh" path="res://Assets/Character/SpahnKopf.png" id="3_gntrk"]
+[ext_resource type="AudioStream" uid="uid://c3fmtk0ii2708" path="res://Assets/Sounds/Quotes/VielWerdenVerzeihenMüssen.wav" id="5_5ixxa"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kyqiw"]
 radius = 35.0
@@ -262,3 +263,9 @@ one_shot = true
 [node name="WallJumpTimer" type="Timer" parent="." unique_id=1027413351]
 wait_time = 0.3
 one_shot = true
+
+[node name="PlayerDiedQuote" type="AudioStreamPlayer" parent="." unique_id=2007516157]
+stream = ExtResource("5_5ixxa")
+bus = &"Quotes"
+
+[connection signal="PlayerDied" from="." to="PlayerDiedQuote" method="play"]

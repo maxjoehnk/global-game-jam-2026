@@ -42,7 +42,7 @@ public partial class Game : Node2D
 		this.activeLayerIndex = this.InitialLayer;
 		this.UpdateActiveLayer();
 
-		this.Player.PlayerNeedsToBeReset += this.RespawnPlayer;
+		this.Player.PlayerDied += this.RespawnPlayer;
 		foreach (LevelFinish finish in this.GetTree().GetNodesInGroup("LevelExits").Cast<LevelFinish>())
 		{
 			finish.PlayerReachedGoal += this.OnPlayerReachedGoal;

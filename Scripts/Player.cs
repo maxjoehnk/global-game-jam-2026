@@ -46,7 +46,7 @@ public partial class Player : CharacterBody2D
 	private Sprite2D Head => GetNode<Sprite2D>("Sprites/Kopf");
 
 	[Signal]
-	public delegate void PlayerNeedsToBeResetEventHandler();
+	public delegate void PlayerDiedEventHandler();
 
 	public void SetActiveCollisionLayer(uint layer)
 	{
@@ -90,7 +90,7 @@ public partial class Player : CharacterBody2D
 		this.MoveAndSlide();
 
 		if (this.GlobalPosition.Y > ResetHeight){
-			this.EmitSignalPlayerNeedsToBeReset();
+			this.EmitSignalPlayerDied();
 		}
 	}
 
