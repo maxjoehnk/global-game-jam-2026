@@ -7,6 +7,7 @@ anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 23.0
 grow_horizontal = 2
+focus_mode = 0
 toggle_mode = true
 text = "Test"
 script = ExtResource("2_0a2ir")
