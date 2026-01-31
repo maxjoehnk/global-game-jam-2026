@@ -92,6 +92,7 @@ autoplay = &"Idle"
 
 [node name="WonEffect" type="AudioStreamPlayer" parent="." unique_id=374380444]
 stream = ExtResource("3_3q6ea")
+volume_db = -10.0
 bus = &"FX"
 
 [connection signal="PlayerReachedGoal" from="." to="WonEffect" method="play"]
