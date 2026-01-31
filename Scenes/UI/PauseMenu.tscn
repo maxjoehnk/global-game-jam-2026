@@ -12,22 +12,11 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_eod5q")
 
-[node name="Panel" type="Panel" parent="." unique_id=538914950]
+[node name="Panel" type="PanelContainer" parent="." unique_id=1334316072]
 layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=1344343719]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -140.0
-offset_top = -98.0
-offset_right = 140.0
-offset_bottom = 98.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 theme_override_constants/margin_left = 40
 theme_override_constants/margin_top = 40
 theme_override_constants/margin_right = 40
@@ -43,6 +32,10 @@ layout_mode = 2
 text = "Paused"
 label_settings = ExtResource("2_238ko")
 horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/VBoxContainer" unique_id=1830583064]
+layout_mode = 2
+theme_override_constants/margin_top = 20
 
 [node name="Resume" parent="Panel/MarginContainer/VBoxContainer" unique_id=1397831284 instance=ExtResource("2_v5qja")]
 layout_mode = 2
