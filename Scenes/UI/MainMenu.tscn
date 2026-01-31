@@ -10,26 +10,35 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_g18y6")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1156685422]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=2069094500]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
 
-[node name="LevelSelector" type="Button" parent="VBoxContainer" unique_id=304777106]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1156685422]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="LevelSelector" type="Button" parent="MarginContainer/VBoxContainer" unique_id=304777106]
 layout_mode = 2
 text = "Levels"
 
-[node name="Settings" type="Button" parent="VBoxContainer" unique_id=458406655]
+[node name="Settings" type="Button" parent="MarginContainer/VBoxContainer" unique_id=458406655]
 layout_mode = 2
 text = "Settings"
 
-[node name="Exit" type="Button" parent="VBoxContainer" unique_id=1674875753]
+[node name="Exit" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1674875753]
 layout_mode = 2
 text = "Exit"
 
-[connection signal="pressed" from="VBoxContainer/LevelSelector" to="." method="OnOpenLevelSelector"]
-[connection signal="pressed" from="VBoxContainer/Settings" to="." method="OnOpenSettings"]
-[connection signal="pressed" from="VBoxContainer/Exit" to="." method="OnExit"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/LevelSelector" to="." method="OnOpenLevelSelector"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Settings" to="." method="OnOpenSettings"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Exit" to="." method="OnExit"]

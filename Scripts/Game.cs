@@ -111,7 +111,6 @@ public partial class Game : Node2D
 	{
 		this.Hud.ShowWonMenu();
 		this.GetTree().Paused = true;
-		GD.Print("Won, next level");
 	}
 
 	private void TogglePause()
