@@ -77,6 +77,7 @@ public partial class Game : Node2D
 		this.UpdateActiveLayer();
 
 		this.Player.PlayerDied += this.RespawnPlayer;
+		this.RespawnMarker.GlobalPosition = this.Player.GlobalPosition;
 		foreach (LevelFinish finish in this.GetTree().GetNodesInGroup("LevelExits").Cast<LevelFinish>())
 		{
 			finish.PlayerReachedGoal += this.OnPlayerReachedGoal;

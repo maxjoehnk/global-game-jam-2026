@@ -1,0 +1,20 @@
+[gd_scene format=4 uid="uid://d1kxbq2ali26i"]
+
+[ext_resource type="PackedScene" uid="uid://dq8bmx6sugagf" path="res://Scenes/Levels/_BaseLevel.tscn" id="1_8glxj"]
+[ext_resource type="TileSet" uid="uid://b0qj4rvg8nt0x" path="res://Assets/TileSet.tres" id="2_2pwoe"]
+[ext_resource type="PackedScene" uid="uid://d2rcj02dpqrfb" path="res://Scenes/BuildingBlocks/LevelFinish.tscn" id="3_rwlrg"]
+
+[node name="001_Introduction" unique_id=14346899 instance=ExtResource("1_8glxj")]
+
+[node name="TileMapLayer2" type="TileMapLayer" parent="Layers" parent_id_path=PackedInt32Array(1705662681) index="0" unique_id=627036990]
+tile_map_data = PackedByteArray("AAADABIAAAABAAQAAAALABIAAAABAAQAAAAXAA4AAAADAAMAAAAbAAoAAAADAAMAAAAfAAgAAAAEAAMAAAAHABAAAAAEAAMAAAD//xAAAAAEAAMAAAAjAAoAAAABAAQAAAAnAAgAAAAEAAMAAAAPABIAAAABAAQAAAATABAAAAACAAQAAAA=")
+tile_set = ExtResource("2_2pwoe")
+
+[node name="LevelFinish" parent="Layers/TileMapLayer2" index="0" unique_id=1423001190 instance=ExtResource("3_rwlrg")]
+position = Vector2(1715, 390)
+
+[node name="Player" parent="." index="4" unique_id=1038420454]
+position = Vector2(95, 772)
+
+[node name="RespawnPoint" parent="." index="5" unique_id=1746357086]
+position = Vector2(91, 739)
