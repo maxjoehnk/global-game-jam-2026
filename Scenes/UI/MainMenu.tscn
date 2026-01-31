@@ -4,34 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bsldn8e7jelex" path="res://Scenes/UI/SpahnButton.tscn" id="2_72sra"]
 [ext_resource type="AudioStream" uid="uid://buxqnht6axxs0" path="res://Assets/Sounds/Quotes/MöglicherweiseImmerWieder.wav" id="2_mjmdf"]
 [ext_resource type="LabelSettings" uid="uid://c581imawvcllk" path="res://Themes/TitleLabel.tres" id="2_t6w0q"]
-[ext_resource type="Texture2D" uid="uid://c3qqe2ap7tgh" path="res://Assets/Character/SpahnKopf.png" id="3_k8um8"]
-[ext_resource type="Script" uid="uid://bei04pk1ped5u" path="res://Scripts/UI/SpahnKopf.cs" id="4_jex3y"]
-
-[sub_resource type="Animation" id="Animation_jex3y"]
-resource_name = "idle"
-loop_mode = 1
-tracks/0/type = "method"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MarginContainer/VBoxContainer/Control/TextureRect")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.46666667),
-"transitions": PackedFloat32Array(1, 1),
-"values": [{
-"args": [],
-"method": &"Animate"
-}, {
-"args": [],
-"method": &"Animate"
-}]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_744d7"]
-_data = {
-&"idle": SubResource("Animation_jex3y")
-}
+[ext_resource type="PackedScene" uid="uid://dk7nxjlht6iqe" path="res://Scenes/UI/AnimatedSpahnKopf.tscn" id="3_k8um8"]
 
 [node name="MainMenu" type="Panel" unique_id=603471195]
 anchors_preset = 15
@@ -64,29 +37,8 @@ text = "Maske kann auch geil sein"
 label_settings = ExtResource("2_t6w0q")
 horizontal_alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer" unique_id=1959960639]
-visible = false
+[node name="Control" parent="MarginContainer/VBoxContainer" unique_id=283827496 instance=ExtResource("3_k8um8")]
 layout_mode = 2
-theme_override_constants/margin_top = 20
-
-[node name="Control" type="Control" parent="MarginContainer/VBoxContainer" unique_id=1867864971]
-custom_minimum_size = Vector2(0, 500)
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/Control" unique_id=1372317412]
-custom_minimum_size = Vector2(500, 500)
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -265.0
-offset_right = 265.0
-offset_bottom = 500.0
-grow_horizontal = 2
-pivot_offset_ratio = Vector2(0.5, 0.5)
-texture = ExtResource("3_k8um8")
-expand_mode = 2
-script = ExtResource("4_jex3y")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=457217760]
 custom_minimum_size = Vector2(200, 0)
@@ -109,11 +61,6 @@ text = "Exit"
 stream = ExtResource("2_mjmdf")
 autoplay = true
 bus = &"Quotes"
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2032505794]
-libraries/ = SubResource("AnimationLibrary_744d7")
-autoplay = &"idle"
-speed_scale = 1.577
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/LevelSelector" to="." method="OnOpenLevelSelector"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/Settings" to="." method="OnOpenSettings"]

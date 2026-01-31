@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://y4ek6m5qeius" path="res://Scripts/UI/WonMenu.cs" id="1_f7pny"]
 [ext_resource type="LabelSettings" uid="uid://cs5xntv3h0phe" path="res://Themes/LabelSettings.tres" id="2_nclqo"]
 [ext_resource type="PackedScene" uid="uid://bsldn8e7jelex" path="res://Scenes/UI/SpahnButton.tscn" id="2_v5qja"]
+[ext_resource type="PackedScene" uid="uid://dk7nxjlht6iqe" path="res://Scenes/UI/AnimatedSpahnKopf.tscn" id="3_wahdk"]
 
 [node name="WonDialog" type="CenterContainer" unique_id=1947197841]
 anchors_preset = 15
@@ -42,6 +43,9 @@ layout_mode = 2
 text = "Level Cleared"
 label_settings = ExtResource("2_nclqo")
 horizontal_alignment = 1
+
+[node name="AnimatedSpahnKopf" parent="Panel/MarginContainer/VBoxContainer" unique_id=283827496 instance=ExtResource("3_wahdk")]
+layout_mode = 2
 
 [node name="Restart" parent="Panel/MarginContainer/VBoxContainer" unique_id=770999740 instance=ExtResource("2_v5qja")]
 layout_mode = 2
