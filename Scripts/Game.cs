@@ -135,7 +135,10 @@ public partial class Game : Node2D
 			layer.Modulate = i == this.activeLayerIndex ? Color.FromHsv(0, 0, 1) : Color.FromHsv(0, 0, 1, 0.2f);
 			float scaling_value = 1.0f + LayerScaling*(i - this.activeLayerIndex);
 			layer.Scale = new Vector2(scaling_value, scaling_value);
-			//layer.Modulate *= LayerColorList[i];
+			if (i != this.activeLayerIndex)
+			{
+				layer.Modulate *= LayerColorList[i].Lerp(new Color(1.0f,1.0f,1.0f), 0.2f);
+			}
 		}
 		Player.SetActiveCollisionLayer(this.ActivePhysicsLayer);
 		this.Hud.SetActiveLayer(this.activeLayerIndex);
