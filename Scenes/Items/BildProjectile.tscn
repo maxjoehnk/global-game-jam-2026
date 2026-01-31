@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://c1w12awysktvy"]
+
+[ext_resource type="Script" uid="uid://cilscqdj2pur8" path="res://Scripts/Items/Projectile.cs" id="1_76ih0"]
+[ext_resource type="Texture2D" uid="uid://c4bowiomdcntm" path="res://Assets/Particles/BildThrowable.png" id="1_c1i1u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_76ih0"]
+size = Vector2(161.5, 586)
+
+[node name="BildProjectile" type="RigidBody2D" unique_id=2079152419]
+collision_layer = 32
+collision_mask = 3850
+mass = 0.2
+contact_monitor = true
+max_contacts_reported = 5
+script = ExtResource("1_76ih0")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1727014401]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_c1i1u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1548203658]
+position = Vector2(0.25, 1)
+scale = Vector2(0.10520343, 0.10479662)
+shape = SubResource("RectangleShape2D_76ih0")

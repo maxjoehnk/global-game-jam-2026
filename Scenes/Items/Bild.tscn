@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://bswuxr4vm5fm7"]
+
+[ext_resource type="PackedScene" uid="uid://dlcl0ch3ppvol" path="res://Scenes/Items/Item.tscn" id="1_05h2a"]
+[ext_resource type="PackedScene" uid="uid://c1w12awysktvy" path="res://Scenes/Items/BildProjectile.tscn" id="2_ot4lx"]
+[ext_resource type="Texture2D" uid="uid://dtmafuq4nhip8" path="res://Assets/Particles/BildCollectable.png" id="3_sm4gr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ot4lx"]
+size = Vector2(612, 583)
+
+[node name="Item" unique_id=1748474714 instance=ExtResource("1_05h2a")]
+Projectile = ExtResource("2_ot4lx")
+Velocity = 500.0
+
+[node name="Sprite2D" parent="." index="0" unique_id=1924315387]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("3_sm4gr")
+
+[node name="CollisionShape2D" parent="." index="1" unique_id=1352463887]
+position = Vector2(1, -0.5)
+scale = Vector2(0.10310766, 0.10772619)
+shape = SubResource("RectangleShape2D_ot4lx")
+
+[node name="Detector" parent="." index="2" unique_id=1265873938]
+collision_layer = 0
+
+[node name="CollisionShape2D2" parent="Detector" index="0" unique_id=5204596]
+scale = Vector2(0.1051113, 0.109819576)
+shape = SubResource("RectangleShape2D_ot4lx")

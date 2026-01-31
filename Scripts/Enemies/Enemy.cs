@@ -18,14 +18,19 @@ public partial class Enemy : CharacterBody2D, IAssignableLayer
 	{
 		this.CollisionLayer = (this.CollisionLayer & Consts.NonLayerMask) | layerMask;
 		
-		uint CollisionValue = (this.CollisionMask & Consts.NonLayerMask) | layerMask;
-		this.CollisionMask = CollisionValue;
-		this.RayLeft.CollisionMask = CollisionValue;
-		this.RayRight.CollisionMask = CollisionValue;
+		uint collisionValue = (this.CollisionMask & Consts.NonLayerMask) | layerMask;
+		this.CollisionMask = collisionValue;
+		this.RayLeft.CollisionMask = collisionValue;
+		this.RayRight.CollisionMask = collisionValue;
 	}
 
-	public bool CheckOnSameLayer(uint OtherMask)
+	public bool CheckOnSameLayer(uint otherMask)
 	{
-		return (OtherMask & this.AssignedLayer) == this.AssignedLayer;
+		return (otherMask & this.AssignedLayer) == this.AssignedLayer;
+	}
+
+	public void Hit(Projectile projectile)
+	{
+		this.QueueFree();
 	}
 }
