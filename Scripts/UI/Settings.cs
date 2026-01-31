@@ -13,17 +13,18 @@ public partial class Settings : Panel
 		return (this.FindChild(name) as Slider)!;
 	}
 	
-	public override void _Ready()
-	{
-		this.MainVolumeSlider.Value = SettingsManager.MainVolume;
-		this.MainVolumeSlider.ValueChanged += this.OnMainVolumeChanged;
-		this.EffectsVolumeSlider.Value = SettingsManager.EffectsVolume;
-		this.EffectsVolumeSlider.ValueChanged += this.OnEffectsVolumeChanged;
-		this.MusicVolumeSlider.Value = SettingsManager.MusicVolume;
-		this.MusicVolumeSlider.ValueChanged += this.OnMusicVolumeChanged;
-		this.QuotesVolumeSlider.Value = SettingsManager.QuotesVolume;
-		this.QuotesVolumeSlider.ValueChanged += this.OnQuotesVolumeChanged;
-	}
+    public override void _Ready()
+    {
+        this.MainVolumeSlider.GrabFocus();
+        this.MainVolumeSlider.Value = SettingsManager.MainVolume;
+        this.MainVolumeSlider.ValueChanged += this.OnMainVolumeChanged;
+        this.EffectsVolumeSlider.Value = SettingsManager.EffectsVolume;
+        this.EffectsVolumeSlider.ValueChanged += this.OnEffectsVolumeChanged;
+        this.MusicVolumeSlider.Value = SettingsManager.MusicVolume;
+        this.MusicVolumeSlider.ValueChanged += this.OnMusicVolumeChanged;
+        this.QuotesVolumeSlider.Value = SettingsManager.QuotesVolume;
+        this.QuotesVolumeSlider.ValueChanged += this.OnQuotesVolumeChanged;
+    }
 
 	private void OnMainVolumeChanged(double value)
 	{

@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://dk7nxjlht6iqe"]
+
+[ext_resource type="Texture2D" uid="uid://c3qqe2ap7tgh" path="res://Assets/Character/SpahnKopf.png" id="1_7cym7"]
+[ext_resource type="Script" uid="uid://bei04pk1ped5u" path="res://Scripts/UI/SpahnKopf.cs" id="2_l06ld"]
+
+[sub_resource type="Animation" id="Animation_7cym7"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_jex3y"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.56666666),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"Animate"
+}, {
+"args": [],
+"method": &"Animate"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_744d7"]
+_data = {
+&"RESET": SubResource("Animation_7cym7"),
+&"idle": SubResource("Animation_jex3y")
+}
+
+[node name="AnimatedSpahnKopf" type="Control" unique_id=283827496]
+clip_contents = true
+custom_minimum_size = Vector2(500, 500)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 500.0
+offset_bottom = 500.0
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1013917388]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("1_7cym7")
+expand_mode = 2
+flip_h = true
+script = ExtResource("2_l06ld")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1986236463]
+libraries/ = SubResource("AnimationLibrary_744d7")
+autoplay = &"idle"
+speed_scale = 1.577

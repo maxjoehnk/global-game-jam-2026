@@ -3,15 +3,31 @@
 [ext_resource type="Texture2D" uid="uid://cnt5jrui71e8x" path="res://Assets/PlaceholderGraphics/3 Objects/Checkpoints/Checkpoint_No_Flag.png" id="1_f2lml"]
 [ext_resource type="Script" uid="uid://b3gj8u63kv8yd" path="res://Scripts/BuildingBlocks/LevelFinish.cs" id="1_haonk"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_haonk"]
-height = 54.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_haonk"]
+size = Vector2(200, 200)
 
 [node name="LevelFinish" type="Area2D" unique_id=1423001190 groups=["LevelExits"]]
 collision_layer = 0
 script = ExtResource("1_haonk")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1405159091]
+visible = false
 texture = ExtResource("1_f2lml")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=895781790]
-shape = SubResource("CapsuleShape2D_haonk")
+shape = SubResource("RectangleShape2D_haonk")
+
+[node name="ReferenceRect" type="ReferenceRect" parent="." unique_id=1418404081]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -100.0
+offset_right = 100.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+border_color = Color(0.08688759, 0.64797103, 0, 1)
+border_width = 5.0

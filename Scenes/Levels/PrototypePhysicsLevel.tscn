@@ -4,9 +4,18 @@
 [ext_resource type="PackedScene" uid="uid://baecr5xqo2qyj" path="res://Scenes/BuildingBlocks/Bridge.tscn" id="2_fcs4b"]
 [ext_resource type="PackedScene" uid="uid://d2rcj02dpqrfb" path="res://Scenes/BuildingBlocks/LevelFinish.tscn" id="5_hy146"]
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_qms24"]
+distance = -1080.0
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_fcs4b"]
 
 [node name="BaseLevel" unique_id=14346899 instance=ExtResource("1_qms24")]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="FixedBoundary" parent_id_path=PackedInt32Array(1051847964) index="0" unique_id=1653534912]
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FixedBoundary/StaticBody2D" index="0" unique_id=772456054]
+shape = SubResource("WorldBoundaryShape2D_qms24")
 
 [node name="Layer 1" type="Node2D" parent="Layers" parent_id_path=PackedInt32Array(1705662681) index="0" unique_id=1275874585]
 

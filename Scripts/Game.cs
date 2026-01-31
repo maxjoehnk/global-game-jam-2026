@@ -13,6 +13,8 @@ public partial class Game : Node2D
 
 	private const int PhysicsBaseLayer = 8;
 	private const int CutBaseLayer = 5;
+	private const uint NonPhysicsLayerMask = 0b11111111;
+	
 	private Node2D LayerContainer => GetNode<Node2D>("Layers");
 	private Player Player => GetNode<Player>("Player");
 	private GameHud Hud => GetNode<GameHud>("UI/HUD");
@@ -43,23 +45,23 @@ public partial class Game : Node2D
 		int physicsLayer = PhysicsBaseLayer;
 		Array<Node> layers = this.LayerContainer.GetChildren();
 		this.Hud.SetLayers(layers.Count, LayerColorList);
-		foreach (Node child in layers)
+		foreach (Node layer in layers)
 		{
-			foreach (PhysicsBody2D physicsBody2D in child.FindChildren("*", type: nameof(PhysicsBody2D))
+			foreach (PhysicsBody2D physicsBody2D in layer.FindChildren("*", type: nameof(PhysicsBody2D))
 						 .Where(c => c is PhysicsBody2D)
 						 .Cast<PhysicsBody2D>())
 			{
-				physicsBody2D.CollisionLayer |= (uint)1 << physicsLayer;
+				physicsBody2D.CollisionLayer = (physicsBody2D.CollisionLayer & NonPhysicsLayerMask) | (uint)1 << physicsLayer;
 			}
 
-			foreach (TileMapLayer tilemap in child.FindChildren("*", type: nameof(TileMapLayer))
-						 .Where(c => c is TileMapLayer)
-						 .Cast<TileMapLayer>())
+			if (layer is TileMapLayer)
 			{
-				uint tile_layers = tilemap.TileSet.GetPhysicsLayerCollisionLayer(0);
-				tilemap.TileSet.SetPhysicsLayerCollisionLayer(
-					0, (uint)1 << physicsLayer | tile_layers
-				);
+				ApplyMaskLayerToTileMapLayer((TileMapLayer)layer, physicsLayer);
+			}
+			
+			foreach (TileMapLayer tileMapLayer in layer.GetChildren().Where(c => c is TileMapLayer).Cast<TileMapLayer>())
+			{
+				ApplyMaskLayerToTileMapLayer(tileMapLayer, physicsLayer);
 			}
 
 			physicsLayer++;
@@ -72,6 +74,14 @@ public partial class Game : Node2D
 		{
 			finish.PlayerReachedGoal += this.OnPlayerReachedGoal;
 		}
+	}
+
+	private static void ApplyMaskLayerToTileMapLayer(TileMapLayer tileMapLayer, int physicsLayer)
+	{
+		TileSet uniqueTileSet = (tileMapLayer.TileSet.Duplicate() as TileSet)!;
+		uint tileMapCollisionLayer = uniqueTileSet.GetPhysicsLayerCollisionLayer(0) & NonPhysicsLayerMask;
+		uniqueTileSet.SetPhysicsLayerCollisionLayer(0, tileMapCollisionLayer | (uint)1 << physicsLayer);
+		tileMapLayer.TileSet = uniqueTileSet;
 	}
 
 	public override void _Input(InputEvent @event)

@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bsldn8e7jelex" path="res://Scenes/UI/SpahnButton.tscn" id="2_72sra"]
 [ext_resource type="AudioStream" uid="uid://buxqnht6axxs0" path="res://Assets/Sounds/Quotes/MöglicherweiseImmerWieder.wav" id="2_mjmdf"]
 [ext_resource type="LabelSettings" uid="uid://c581imawvcllk" path="res://Themes/TitleLabel.tres" id="2_t6w0q"]
+[ext_resource type="PackedScene" uid="uid://dk7nxjlht6iqe" path="res://Scenes/UI/AnimatedSpahnKopf.tscn" id="3_k8um8"]
 
 [node name="MainMenu" type="Panel" unique_id=603471195]
 anchors_preset = 15
@@ -36,9 +37,8 @@ text = "Maske kann auch geil sein"
 label_settings = ExtResource("2_t6w0q")
 horizontal_alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer" unique_id=1959960639]
+[node name="Control" parent="MarginContainer/VBoxContainer" unique_id=283827496 instance=ExtResource("3_k8um8")]
 layout_mode = 2
-theme_override_constants/margin_top = 20
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=457217760]
 custom_minimum_size = Vector2(200, 0)

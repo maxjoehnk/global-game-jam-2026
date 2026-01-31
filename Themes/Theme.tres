@@ -1,6 +1,7 @@
 [gd_resource type="Theme" format=3 uid="uid://cguqiur7fkn0g"]
 
 [ext_resource type="FontFile" uid="uid://dwo1chvod5pr" path="res://Assets/Fonts/Cambria-Font.ttf" id="1_bevgq"]
+[ext_resource type="Texture2D" uid="uid://4ky7dbjq0h12" path="res://Assets/UI/SliderHandle.png" id="2_cprso"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ru65r"]
 bg_color = Color(0.46302497, 0.67667603, 0.12846282, 1)
@@ -14,5 +15,7 @@ bg_color = Color(0.16026929, 0.16026932, 0.1602692, 1)
 [resource]
 Button/fonts/font = ExtResource("1_bevgq")
 Button/styles/pressed = SubResource("StyleBoxFlat_ru65r")
+HSlider/icons/grabber = ExtResource("2_cprso")
+HSlider/icons/grabber_highlight = ExtResource("2_cprso")
 Panel/styles/panel = SubResource("StyleBoxFlat_bevgq")
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_7yoxp")
