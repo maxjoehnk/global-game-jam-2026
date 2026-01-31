@@ -30,6 +30,8 @@ public partial class Player : CharacterBody2D
 	[Export] public float WallJumpX = 400f;
 	[Export] public float WallJumpY = -600f;
 	[Export] public float WallJumpInputLimit = -0.9f;
+	private Timer WallJumpTimer => GetNode<Timer>("WallJumpTimer");
+	private float LastWallDir = 0.0f;
 
 	[Export] public float FallPull = 250f;
 	[Export] public float FallTransition = 60f;
@@ -120,7 +122,7 @@ public partial class Player : CharacterBody2D
 			case State.WallJump:
 				this.AnimationPlayer.Play("idle");
 				velocity.Y = this.WallJumpY;
-				velocity.X = this.GetWallNormal().X * this.WallJumpX;
+				velocity.X = this.LastWallDir * this.WallJumpX;
 				this.Velocity = velocity;
 				break;
 			case State.Dive:
@@ -275,11 +277,21 @@ public partial class Player : CharacterBody2D
 	}
 
 	public bool check_wall_jump(float input_x){
-		if (this.IsOnWall() && Input.IsActionJustPressed("jump"))
+		if (this.WallJumpTimer.TimeLeft > 0 && Input.IsActionJustPressed("jump"))
 		{
-			if(this.GetWallNormal().X * input_x < this.WallJumpInputLimit)
+			this.WallJumpTimer.Stop();
+			return true;
+		}
+		if (this.IsOnWall())
+		{
+			this.LastWallDir = this.GetWallNormal().X;
+			if(this.GetWallNormal().X * input_x < this.WallJumpInputLimit && Input.IsActionJustPressed("jump"))
 			{
 				return true;
+			}
+			else if (this.WallJumpTimer.TimeLeft == 0)
+			{
+				this.WallJumpTimer.Start();
 			}
 		}
 		return false;

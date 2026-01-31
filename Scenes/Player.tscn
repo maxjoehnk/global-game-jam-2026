@@ -258,3 +258,7 @@ texture = ExtResource("3_gntrk")
 [node name="CoyoteTimer" type="Timer" parent="." unique_id=1319522194]
 wait_time = 0.5
 one_shot = true
+
+[node name="WallJumpTimer" type="Timer" parent="." unique_id=1027413351]
+wait_time = 0.3
+one_shot = true
