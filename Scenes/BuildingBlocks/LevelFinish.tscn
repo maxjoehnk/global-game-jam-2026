@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b3gj8u63kv8yd" path="res://Scripts/BuildingBlocks/LevelFinish.cs" id="1_haonk"]
 [ext_resource type="Texture2D" uid="uid://b3cvrve3kidwy" path="res://Assets/Elements/Atlas.png" id="2_haonk"]
+[ext_resource type="AudioStream" uid="uid://b2wcbe71vgn86" path="res://Assets/Sounds/FX/Kaching.wav" id="3_3q6ea"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f2lml"]
 atlas = ExtResource("2_haonk")
@@ -88,3 +89,9 @@ shape = SubResource("RectangleShape2D_haonk")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1587699469]
 libraries/ = SubResource("AnimationLibrary_5ejpd")
 autoplay = &"Idle"
+
+[node name="WonEffect" type="AudioStreamPlayer" parent="." unique_id=374380444]
+stream = ExtResource("3_3q6ea")
+bus = &"FX"
+
+[connection signal="PlayerReachedGoal" from="." to="WonEffect" method="play"]
