@@ -10,10 +10,8 @@ script = ExtResource("1_2rwt8")
 [node name="NationalHymne" type="AudioStreamPlayer" parent="." unique_id=1681606427]
 stream = ExtResource("2_vrkvq")
 volume_db = -10.0
-autoplay = true
 bus = &"Music"
 
 [node name="Intro" type="AudioStreamPlayer" parent="." unique_id=928673042]
 stream = ExtResource("2_o6v2g")
-autoplay = true
 bus = &"Quotes"

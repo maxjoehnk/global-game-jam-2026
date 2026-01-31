@@ -10,6 +10,7 @@ public partial class MainMenu : Panel
 	public override void _Ready()
 	{
 		this.LevelSelector.GrabFocus();
+		GlobalAudioPlayback.Instance.StartAllPlayback();
 	}
 
 	public void OnOpenLevelSelector()
