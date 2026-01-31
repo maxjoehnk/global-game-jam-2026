@@ -98,9 +98,12 @@ public partial class Player : CharacterBody2D
 			this.EmitSignalPlayerDied();
 		}
 		// Put cut area in front of player
-		this.CutTool.Position = new Vector2(
-				Mathf.Sign(this.Velocity.X) * CutPosX, 0.0f
-			);
+		if (Mathf.Abs(this.Velocity.X) > 0)
+		{
+			this.CutTool.Position = new Vector2(
+					Mathf.Sign(this.Velocity.X) * CutPosX, 0.0f
+				);	
+		}
 	}
 
 	public void set_new_state(State NewState){

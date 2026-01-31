@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://de6hgg3odsf6y"]
+
+[ext_resource type="Script" uid="uid://dnbw8h2bfq7f1" path="res://Scripts/UI/CustomTabBar.cs" id="1_cpdhy"]
+[ext_resource type="Texture2D" uid="uid://dcvar2yqrxvj5" path="res://Assets/UI/Border.png" id="1_cw1yi"]
+
+[node name="CustomTabBar" type="CanvasLayer" unique_id=520158691]
+script = ExtResource("1_cpdhy")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=328771140]
+custom_minimum_size = Vector2(0, 50)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -960.0
+offset_right = 960.0
+offset_bottom = 45.0
+grow_horizontal = 2
+size_flags_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="OuterVBox" type="VBoxContainer" parent="." unique_id=300245134]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="OuterVBox" unique_id=469426845]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+
+[node name="LabelBox" type="HBoxContainer" parent="OuterVBox" unique_id=981975235]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="OuterVBox" unique_id=1423204802]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("1_cw1yi")

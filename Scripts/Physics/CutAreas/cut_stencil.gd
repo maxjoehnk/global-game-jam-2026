@@ -4,6 +4,17 @@ const CutBody: PackedScene = preload("res://Scenes/Physics/cutable_ridgid_body.t
 const DefaultColor: Color  = Color(0.8, 0.0, 0.224, 0.392) 
 const HoverColor: Color    = Color(0.025, 0.522, 0.0, 0.196) 
 
+const LayerColorList = [
+	Color(0.996, 0.0, 0.246),
+	Color(0.2, 0.256, 1.0),
+	Color(0.264, 0.494, 0.0),
+	Color(0.825, 0.042, 0.602, 1.0),
+	Color(0.68, 0.46, 0.0),
+	Color(0.08, 0.561, 0.734),
+	Color(0.77, 0.26, 0.0),
+	Color(0.333, 0.747, 0.559)
+]
+
 @onready var sprite_2d : Sprite2D = $Sprite2D
 @onready var collision_polygon_2d : CollisionPolygon2D = $Area2D/CollisionPolygon2D
 

@@ -4,13 +4,13 @@ namespace GlobalGameJam.Scripts.UI;
 
 public partial class LayerEntry : Button
 {
-    public bool Active
-    {
-        set => this.SetPressed(value);
-    }
+	public bool Active
+	{
+		set => this.SetPressed(value);
+	}
 
-    public string LayerName
-    {
-        set => this.Text = value;
-    }
+	public string LayerName
+	{
+		set => this.Text = value;
+	}
 }

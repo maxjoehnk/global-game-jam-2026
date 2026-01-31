@@ -4,6 +4,7 @@ using Godot;
 using GlobalGameJam.Scripts.Core;
 using GlobalGameJam.Scripts.UI;
 using Godot.Collections;
+using System.ComponentModel.DataAnnotations;
 
 public partial class Game : Node2D
 {
@@ -24,11 +25,24 @@ public partial class Game : Node2D
 	private Node2D ActiveLayer => LayerContainer.GetChild<Node2D>(this.activeLayerIndex);
 	private uint ActivePhysicsLayer => (uint)1 << (PhysicsBaseLayer + this.activeLayerIndex);
 
+
+	private static readonly Color[] LayerColorList =
+	{
+		new Color(0.996f, 0.0f, 0.246f),
+		new Color(0.2f, 0.256f, 1.0f),
+		new Color(0.264f, 0.494f, 0.0f),
+		new Color(0.825f, 0.042f, 0.602f, 1.0f),
+		new Color(0.68f, 0.46f, 0.0f),
+		new Color(0.08f, 0.561f, 0.734f),
+		new Color(0.77f, 0.26f, 0.0f),
+		new Color(0.333f, 0.747f, 0.559f),
+	};
+
 	public override void _Ready()
 	{
 		int physicsLayer = PhysicsBaseLayer;
 		Array<Node> layers = this.LayerContainer.GetChildren();
-		this.Hud.SetLayers(new Array<string>(layers.Select(l => l.Name.ToString())));
+		this.Hud.SetLayers(layers.Count, LayerColorList);
 		foreach (Node child in layers)
 		{
 			foreach (PhysicsBody2D physicsBody2D in child.FindChildren("*", type: nameof(PhysicsBody2D))

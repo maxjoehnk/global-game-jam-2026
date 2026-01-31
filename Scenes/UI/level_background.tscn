@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://sy1jocr8k3dq"]
+
+[ext_resource type="Script" uid="uid://ck1m1sgk5srs0" path="res://Scripts/UI/LevelBackground.cs" id="1_iecnm"]
+
+[node name="LevelBackground" type="ColorRect" unique_id=1050988965]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_iecnm")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=527735779]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer" unique_id=1007361121]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=2127769869]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/HBoxContainer" unique_id=2119366000]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+
+[node name="BackGround" type="ColorRect" parent="VBoxContainer/HBoxContainer" unique_id=340790139]
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(0.08468992, 0.08468992, 0.08468992, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer" unique_id=1025130506]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer" unique_id=1707046155]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
