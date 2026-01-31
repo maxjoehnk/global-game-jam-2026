@@ -42,15 +42,12 @@ public partial class Game : Node2D
 
 			if (layer is TileMapLayer)
 			{
-				TileMapLayer tileMapLayer = (layer as TileMapLayer)!;
-				uint tileMapCollisionLayer = tileMapLayer.TileSet.GetPhysicsLayerCollisionLayer(0) & NonPhysicsLayerMask;
-				tileMapLayer.TileSet.SetPhysicsLayerCollisionLayer(0, tileMapCollisionLayer | (uint)1 << physicsLayer);
+				ApplyMaskLayerToTileMapLayer((TileMapLayer)layer, physicsLayer);
 			}
 			
 			foreach (TileMapLayer tileMapLayer in layer.GetChildren().Where(c => c is TileMapLayer).Cast<TileMapLayer>())
 			{
-				uint tileMapCollisionLayer = tileMapLayer.TileSet.GetPhysicsLayerCollisionLayer(0) & NonPhysicsLayerMask;
-				tileMapLayer.TileSet.SetPhysicsLayerCollisionLayer(0, tileMapCollisionLayer | (uint)1 << physicsLayer);
+				ApplyMaskLayerToTileMapLayer(tileMapLayer, physicsLayer);
 			}
 
 			physicsLayer++;
@@ -63,6 +60,14 @@ public partial class Game : Node2D
 		{
 			finish.PlayerReachedGoal += this.OnPlayerReachedGoal;
 		}
+	}
+
+	private static void ApplyMaskLayerToTileMapLayer(TileMapLayer tileMapLayer, int physicsLayer)
+	{
+		TileSet uniqueTileSet = (tileMapLayer.TileSet.Duplicate() as TileSet)!;
+		uint tileMapCollisionLayer = uniqueTileSet.GetPhysicsLayerCollisionLayer(0) & NonPhysicsLayerMask;
+		uniqueTileSet.SetPhysicsLayerCollisionLayer(0, tileMapCollisionLayer | (uint)1 << physicsLayer);
+		tileMapLayer.TileSet = uniqueTileSet;
 	}
 
 	public override void _Input(InputEvent @event)
