@@ -4,6 +4,11 @@
 [ext_resource type="PackedScene" uid="uid://de6hgg3odsf6y" path="res://Scenes/UI/custom_tab_bar.tscn" id="2_663bt"]
 [ext_resource type="PackedScene" uid="uid://dg06nvdxick6h" path="res://Scenes/UI/PauseMenu.tscn" id="3_663bt"]
 [ext_resource type="PackedScene" uid="uid://bfmertmbklj7h" path="res://Scenes/UI/WonMenu.tscn" id="4_nbojb"]
+[ext_resource type="PackedScene" uid="uid://dntvdl18dlw45" path="res://Scenes/UI/ControlsOverlay.tscn" id="5_nbojb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nbojb"]
+bg_color = Color(0, 0, 0, 0.39215687)
+corner_radius_top_left = 16
 
 [node name="HUD" type="CanvasLayer" unique_id=1019550456]
 script = ExtResource("1_bg7v8")
@@ -16,3 +21,25 @@ visible = false
 
 [node name="WonDialog" parent="." unique_id=1947197841 instance=ExtResource("4_nbojb")]
 visible = false
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1383068308]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -468.0
+offset_top = -52.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_nbojb")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=336697456]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="ControlsOverlay" parent="PanelContainer/MarginContainer" unique_id=879082475 instance=ExtResource("5_nbojb")]
+layout_mode = 2
