@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://n8gtx4gsk0jv" path="res://Scripts/UI/ControlsOverlay.cs" id="1_a3v6u"]
 [ext_resource type="Texture2D" uid="uid://ceg1t2ju5q3ri" path="res://Assets/UI/Input/Dive.png" id="2_hbpqw"]
 [ext_resource type="Texture2D" uid="uid://c0jrfbg2a8rph" path="res://Assets/UI/Input/Jump.png" id="3_hbpqw"]
+[ext_resource type="Texture2D" uid="uid://ewb8seqxy6yp" path="res://Assets/UI/Input/Throw.png" id="4_qhj15"]
 [ext_resource type="Texture2D" uid="uid://dg2m3uc4ioxoy" path="res://Assets/UI/Input/Move.png" id="4_tq7o8"]
 [ext_resource type="Texture2D" uid="uid://btu5l8gxba15n" path="res://Assets/UI/Input/Prev Layer.png" id="5_qhj15"]
 [ext_resource type="Texture2D" uid="uid://ckmus1tiqqle7" path="res://Assets/UI/Input/Next Layer.png" id="6_1q3b2"]
@@ -12,6 +13,9 @@ atlas = ExtResource("4_tq7o8")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cm57f"]
 atlas = ExtResource("2_hbpqw")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1q3b2"]
+atlas = ExtResource("4_qhj15")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3dy20"]
 atlas = ExtResource("3_hbpqw")
@@ -64,6 +68,21 @@ expand_mode = 2
 [node name="Label" type="Label" parent="HBoxContainer2" unique_id=1576133905]
 layout_mode = 2
 text = "Dive"
+
+[node name="HBoxContainer6" type="HBoxContainer" parent="." unique_id=1385203785]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer6" unique_id=945540738]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_1q3b2")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer6" unique_id=1223754984]
+layout_mode = 2
+text = "Throw"
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="." unique_id=1671657204]
 layout_mode = 2

@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://dlcl0ch3ppvol"]
+
+[ext_resource type="Texture2D" uid="uid://rg2h3v1uq5wj" path="res://icon.svg" id="1_b8rrc"]
+[ext_resource type="Script" uid="uid://0deb61naogjk" path="res://Scripts/Items/Item.cs" id="1_mqxk5"]
+
+[node name="Item" type="RigidBody2D" unique_id=622532724]
+collision_layer = 4
+collision_mask = 3848
+linear_damp_mode = 1
+script = ExtResource("1_mqxk5")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1924315387]
+texture = ExtResource("1_b8rrc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1352463887]
+
+[node name="Detector" type="Area2D" parent="." unique_id=1265873938]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Detector" unique_id=5204596]

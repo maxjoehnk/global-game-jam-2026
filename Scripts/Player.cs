@@ -15,7 +15,7 @@ public enum State
 
 public partial class Player : CharacterBody2D
 {
-	private const uint BaseCollisionLayer = 0b1100;
+	private const uint BaseCollisionLayer = 0b1000;
 	private const float ResetHeight = 1200f;
 	private const float MoveTol = 0.01f;
 	private const float SpriteScale = 0.5f;
@@ -40,6 +40,8 @@ public partial class Player : CharacterBody2D
 	private Timer CoyoteTimer => GetNode<Timer>("CoyoteTimer");
 
 	[Export] public float DiveStrength = 350f;
+
+	private Item? holdingItem;
 
 	public float Gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
 	// Graphics
@@ -75,6 +77,18 @@ public partial class Player : CharacterBody2D
 	public override void _Ready()
 	{
 		this.Rotation = 0;
+	}
+
+	public override void _Input(InputEvent @event)
+	{
+		if (Input.IsActionJustPressedByEvent(InputAction.Throw, @event))
+		{
+			if (this.holdingItem != null)
+			{
+				this.holdingItem.Throw(this.GetParent(), this.GlobalPosition, this.Head.FlipH);
+				this.holdingItem = null;
+			}
+		}
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -418,4 +432,9 @@ public partial class Player : CharacterBody2D
 		}
 	}
 
+	public void PickUp(Item item)
+	{
+		this.holdingItem?.QueueFree();
+		this.holdingItem = item;
+	}
 }
