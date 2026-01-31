@@ -1,4 +1,5 @@
 using System.Linq;
+using GlobalGameJam.Scripts;
 using GlobalGameJam.Scripts.BuildingBlocks;
 using Godot;
 using GlobalGameJam.Scripts.Core;
@@ -13,7 +14,6 @@ public partial class Game : Node2D
 
 	private const int PhysicsBaseLayer = 8;
 	private const int CutBaseLayer = 5;
-	private const uint NonPhysicsLayerMask = 0b11111111;
 	
 	private Node2D LayerContainer => GetNode<Node2D>("Layers");
 	private Player Player => GetNode<Player>("Player");
@@ -47,21 +47,27 @@ public partial class Game : Node2D
 		this.Hud.SetLayers(layers.Count, LayerColorList);
 		foreach (Node layer in layers)
 		{
+			uint layerMask = (uint)1 << physicsLayer;
+			foreach (IAssignableLayer assignableLayer in layer.FindChildren("*").Where(c => c is IAssignableLayer).Cast<IAssignableLayer>())
+			{
+				assignableLayer.AssignedLayer = layerMask;
+			}
+			
 			foreach (PhysicsBody2D physicsBody2D in layer.FindChildren("*", type: nameof(PhysicsBody2D))
 						 .Where(c => c is PhysicsBody2D)
 						 .Cast<PhysicsBody2D>())
 			{
-				physicsBody2D.CollisionLayer = (physicsBody2D.CollisionLayer & NonPhysicsLayerMask) | (uint)1 << physicsLayer;
+				physicsBody2D.CollisionLayer = (physicsBody2D.CollisionLayer & Consts.NonLayerMask) | layerMask;
 			}
 
 			if (layer is TileMapLayer)
 			{
-				ApplyMaskLayerToTileMapLayer((TileMapLayer)layer, physicsLayer);
+				ApplyMaskLayerToTileMapLayer((TileMapLayer)layer, layerMask);
 			}
 			
 			foreach (TileMapLayer tileMapLayer in layer.GetChildren().Where(c => c is TileMapLayer).Cast<TileMapLayer>())
 			{
-				ApplyMaskLayerToTileMapLayer(tileMapLayer, physicsLayer);
+				ApplyMaskLayerToTileMapLayer(tileMapLayer, layerMask);
 			}
 
 			physicsLayer++;
@@ -76,11 +82,11 @@ public partial class Game : Node2D
 		}
 	}
 
-	private static void ApplyMaskLayerToTileMapLayer(TileMapLayer tileMapLayer, int physicsLayer)
+	private static void ApplyMaskLayerToTileMapLayer(TileMapLayer tileMapLayer, uint physicsLayer)
 	{
 		TileSet uniqueTileSet = (tileMapLayer.TileSet.Duplicate() as TileSet)!;
-		uint tileMapCollisionLayer = uniqueTileSet.GetPhysicsLayerCollisionLayer(0) & NonPhysicsLayerMask;
-		uniqueTileSet.SetPhysicsLayerCollisionLayer(0, tileMapCollisionLayer | (uint)1 << physicsLayer);
+		uint tileMapCollisionLayer = uniqueTileSet.GetPhysicsLayerCollisionLayer(0) & Consts.NonLayerMask;
+		uniqueTileSet.SetPhysicsLayerCollisionLayer(0, tileMapCollisionLayer | physicsLayer);
 		tileMapLayer.TileSet = uniqueTileSet;
 	}
 
