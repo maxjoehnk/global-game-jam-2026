@@ -18,13 +18,13 @@ public partial class Player : CharacterBody2D
 	private const float ResetHeight = 1200f;
 	private const float MoveTol = 0.01f;
 	// Physics
-	[Export] public float MovementSpeed = 260f;
-	[Export] public float MovementAccel = 400f;
+	[Export] public float MovementSpeed = 290f;
+	[Export] public float MovementAccel = 450f;
 	[Export] public float MovementFriction = 300f;
-	[Export] public float MovementStartDash = 70f;
+	[Export] public float MovementStartDash = 90f;
 
-	[Export] public float JumpSpeed = -650f;
-	[Export] public float AirSpeed = 250f;
+	[Export] public float JumpSpeed = -700f;
+	[Export] public float AirSpeed = 270f;
 	[Export] public float AirAccel = 450f;
 
 	[Export] public float WallJumpX = 400f;
@@ -84,7 +84,7 @@ public partial class Player : CharacterBody2D
 				break;
 
 			case State.WallJump:
-				this.jump_state(delta);
+				this.wall_jump_state(delta);
 				break;
 
 			case State.Dive:
@@ -252,6 +252,32 @@ public partial class Player : CharacterBody2D
 		}
 		this.Velocity = velocity;
 		if (this.check_wall_jump(direction))
+		{
+			this.set_new_state(State.WallJump);
+			return;
+		}
+	}
+
+	public void wall_jump_state(double delta){
+		if (this.Velocity.Y >= this.FallTransition){
+			this.set_new_state(State.Fall);
+			return;
+		}
+		else if (this.IsOnFloor())
+		{
+			this.set_new_state(State.Run);
+			return;
+		}
+		else if (Input.IsActionJustPressed("dive"))
+		{
+			this.set_new_state(State.Dive);
+			return;			
+		}
+		Vector2 velocity = this.Velocity;
+		this.update_look_direction(velocity.X);
+		velocity.Y += this.Gravity * (float)delta;;
+		this.Velocity = velocity;
+		if (this.check_wall_jump(velocity.X))
 		{
 			this.set_new_state(State.WallJump);
 			return;

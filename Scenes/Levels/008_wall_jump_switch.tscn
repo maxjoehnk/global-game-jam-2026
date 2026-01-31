@@ -1,0 +1,23 @@
+[gd_scene format=4 uid="uid://brrcic7bgo3al"]
+
+[ext_resource type="PackedScene" uid="uid://dq8bmx6sugagf" path="res://Scenes/Levels/_BaseLevel.tscn" id="1_jskc1"]
+[ext_resource type="TileSet" uid="uid://b0qj4rvg8nt0x" path="res://Assets/TileSet.tres" id="2_0wns6"]
+[ext_resource type="PackedScene" uid="uid://d2rcj02dpqrfb" path="res://Scenes/BuildingBlocks/LevelFinish.tscn" id="3_0wns6"]
+
+[node name="008WallJumpSwitch" unique_id=14346899 instance=ExtResource("1_jskc1")]
+InitialLayer = 1
+
+[node name="TileMapLayer2" type="TileMapLayer" parent="Layers" parent_id_path=PackedInt32Array(1705662681) index="0" unique_id=1199067302]
+tile_map_data = PackedByteArray("AAANAA0AAAADAAIAAAANAAoAAAADAAIAAAANAAcAAAADAAIAAAANAAQAAAADAAIAAAANAAEAAAADAAIAAAAJAAgAAAADAAIAAAAJAAUAAAADAAIAAAAJAAIAAAADAAIAAAAJAP//AAADAAIAAAA=")
+tile_set = ExtResource("2_0wns6")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="Layers" parent_id_path=PackedInt32Array(1705662681) index="1" unique_id=953703877]
+position = Vector2(960, 540)
+tile_map_data = PackedByteArray("AADt/wkAAAABAAQAAADx/wkAAAABAAQAAAD1/wkAAAABAAQAAAD5/wcAAAAEAAMAAAD9/wcAAAAEAAMAAAABAAcAAAAEAAMAAAAFAAwAAAADAAIAAAAMAAkAAAABAAIAAAAMAAsAAAABAAIAAAAPAAoAAAACAAIAAAAJAPr/AAAAAAIAAAANAPr/AAAAAAIAAAARAPr/AAAAAAIAAAAVAPr/AAAAAAIAAAAIAAUAAAABAAIAAAAJAAMAAAACAAIAAAAJAAgAAAADAAIAAAAFAAkAAAADAAIAAAAFAAYAAAADAAIAAAAFAAMAAAADAAIAAAAFAP3/AAADAAIAAAAFAAAAAAADAAIAAAABAAsAAAADAAIAAAAJAAsAAAADAAIAAAA=")
+tile_set = ExtResource("2_0wns6")
+
+[node name="LevelFinish" parent="Layers/TileMapLayer" index="0" unique_id=1423001190 instance=ExtResource("3_0wns6")]
+position = Vector2(746, -317)
+
+[node name="Player" parent="." index="4" unique_id=1038420454]
+position = Vector2(164, 860)

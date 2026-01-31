@@ -1,0 +1,38 @@
+[gd_scene format=4 uid="uid://m2c7b65epllm"]
+
+[ext_resource type="PackedScene" uid="uid://dq8bmx6sugagf" path="res://Scenes/Levels/_BaseLevel.tscn" id="1_4dj3k"]
+[ext_resource type="TileSet" uid="uid://b0qj4rvg8nt0x" path="res://Assets/TileSet.tres" id="2_7rkqp"]
+[ext_resource type="PackedScene" uid="uid://d2rcj02dpqrfb" path="res://Scenes/BuildingBlocks/LevelFinish.tscn" id="3_83k5p"]
+
+[node name="011ChairTower" unique_id=14346899 instance=ExtResource("1_4dj3k")]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="Layers" parent_id_path=PackedInt32Array(1705662681) index="0" unique_id=798989183]
+position = Vector2(960, 540)
+tile_map_data = PackedByteArray("AADz/wcAAAAAAAMAAADw/wcAAAAAAAUAAADz/wkAAAAAAAMAAADw/wkAAAAAAAUAAAA=")
+tile_set = ExtResource("2_7rkqp")
+
+[node name="TileMapLayer2" type="TileMapLayer" parent="Layers" parent_id_path=PackedInt32Array(1705662681) index="1" unique_id=1634084360]
+position = Vector2(960, 540)
+tile_map_data = PackedByteArray("AAD4/wgAAAAAAAMAAAD4/wYAAAAAAAMAAAD4/wQAAAAAAAMAAAA=")
+tile_set = ExtResource("2_7rkqp")
+
+[node name="TileMapLayer3" type="TileMapLayer" parent="Layers" parent_id_path=PackedInt32Array(1705662681) index="2" unique_id=872333024]
+position = Vector2(960, 540)
+tile_map_data = PackedByteArray("AAD+/wgAAAAAAAUAAAD+/wYAAAAAAAUAAAD+/wQAAAAAAAMAAAD+/wIAAAAAAAMAAAA=")
+tile_set = ExtResource("2_7rkqp")
+
+[node name="TileMapLayer4" type="TileMapLayer" parent="Layers" parent_id_path=PackedInt32Array(1705662681) index="3" unique_id=89994600]
+position = Vector2(960, 540)
+tile_map_data = PackedByteArray("AAAFAAkAAAAAAAMAAAAFAAcAAAAAAAMAAAAFAAUAAAAAAAMAAAAFAAMAAAAAAAMAAAAFAAEAAAAAAAMAAAAFAP//AAAAAAMAAAA=")
+tile_set = ExtResource("2_7rkqp")
+
+[node name="TileMapLayer5" type="TileMapLayer" parent="Layers" parent_id_path=PackedInt32Array(1705662681) index="4" unique_id=715287715]
+position = Vector2(960, 540)
+tile_map_data = PackedByteArray("AADt//7/AAABAAQAAADx//7/AAABAAQAAAD1//7/AAABAAQAAADp//7/AAABAAQAAAA=")
+tile_set = ExtResource("2_7rkqp")
+
+[node name="LevelFinish" parent="Layers/TileMapLayer5" index="0" unique_id=1423001190 instance=ExtResource("3_83k5p")]
+position = Vector2(-704, -250)
+
+[node name="Player" parent="." index="4" unique_id=1038420454]
+position = Vector2(252, 841)

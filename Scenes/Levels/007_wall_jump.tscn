@@ -1,0 +1,15 @@
+[gd_scene format=4 uid="uid://8eb7h11mc7wa"]
+
+[ext_resource type="PackedScene" uid="uid://dq8bmx6sugagf" path="res://Scenes/Levels/_BaseLevel.tscn" id="1_a5fsw"]
+[ext_resource type="TileSet" uid="uid://b0qj4rvg8nt0x" path="res://Assets/TileSet.tres" id="2_vi3xe"]
+[ext_resource type="PackedScene" uid="uid://d2rcj02dpqrfb" path="res://Scenes/BuildingBlocks/LevelFinish.tscn" id="3_vi3xe"]
+
+[node name="007_WallJump" unique_id=14346899 instance=ExtResource("1_a5fsw")]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="Layers" parent_id_path=PackedInt32Array(1705662681) index="0" unique_id=1469210915]
+position = Vector2(960, 540)
+tile_map_data = PackedByteArray("AAARAPr/AAAAAAIAAAANAPr/AAAAAAIAAAAJAPz/AAABAAQAAAAFAP3/AAADAAIAAAAFAAAAAAADAAIAAAAFAAMAAAADAAIAAAAFAAYAAAADAAIAAAAFAAkAAAADAAIAAAAFAAwAAAADAAIAAAAJAAwAAAADAAIAAAAJAAkAAAADAAIAAAAIAAYAAAABAAIAAAAJAAQAAAACAAIAAAANAAoAAAACAAIAAAABAAcAAAAAAAIAAAD9/wcAAAAAAAIAAAD1/wcAAAACAAQAAADx/wcAAAACAAQAAADt/wcAAAACAAQAAAD6/wAAAAADAAIAAAD6//3/AAADAAIAAAD6//r/AAADAAIAAAD6//f/AAADAAIAAAD8/wUAAAACAAUAAAD5/wcAAAAAAAIAAAA=")
+tile_set = ExtResource("2_vi3xe")
+
+[node name="LevelFinish" parent="Layers/TileMapLayer" index="0" unique_id=1423001190 instance=ExtResource("3_vi3xe")]
+position = Vector2(762, -330)

@@ -1,0 +1,15 @@
+[gd_scene format=4 uid="uid://b20g6tjnwv431"]
+
+[ext_resource type="PackedScene" uid="uid://dq8bmx6sugagf" path="res://Scenes/Levels/_BaseLevel.tscn" id="1_lruki"]
+[ext_resource type="TileSet" uid="uid://b0qj4rvg8nt0x" path="res://Assets/TileSet.tres" id="2_hbua4"]
+[ext_resource type="PackedScene" uid="uid://d2rcj02dpqrfb" path="res://Scenes/BuildingBlocks/LevelFinish.tscn" id="3_hbua4"]
+
+[node name="009DiveToTheMoney" unique_id=14346899 instance=ExtResource("1_lruki")]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="Layers" parent_id_path=PackedInt32Array(1705662681) index="0" unique_id=711403210]
+position = Vector2(960, 540)
+tile_map_data = PackedByteArray("AAAOAAoAAAAGAAIAAAASAAoAAAAHAAIAAAAWAAoAAAAIAAIAAAAKAAoAAAAFAAIAAAD5/wcAAAADAAIAAAD5/woAAAADAAIAAAD1/wcAAAADAAIAAADx/wcAAAADAAIAAADt/wcAAAADAAIAAADt/woAAAADAAIAAADx/woAAAADAAIAAAD1/woAAAADAAIAAADs/wQAAAABAAIAAADt/wIAAAACAAIAAAA=")
+tile_set = ExtResource("2_hbua4")
+
+[node name="LevelFinish" parent="Layers/TileMapLayer" index="0" unique_id=1423001190 instance=ExtResource("3_hbua4")]
+position = Vector2(809, 333)
