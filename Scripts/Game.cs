@@ -11,7 +11,7 @@ public partial class Game : Node2D
 	public int InitialLayer;
 
 	private const int PhysicsBaseLayer = 8;
-
+	private const int CutBaseLayer = 5;
 	private Node2D LayerContainer => GetNode<Node2D>("Layers");
 	private Player Player => GetNode<Player>("Player");
 	private GameHud Hud => GetNode<GameHud>("UI/HUD");
@@ -37,6 +37,17 @@ public partial class Game : Node2D
 			{
 				physicsBody2D.CollisionLayer |= (uint)1 << physicsLayer;
 			}
+
+			foreach (TileMapLayer tilemap in child.FindChildren("*", type: nameof(TileMapLayer))
+						 .Where(c => c is TileMapLayer)
+						 .Cast<TileMapLayer>())
+			{
+				uint tile_layers = tilemap.TileSet.GetPhysicsLayerCollisionLayer(0);
+				tilemap.TileSet.SetPhysicsLayerCollisionLayer(
+					0, (uint)1 << physicsLayer | tile_layers
+				);
+			}
+
 			physicsLayer++;
 		}
 		this.activeLayerIndex = this.InitialLayer;
@@ -91,7 +102,6 @@ public partial class Game : Node2D
 			Node2D layer = this.LayerContainer.GetChild<Node2D>(i);
 			layer.Modulate = i == this.activeLayerIndex ? Color.FromHsv(0, 0, 1) : Color.FromHsv(0, 0, 1, 0.25f);
 		}
-
 		Player.SetActiveCollisionLayer(this.ActivePhysicsLayer);
 		this.Hud.SetActiveLayer(this.activeLayerIndex);
 	}

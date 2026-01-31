@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://c735bd2pgysm"]
+
+[ext_resource type="Script" uid="uid://ccpytpn5m0m6r" path="res://Scripts/Physics/CutAreas/TileMapCutter.cs" id="1_sgbb1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sgbb1"]
+size = Vector2(150, 300)
+
+[node name="TileMapCutter" type="Node2D" unique_id=1935722058]
+script = ExtResource("1_sgbb1")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1879169653]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1238928804]
+shape = SubResource("RectangleShape2D_sgbb1")

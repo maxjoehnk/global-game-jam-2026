@@ -17,15 +17,15 @@ public partial class Player : CharacterBody2D
 	private const uint BaseCollisionLayer = 0b1110;
 	private const float ResetHeight = 1200f;
 	private const float MoveTol = 0.01f;
-
+	// Physics
 	[Export] public float MovementSpeed = 260f;
-	[Export] public float MovementAccel = 350f;
-	[Export] public float MovementFriction = 200f;
+	[Export] public float MovementAccel = 400f;
+	[Export] public float MovementFriction = 300f;
 	[Export] public float MovementStartDash = 70f;
 
 	[Export] public float JumpSpeed = -650f;
-	[Export] public float AirSpeed = 200f;
-	[Export] public float AirAccel = 220f;
+	[Export] public float AirSpeed = 250f;
+	[Export] public float AirAccel = 450f;
 
 	[Export] public float WallJumpX = 400f;
 	[Export] public float WallJumpY = -600f;
@@ -40,16 +40,21 @@ public partial class Player : CharacterBody2D
 	[Export] public float DiveStrength = 350f;
 
 	public float Gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
-
+	// Graphics
 	private AnimationPlayer AnimationPlayer => GetNode<AnimationPlayer>("AnimationPlayer");
 	private State CurrentState = State.Idle;
 	private Sprite2D Head => GetNode<Sprite2D>("Sprites/Kopf");
+
+	// Interact with world:
+	private const float CutPosX = 75.0f;
+	private TileMapCutter CutTool => GetNode<TileMapCutter>("TileMapCutter");
 
 	[Signal]
 	public delegate void PlayerDiedEventHandler();
 
 	public void SetActiveCollisionLayer(uint layer)
 	{
+		this.CutTool.SetActiveLayers(layer);
 		this.CollisionMask = BaseCollisionLayer | layer;
 	}
 
@@ -92,6 +97,10 @@ public partial class Player : CharacterBody2D
 		if (this.GlobalPosition.Y > ResetHeight){
 			this.EmitSignalPlayerDied();
 		}
+		// Put cut area in front of player
+		this.CutTool.Position = new Vector2(
+				Mathf.Sign(this.Velocity.X) * CutPosX, 0.0f
+			);
 	}
 
 	public void set_new_state(State NewState){
@@ -190,11 +199,11 @@ public partial class Player : CharacterBody2D
 				(float)delta * this.MovementAccel * this.scale_accel(direction * velocity.X > 0)
 			);	
 		}
-		if (Mathf.Abs(direction) < MoveTol || direction * velocity.X < 0.0f){
-			float friciton_scale = Mathf.Max(1.0f, this.Velocity.X / this.MovementSpeed);
-			velocity.X = Mathf.MoveToward(
-				velocity.X, 0.0f, friciton_scale * (float)delta * this.MovementFriction
-			);
+		if (Mathf.Abs(direction) < MoveTol){
+			velocity.X = 0.0f;
+		}
+		else if (direction * velocity.X < 0.0f){
+			velocity.X = direction * this.MovementStartDash;
 		}
 		this.Velocity = velocity;
 		if (Mathf.Abs(this.Velocity.X) < MoveTol)
@@ -207,7 +216,7 @@ public partial class Player : CharacterBody2D
 	public float scale_accel(bool direction_in_velocity){
 		float AccelScale = 1.0f;
 		if (!direction_in_velocity){
-			AccelScale *= 2.0f;
+			AccelScale *= 5.0f;
 		}
 		return AccelScale;
 	}
