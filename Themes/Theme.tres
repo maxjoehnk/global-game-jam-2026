@@ -5,10 +5,14 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ru65r"]
 bg_color = Color(0.46302497, 0.67667603, 0.12846282, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bevgq"]
+bg_color = Color(0.14586782, 0.14586785, 0.1458678, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7yoxp"]
 bg_color = Color(0.16026929, 0.16026932, 0.1602692, 1)
 
 [resource]
 Button/fonts/font = ExtResource("1_bevgq")
 Button/styles/pressed = SubResource("StyleBoxFlat_ru65r")
+Panel/styles/panel = SubResource("StyleBoxFlat_bevgq")
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_7yoxp")

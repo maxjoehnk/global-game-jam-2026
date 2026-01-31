@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://dmduxkrn46458" path="res://Scripts/UI/GameHud.cs" id="1_bg7v8"]
 [ext_resource type="LabelSettings" uid="uid://cs5xntv3h0phe" path="res://Themes/LabelSettings.tres" id="2_315wm"]
+[ext_resource type="PackedScene" uid="uid://dg06nvdxick6h" path="res://Scenes/UI/PauseMenu.tscn" id="3_663bt"]
+[ext_resource type="PackedScene" uid="uid://bfmertmbklj7h" path="res://Scenes/UI/WonMenu.tscn" id="4_nbojb"]
 
 [node name="HUD" type="Control" unique_id=385332768]
 layout_mode = 3
@@ -38,3 +40,11 @@ horizontal_alignment = 1
 
 [node name="Layers" type="VBoxContainer" parent="Panel/VBoxContainer" unique_id=246784075]
 layout_mode = 2
+
+[node name="PauseDialog" parent="." unique_id=1635492489 instance=ExtResource("3_663bt")]
+visible = false
+layout_mode = 1
+
+[node name="WonDialog" parent="." unique_id=1947197841 instance=ExtResource("4_nbojb")]
+visible = false
+layout_mode = 1

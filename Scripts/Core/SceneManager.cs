@@ -8,6 +8,8 @@ public partial class SceneManager : Node
 {
 	public static SceneManager Instance = null!;
 	private Node CurrentScene { get; set; } = null!;
+
+	private AvailableLevel? activeLevel;
 	
 	public List<AvailableLevel> Levels { get; private set; }
 	
@@ -37,6 +39,32 @@ public partial class SceneManager : Node
 	public void OpenLevel(AvailableLevel level)
 	{
 		this.LoadScene($"res://Scenes/Levels/{level.Path}");
+		this.activeLevel = level;
+	}
+
+	public void RestartLevel()
+	{
+		if (this.activeLevel == null)
+		{
+			return;
+		}
+		this.OpenLevel(this.activeLevel);
+	}
+
+	public void LoadNextLevel()
+	{
+		if (this.activeLevel == null)
+		{
+			return;
+		}
+
+		int nextLevelIndex = this.Levels.IndexOf(this.activeLevel) + 1;
+		if (nextLevelIndex >= this.Levels.Count)
+		{
+			return;
+		}
+		
+		this.OpenLevel(this.Levels[nextLevelIndex]);
 	}
 
 	private static List<AvailableLevel> GetAvailableLevels()
@@ -53,10 +81,12 @@ public partial class SceneManager : Node
 	private void LoadScene(string path)
 	{
 		this.CurrentScene.QueueFree();
+		this.activeLevel = null;
 		PackedScene scene = GD.Load<PackedScene>(path);
 		this.CurrentScene = scene.Instantiate();
 
 		this.GetTree().Root.AddChild(this.CurrentScene);
 		this.GetTree().CurrentScene = this.CurrentScene;
+		this.GetTree().Paused = false;
 	}
 }

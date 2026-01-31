@@ -1,4 +1,5 @@
 using System.Linq;
+using GlobalGameJam.Scripts.BuildingBlocks;
 using Godot;
 using GlobalGameJam.Scripts.Core;
 using GlobalGameJam.Scripts.UI;
@@ -42,6 +43,10 @@ public partial class Game : Node2D
 		this.UpdateActiveLayer();
 
 		this.Player.PlayerNeedsToBeReset += this.RespawnPlayer;
+		foreach (LevelFinish finish in this.GetTree().GetNodesInGroup("LevelExits").Cast<LevelFinish>())
+		{
+			finish.PlayerReachedGoal += this.OnPlayerReachedGoal;
+		}
 	}
 
 	public override void _Process(double delta)
@@ -54,6 +59,11 @@ public partial class Game : Node2D
 		if (Input.IsActionJustPressed(InputAction.LayerDown))
 		{
 			this.PreviousLayer();
+		}
+
+		if (Input.IsActionJustPressed(InputAction.Menu))
+		{
+			this.TogglePause();
 		}
 	}
 
@@ -95,5 +105,18 @@ public partial class Game : Node2D
 		this.activeLayerIndex = this.InitialLayer;
 		this.UpdateActiveLayer();
 		this.Player.GlobalPosition = this.RespawnMarker.GlobalPosition;
+	}
+
+	private void OnPlayerReachedGoal()
+	{
+		this.Hud.ShowWonMenu();
+		this.GetTree().Paused = true;
+		GD.Print("Won, next level");
+	}
+
+	private void TogglePause()
+	{
+		this.Hud.TogglePauseMenu();
+		this.GetTree().Paused = true;
 	}
 }
