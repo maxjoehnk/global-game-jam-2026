@@ -2,13 +2,17 @@
 
 [ext_resource type="PackedScene" uid="uid://dq8bmx6sugagf" path="res://Scenes/Levels/_BaseLevel.tscn" id="1_bgque"]
 [ext_resource type="TileSet" uid="uid://dla10wbktycmr" path="res://Assets/TileSet.tres" id="2_bgque"]
+[ext_resource type="PackedScene" uid="uid://d2rcj02dpqrfb" path="res://Scenes/BuildingBlocks/LevelFinish.tscn" id="3_2pcjs"]
 
 [node name="BaseLevel" unique_id=14346899 instance=ExtResource("1_bgque")]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="Layers" parent_id_path=PackedInt32Array(1705662681) index="0" unique_id=1498660123]
-tile_map_data = PackedByteArray("AAABABQAAAABAAYAAAAFABQAAAABAAYAAAAJABQAAAABAAYAAAANABQAAAABAAYAAAARABQAAAABAAYAAAAVABQAAAABAAYAAAAZABQAAAABAAYAAAAdABQAAAABAAYAAAAhABQAAAABAAYAAAAfABIAAAACAAUAAAA=")
+tile_map_data = PackedByteArray("AAABABQAAAABAAYAAAAFABQAAAABAAYAAAAJABQAAAABAAYAAAANABQAAAABAAYAAAARABQAAAABAAYAAAAVABQAAAABAAYAAAAZABQAAAABAAYAAAAdABQAAAABAAYAAAAhABQAAAABAAYAAAAfABIAAAACAAUAAAAPABMAAAAHAAQAAAA=")
 tile_set = ExtResource("2_bgque")
 
 [node name="TileMapLayer2" type="TileMapLayer" parent="Layers" parent_id_path=PackedInt32Array(1705662681) index="1" unique_id=1177787994]
-tile_map_data = PackedByteArray("AAAVABIAAAAEAAMAAAAZAA4AAAAEAAMAAAAdAA8AAAABAAQAAAAhAA8AAAABAAQAAAA=")
+tile_map_data = PackedByteArray("AAAZAA4AAAADAAMAAAAVABIAAAADAAMAAAAdAAwAAAAEAAMAAAAhAAwAAAAEAAMAAAA=")
 tile_set = ExtResource("2_bgque")
+
+[node name="LevelFinish" parent="." index="6" unique_id=1423001190 instance=ExtResource("3_2pcjs")]
+position = Vector2(1619, 574)
