@@ -45,6 +45,7 @@ label_settings = ExtResource("2_nclqo")
 horizontal_alignment = 1
 
 [node name="AnimatedSpahnKopf" parent="Panel/MarginContainer/VBoxContainer" unique_id=283827496 instance=ExtResource("3_wahdk")]
+custom_minimum_size = Vector2(250, 300)
 layout_mode = 2
 
 [node name="Restart" parent="Panel/MarginContainer/VBoxContainer" unique_id=770999740 instance=ExtResource("2_v5qja")]
