@@ -72,7 +72,9 @@ public partial class SceneManager : Node
 		List<AvailableLevel> levels = ResourceLoader.ListDirectory("res://Scenes/Levels")
 			.Where(name => name.EndsWith(".tscn"))
 			.Where(name => !name.StartsWith("_"))
-			.Select((file) => new AvailableLevel(file))
+			.Select((file, index) => new AvailableLevel(file, index))
+			.Where(level => !level.IsTestLevel || OS.IsDebugBuild())
+			.OrderBy(level => level.LevelIndex)
 			.ToList();
 
 		return levels;
