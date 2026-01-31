@@ -235,7 +235,14 @@ public partial class Player : CharacterBody2D
 	}
 
 	public void update_look_direction(float direction){
-		Head.FlipH = direction > 0;
+		if (direction > 0)
+		{
+			Head.FlipH = true;
+		}
+		else if (direction < 0)
+		{
+			Head.FlipH = false;
+		}
 	}
 
 	public void run_state(double delta){
