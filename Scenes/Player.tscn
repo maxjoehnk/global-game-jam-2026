@@ -107,7 +107,7 @@ tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("Sprites:rotation")
-tracks/1/interp = 2
+tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.26, 0.66),
@@ -125,6 +125,7 @@ _data = {
 
 [node name="Player" type="CharacterBody2D" unique_id=1038420454]
 collision_mask = 65294
+platform_on_leave = 1
 platform_floor_layers = 4294967288
 script = ExtResource("1_rpqav")
 MovementSpeed = 200.0
@@ -153,3 +154,7 @@ texture = ExtResource("3_dewec")
 position = Vector2(-13, -142)
 scale = Vector2(0.05906107, 0.05906107)
 texture = ExtResource("3_gntrk")
+
+[node name="CoyoteTimer" type="Timer" parent="." unique_id=1319522194]
+wait_time = 0.5
+one_shot = true
