@@ -15,6 +15,7 @@ public partial class Settings : Panel
 	
     public override void _Ready()
     {
+        this.MainVolumeSlider.GrabFocus();
         this.MainVolumeSlider.Value = SettingsManager.MainVolume;
         this.MainVolumeSlider.ValueChanged += this.OnMainVolumeChanged;
         this.EffectsVolumeSlider.Value = SettingsManager.EffectsVolume;
