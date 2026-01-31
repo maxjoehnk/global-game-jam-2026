@@ -18,6 +18,7 @@ public partial class Player : CharacterBody2D
 	private const uint BaseCollisionLayer = 0b1100;
 	private const float ResetHeight = 1200f;
 	private const float MoveTol = 0.01f;
+	private const float SpriteScale = 0.5f;
 	// Physics
 	[Export] public float MovementSpeed = 290f;
 	[Export] public float MovementAccel = 450f;
@@ -45,7 +46,7 @@ public partial class Player : CharacterBody2D
 	private AnimationPlayer AnimationPlayer => GetNode<AnimationPlayer>("AnimationPlayer");
 	private State CurrentState = State.Idle;
 	private Sprite2D Head => GetNode<Sprite2D>("Sprites/Kopf");
-
+	private Node2D SpriteContainer => GetNode<Node2D>("Sprites");
 	// Interact with world:
 	private const float CutPosX = 75.0f;
 	private TileMapCutter CutTool => GetNode<TileMapCutter>("TileMapCutter");
@@ -139,7 +140,7 @@ public partial class Player : CharacterBody2D
 				break;
 
 			case State.Jump:
-				this.AnimationPlayer.Play("idle");
+				this.AnimationPlayer.Play("jump");
 				this.EmitSignalPlayerJumped();
 				velocity.Y = this.JumpSpeed;
 				this.Velocity = velocity;
@@ -153,7 +154,7 @@ public partial class Player : CharacterBody2D
 				this.Velocity = velocity;
 				break;
 			case State.WallJump:
-				this.AnimationPlayer.Play("idle");
+				this.AnimationPlayer.Play("jump");
 				velocity.Y = this.WallJumpY;
 				velocity.X = this.LastWallDir * this.WallJumpX;
 				this.Velocity = velocity;
@@ -178,7 +179,6 @@ public partial class Player : CharacterBody2D
 				}
 				break;
 			case State.Hurt:
-				this.AnimationPlayer.Play("hurt");
 				break;
 		}
 
@@ -218,6 +218,14 @@ public partial class Player : CharacterBody2D
 		if (!(this.CurrentState == State.Hurt))
 		{
 			this.set_new_state(State.Hurt);
+			if (HitSource.X > this.GlobalPosition.X)
+			{
+				this.AnimationPlayer.Play("hurt_left");
+			}
+			else
+			{
+				this.AnimationPlayer.Play("hurt_right");
+			}
 		}
 	}
 
