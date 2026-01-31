@@ -23,6 +23,10 @@ public partial class GlobalAudioPlayback : Node
     {
         foreach (AudioStreamPlayer audioStreamPlayer in this.GetChildren().Cast<AudioStreamPlayer>())
         {
+            if (audioStreamPlayer.Playing)
+            {
+                continue;
+            }
             audioStreamPlayer.Play();
         }
     }
