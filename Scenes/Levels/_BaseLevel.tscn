@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://ciskn3kh6rmmo" path="res://Scripts/Game.cs" id="1_n8wt5"]
 [ext_resource type="PackedScene" uid="uid://cw3x8fe8c2ghf" path="res://Scenes/Player.tscn" id="2_1rdqr"]
 [ext_resource type="PackedScene" uid="uid://d3ylock0hdv0d" path="res://Scenes/UI/GameHUD.tscn" id="2_qawov"]
+[ext_resource type="Texture2D" uid="uid://dslh3l7wrv2ou" path="res://Assets/Elements/Background.png" id="2_t6oia"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qawov"]
 size = Vector2(1920, 45)
@@ -12,6 +13,18 @@ size = Vector2(45, 1080)
 
 [node name="_BaseLevel" type="Node2D" unique_id=14346899]
 script = ExtResource("1_n8wt5")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1627012032]
+layer = -100
+
+[node name="Background" type="TextureRect" parent="CanvasLayer" unique_id=1416079175]
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_t6oia")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=73609627]
 
