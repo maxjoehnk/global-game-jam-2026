@@ -12,6 +12,8 @@ public partial class Game : Node2D
 
 	private const int PhysicsBaseLayer = 8;
 	private const int CutBaseLayer = 5;
+	private const uint NonPhysicsLayerMask = 0b11111111;
+	
 	private Node2D LayerContainer => GetNode<Node2D>("Layers");
 	private Player Player => GetNode<Player>("Player");
 	private GameHud Hud => GetNode<GameHud>("UI/HUD");
@@ -35,14 +37,20 @@ public partial class Game : Node2D
 						 .Where(c => c is PhysicsBody2D)
 						 .Cast<PhysicsBody2D>())
 			{
-				physicsBody2D.CollisionLayer |= (uint)1 << physicsLayer;
+				physicsBody2D.CollisionLayer = (physicsBody2D.CollisionLayer & NonPhysicsLayerMask) | (uint)1 << physicsLayer;
 			}
 
-			if (layer is TileMapLayer tileMapLayer)
+			if (layer is TileMapLayer)
 			{
-				TileSet uniqueTileSet = (tileMapLayer.TileSet.Duplicate() as TileSet)!;
-				uniqueTileSet.SetPhysicsLayerCollisionLayer(0, (uint)1 << physicsLayer);
-				tileMapLayer.TileSet = uniqueTileSet;
+				TileMapLayer tileMapLayer = (layer as TileMapLayer)!;
+				uint tileMapCollisionLayer = tileMapLayer.TileSet.GetPhysicsLayerCollisionLayer(0) & NonPhysicsLayerMask;
+				tileMapLayer.TileSet.SetPhysicsLayerCollisionLayer(0, tileMapCollisionLayer | (uint)1 << physicsLayer);
+			}
+			
+			foreach (TileMapLayer tileMapLayer in layer.GetChildren().Where(c => c is TileMapLayer).Cast<TileMapLayer>())
+			{
+				uint tileMapCollisionLayer = tileMapLayer.TileSet.GetPhysicsLayerCollisionLayer(0) & NonPhysicsLayerMask;
+				tileMapLayer.TileSet.SetPhysicsLayerCollisionLayer(0, tileMapCollisionLayer | (uint)1 << physicsLayer);
 			}
 
 			physicsLayer++;

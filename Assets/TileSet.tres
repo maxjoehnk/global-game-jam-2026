@@ -2317,6 +2317,7 @@ texture_region_size = Vector2i(200, 200)
 1:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(109.59262, 54.330612, 102.76248, 102.45201, -101.21016, 101.831085, -106.177536, 54.641068)
 
 [resource]
+resource_local_to_scene = true
 tile_size = Vector2i(50, 50)
 physics_layer_0/collision_layer = 0
 sources/0 = SubResource("TileSetAtlasSource_v51m0")
