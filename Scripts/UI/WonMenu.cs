@@ -3,6 +3,14 @@ using GlobalGameJam.Scripts.Core;
 
 public partial class WonMenu : CenterContainer
 {
+    private Control NextLevelButton => (this.FindChild("NextLevel") as Control)!;
+    
+    public void ShowDialog()
+    {
+        this.Visible = true;
+        this.NextLevelButton.GrabFocus();
+    }
+    
     public void OnExit()
     {
         SceneManager.Instance.OpenMainMenu();

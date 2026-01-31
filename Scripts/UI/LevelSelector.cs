@@ -1,3 +1,4 @@
+using System.Linq;
 using GlobalGameJam.Scripts.Core;
 using Godot;
 
@@ -7,6 +8,8 @@ public partial class LevelSelector : Control
 {
 	private PackedScene LevelButton => GD.Load<PackedScene>("res://Scenes/UI/LevelButton.tscn");
 	
+	private Control? FirstLevel => this.GetChildren().Where(c => c is LevelButton).Cast<LevelButton>().FirstOrDefault();
+	
 	public override void _Ready()
 	{
 		foreach (AvailableLevel level in SceneManager.Instance.Levels)
@@ -15,6 +18,8 @@ public partial class LevelSelector : Control
 
 			this.AddChild(levelButton);
 		}
+		
+		FirstLevel?.GrabFocus();
 	}
 
 	private LevelButton CreateLevelButton(AvailableLevel level)
