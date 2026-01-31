@@ -5,6 +5,7 @@
 [ext_resource type="LabelSettings" uid="uid://c581imawvcllk" path="res://Themes/TitleLabel.tres" id="2_t6w0q"]
 [ext_resource type="PackedScene" uid="uid://dk7nxjlht6iqe" path="res://Scenes/UI/AnimatedSpahnKopf.tscn" id="3_k8um8"]
 [ext_resource type="PackedScene" uid="uid://dldf13bwc50mu" path="res://Scenes/UI/JensSpahnFordert.tscn" id="5_k8um8"]
+[ext_resource type="Theme" uid="uid://d1wiq2lhxalpu" path="res://Themes/PaperUi.tres" id="6_kl3t2"]
 
 [node name="MainMenu" type="Panel" unique_id=603471195]
 anchors_preset = 15
@@ -12,6 +13,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("6_kl3t2")
 script = ExtResource("1_g18y6")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=2069094500]
@@ -60,7 +62,7 @@ text = "Exit"
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer" unique_id=284010176]
 layout_mode = 2
-theme_override_constants/margin_top = 20
+theme_override_constants/margin_top = 50
 
 [node name="JensSpahnFordert" parent="MarginContainer/VBoxContainer" unique_id=540377989 instance=ExtResource("5_k8um8")]
 layout_mode = 2

@@ -1,0 +1,64 @@
+[gd_resource type="Theme" format=3 uid="uid://df35olqvawmkw"]
+
+[ext_resource type="Texture2D" uid="uid://c574x7lr3dtp5" path="res://Assets/UI/Schwärzung2.png" id="1_dxiv7"]
+[ext_resource type="Texture2D" uid="uid://dbkt1oifmbmon" path="res://Assets/UI/Schwärzung3.png" id="2_pbm47"]
+[ext_resource type="Texture2D" uid="uid://bacnngmrpm2g2" path="res://Assets/UI/Background.png" id="2_yg1gn"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_s0nl2"]
+load_path = "res://.godot/imported/Schwärzung3.png-4d06e330a173627099cdf1494ccb6f8b.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hy8rr"]
+texture = SubResource("CompressedTexture2D_s0nl2")
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_oklow"]
+texture = ExtResource("1_dxiv7")
+expand_margin_top = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ab8s4"]
+bg_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hy8rr"]
+bg_color = Color(0, 0.61960787, 0.8784314, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_top = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oklow"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_top = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ulvlp"]
+texture = ExtResource("2_pbm47")
+expand_margin_left = 8.0
+expand_margin_top = 2.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_744d7"]
+texture = ExtResource("2_yg1gn")
+
+[resource]
+Button/font_sizes/font_size = 26
+Button/styles/focus = SubResource("StyleBoxTexture_hy8rr")
+Button/styles/hover = SubResource("StyleBoxTexture_hy8rr")
+Button/styles/normal = SubResource("StyleBoxTexture_oklow")
+Button/styles/pressed = SubResource("StyleBoxTexture_hy8rr")
+HSlider/styles/focus = SubResource("StyleBoxFlat_ab8s4")
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_hy8rr")
+HSlider/styles/slider = SubResource("StyleBoxFlat_oklow")
+Label/colors/font_color = Color(1, 1, 1, 1)
+Label/colors/font_shadow_color = Color(1, 1, 1, 0.19607843)
+Label/styles/normal = SubResource("StyleBoxTexture_ulvlp")
+Panel/styles/panel = SubResource("StyleBoxTexture_744d7")

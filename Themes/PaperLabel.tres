@@ -1,0 +1,10 @@
+[gd_resource type="LabelSettings" format=3 uid="uid://d1wnrxsnlcr3f"]
+
+[ext_resource type="FontFile" uid="uid://dwo1chvod5pr" path="res://Assets/Fonts/Cambria-Font.ttf" id="1_er3pj"]
+
+[resource]
+font = ExtResource("1_er3pj")
+font_size = 36
+font_color = Color(0.14406255, 0.14406255, 0.14406255, 1)
+shadow_color = Color(1, 1, 1, 0.654902)
+shadow_offset = Vector2(0.7, 0.7)
