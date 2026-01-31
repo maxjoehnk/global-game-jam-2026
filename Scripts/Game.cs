@@ -5,6 +5,7 @@ using GlobalGameJam.Scripts.Core;
 using GlobalGameJam.Scripts.UI;
 using Godot.Collections;
 using System.ComponentModel.DataAnnotations;
+using System;
 
 public partial class Game : Node2D
 {
@@ -14,7 +15,8 @@ public partial class Game : Node2D
 	private const int PhysicsBaseLayer = 8;
 	private const int CutBaseLayer = 5;
 	private const uint NonPhysicsLayerMask = 0b11111111;
-	
+	private const float LayerScaling = 0.05f;
+
 	private Node2D LayerContainer => GetNode<Node2D>("Layers");
 	private Player Player => GetNode<Player>("Player");
 	private GameHud Hud => GetNode<GameHud>("UI/HUD");
@@ -45,7 +47,7 @@ public partial class Game : Node2D
 		int physicsLayer = PhysicsBaseLayer;
 		Array<Node> layers = this.LayerContainer.GetChildren();
 		this.Hud.SetLayers(layers.Count, LayerColorList);
-		foreach (Node layer in layers)
+		foreach (Node2D layer in layers)
 		{
 			foreach (PhysicsBody2D physicsBody2D in layer.FindChildren("*", type: nameof(PhysicsBody2D))
 						 .Where(c => c is PhysicsBody2D)
@@ -63,7 +65,6 @@ public partial class Game : Node2D
 			{
 				ApplyMaskLayerToTileMapLayer(tileMapLayer, physicsLayer);
 			}
-
 			physicsLayer++;
 		}
 		this.activeLayerIndex = this.InitialLayer;
@@ -102,7 +103,7 @@ public partial class Game : Node2D
 		this.activeLayerIndex += 1;
 		if (this.activeLayerIndex >= this.LayerCount)
 		{
-			this.activeLayerIndex = 0;
+			this.activeLayerIndex = this.LayerCount-1;//0;
 		}
 
 		this.UpdateActiveLayer();
@@ -113,7 +114,7 @@ public partial class Game : Node2D
 		this.activeLayerIndex -= 1;
 		if (this.activeLayerIndex < 0)
 		{
-			this.activeLayerIndex = this.LayerCount - 1;
+			this.activeLayerIndex = 0; //this.LayerCount - 1;
 		}
 
 		this.UpdateActiveLayer();
@@ -124,7 +125,10 @@ public partial class Game : Node2D
 		for (int i = 0; i < this.LayerContainer.GetChildren().Count; i++)
 		{
 			Node2D layer = this.LayerContainer.GetChild<Node2D>(i);
-			layer.Modulate = i == this.activeLayerIndex ? Color.FromHsv(0, 0, 1) : Color.FromHsv(0, 0, 1, 0.25f);
+			layer.Modulate = i == this.activeLayerIndex ? Color.FromHsv(0, 0, 1) : Color.FromHsv(0, 0, 1, 0.2f);
+			float scaling_value = 1.0f + LayerScaling*(i - this.activeLayerIndex);
+			layer.Scale = new Vector2(scaling_value, scaling_value);
+			//layer.Modulate *= LayerColorList[i];
 		}
 		Player.SetActiveCollisionLayer(this.ActivePhysicsLayer);
 		this.Hud.SetActiveLayer(this.activeLayerIndex);
