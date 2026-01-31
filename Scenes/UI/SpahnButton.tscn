@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://bsldn8e7jelex"]
+
+[ext_resource type="Texture2D" uid="uid://c3qqe2ap7tgh" path="res://Assets/Character/SpahnKopf.png" id="1_dbxse"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dbxse"]
+
+[node name="Button" type="Button" unique_id=1995207131]
+theme_override_styles/focus = SubResource("StyleBoxEmpty_dbxse")
+text = "Levels"
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1090104402]
+visible = false
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_top = 1.0
+offset_right = 30.0
+offset_bottom = 1.0
+grow_vertical = 2
+texture = ExtResource("1_dbxse")
+expand_mode = 1
+
+[connection signal="focus_entered" from="." to="TextureRect" method="show"]
+[connection signal="focus_exited" from="." to="TextureRect" method="hide"]

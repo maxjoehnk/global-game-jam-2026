@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://dg06nvdxick6h"]
 
 [ext_resource type="Script" uid="uid://cwdmp8s8j4jkj" path="res://Scripts/UI/PauseMenu.cs" id="1_eod5q"]
+[ext_resource type="LabelSettings" uid="uid://cs5xntv3h0phe" path="res://Themes/LabelSettings.tres" id="2_238ko"]
+[ext_resource type="PackedScene" uid="uid://bsldn8e7jelex" path="res://Scenes/UI/SpahnButton.tscn" id="2_v5qja"]
 
 [node name="PauseDialog" type="CenterContainer" unique_id=1635492489]
 anchors_preset = 15
@@ -39,17 +41,18 @@ alignment = 1
 [node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer" unique_id=1211335470]
 layout_mode = 2
 text = "Paused"
+label_settings = ExtResource("2_238ko")
 horizontal_alignment = 1
 
-[node name="Resume" type="Button" parent="Panel/MarginContainer/VBoxContainer" unique_id=1397831284]
+[node name="Resume" parent="Panel/MarginContainer/VBoxContainer" unique_id=1397831284 instance=ExtResource("2_v5qja")]
 layout_mode = 2
 text = "Resume"
 
-[node name="Restart" type="Button" parent="Panel/MarginContainer/VBoxContainer" unique_id=12358260]
+[node name="Restart" parent="Panel/MarginContainer/VBoxContainer" unique_id=12358260 instance=ExtResource("2_v5qja")]
 layout_mode = 2
 text = "Restart"
 
-[node name="Exit" type="Button" parent="Panel/MarginContainer/VBoxContainer" unique_id=1155993787]
+[node name="Exit" parent="Panel/MarginContainer/VBoxContainer" unique_id=1155993787 instance=ExtResource("2_v5qja")]
 layout_mode = 2
 text = "Exit"
 

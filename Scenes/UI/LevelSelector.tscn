@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://cfuuhd2fencb1"]
 
+[ext_resource type="LabelSettings" uid="uid://c581imawvcllk" path="res://Themes/TitleLabel.tres" id="1_6r133"]
+[ext_resource type="PackedScene" uid="uid://bsldn8e7jelex" path="res://Scenes/UI/SpahnButton.tscn" id="1_cc4ho"]
 [ext_resource type="Script" uid="uid://b0vocoln4lnfo" path="res://Scripts/UI/LevelSelector.cs" id="1_o3ex8"]
 
 [node name="LevelSelector" type="Panel" unique_id=466009]
@@ -10,21 +12,41 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="." unique_id=1966198729]
+custom_minimum_size = Vector2(400, 500)
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.5
+offset_top = -16.0
+offset_right = 50.5
+offset_bottom = 16.0
 grow_horizontal = 2
 grow_vertical = 2
+alignment = 1
 
-[node name="Button" type="Button" parent="VBoxContainer2" unique_id=2111877510]
+[node name="Label" type="Label" parent="VBoxContainer2" unique_id=27183115]
 layout_mode = 2
-text = "Back to Menu"
+text = "Levels"
+label_settings = ExtResource("1_6r133")
+horizontal_alignment = 1
 
 [node name="FlowContainer" type="VFlowContainer" parent="VBoxContainer2" unique_id=1891231098]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
 alignment = 1
-last_wrap_alignment = 1
+last_wrap_alignment = 2
 script = ExtResource("1_o3ex8")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer2" unique_id=1792242283]
+layout_mode = 2
+theme_override_constants/margin_top = 80
+
+[node name="Button" parent="VBoxContainer2" unique_id=2111877510 instance=ExtResource("1_cc4ho")]
+layout_mode = 2
+text = "Back to Menu"
 
 [connection signal="pressed" from="VBoxContainer2/Button" to="VBoxContainer2/FlowContainer" method="OnBackPressed"]

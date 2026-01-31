@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://b4grxs5ftqxs5"]
 
 [ext_resource type="Script" uid="uid://baqvbxbmv7o0u" path="res://Scripts/UI/MainMenu.cs" id="1_g18y6"]
+[ext_resource type="PackedScene" uid="uid://bsldn8e7jelex" path="res://Scenes/UI/SpahnButton.tscn" id="2_72sra"]
 [ext_resource type="AudioStream" uid="uid://buxqnht6axxs0" path="res://Assets/Sounds/Quotes/MöglicherweiseImmerWieder.wav" id="2_mjmdf"]
 
 [node name="MainMenu" type="Panel" unique_id=603471195]
@@ -28,15 +29,15 @@ custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="LevelSelector" type="Button" parent="MarginContainer/VBoxContainer" unique_id=304777106]
+[node name="LevelSelector" parent="MarginContainer/VBoxContainer" unique_id=1995207131 instance=ExtResource("2_72sra")]
 layout_mode = 2
 text = "Levels"
 
-[node name="Settings" type="Button" parent="MarginContainer/VBoxContainer" unique_id=458406655]
+[node name="Settings" parent="MarginContainer/VBoxContainer" unique_id=458406655 instance=ExtResource("2_72sra")]
 layout_mode = 2
 text = "Settings"
 
-[node name="Exit" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1674875753]
+[node name="Exit" parent="MarginContainer/VBoxContainer" unique_id=1674875753 instance=ExtResource("2_72sra")]
 layout_mode = 2
 text = "Exit"
 

@@ -6,15 +6,15 @@ namespace GlobalGameJam.Scripts.UI;
 
 public partial class LevelSelector : Control
 {
-	private PackedScene LevelButton => GD.Load<PackedScene>("res://Scenes/UI/LevelButton.tscn");
+	private PackedScene LevelButton => GD.Load<PackedScene>("res://Scenes/UI/SpahnButton.tscn");
 	
-	private Control? FirstLevel => this.GetChildren().Where(c => c is LevelButton).Cast<LevelButton>().FirstOrDefault();
+	private Control? FirstLevel => this.GetChildren().Where(c => c is Button).Cast<Button>().FirstOrDefault();
 	
 	public override void _Ready()
 	{
 		foreach (AvailableLevel level in SceneManager.Instance.Levels)
 		{
-			LevelButton levelButton = this.CreateLevelButton(level);
+			Button levelButton = this.CreateLevelButton(level);
 
 			this.AddChild(levelButton);
 		}
@@ -22,13 +22,14 @@ public partial class LevelSelector : Control
 		FirstLevel?.GrabFocus();
 	}
 
-	private LevelButton CreateLevelButton(AvailableLevel level)
+	private Button CreateLevelButton(AvailableLevel level)
 	{
-		LevelButton levelButton = this.LevelButton.Instantiate<LevelButton>();
-		levelButton.LevelName = level.Name;
-		levelButton.Pressed += () => { SceneManager.Instance.OpenLevel(level); };
+		Button button = this.LevelButton.Instantiate<Button>();
+		button.CustomMinimumSize = new Vector2(300, 0);
+		button.Text = level.Name;
+		button.Pressed += () => { SceneManager.Instance.OpenLevel(level); };
 		
-		return levelButton;
+		return button;
 	}
 
 	public void OnBackPressed()

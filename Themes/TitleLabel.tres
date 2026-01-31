@@ -1,0 +1,7 @@
+[gd_resource type="LabelSettings" format=3 uid="uid://c581imawvcllk"]
+
+[ext_resource type="FontFile" uid="uid://dwo1chvod5pr" path="res://Assets/Fonts/Cambria-Font.ttf" id="1_g364f"]
+
+[resource]
+font = ExtResource("1_g364f")
+font_size = 48

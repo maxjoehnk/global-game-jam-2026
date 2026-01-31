@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://lhi7csxw410n"]
 
 [ext_resource type="Script" uid="uid://bimg08dp34kbv" path="res://Scripts/UI/Settings.cs" id="1_mj2lg"]
+[ext_resource type="LabelSettings" uid="uid://c581imawvcllk" path="res://Themes/TitleLabel.tres" id="2_sc1bs"]
+[ext_resource type="PackedScene" uid="uid://bsldn8e7jelex" path="res://Scenes/UI/SpahnButton.tscn" id="2_v5qja"]
+[ext_resource type="LabelSettings" uid="uid://cs5xntv3h0phe" path="res://Themes/LabelSettings.tres" id="3_hfiyb"]
 
 [node name="Settings" type="Panel" unique_id=603471195]
 anchors_preset = 15
@@ -24,16 +27,27 @@ theme_override_constants/margin_bottom = 20
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1156685422]
 layout_mode = 2
+alignment = 1
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer" unique_id=234807790]
 layout_mode = 2
 text = "Settings"
+label_settings = ExtResource("2_sc1bs")
 horizontal_alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer" unique_id=1922368282]
+layout_mode = 2
+theme_override_constants/margin_top = 30
 
 [node name="Label2" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1064750278]
 layout_mode = 2
 text = "Audio"
+label_settings = ExtResource("3_hfiyb")
 horizontal_alignment = 1
+
+[node name="MarginContainer3" type="MarginContainer" parent="MarginContainer/VBoxContainer" unique_id=328339877]
+layout_mode = 2
+theme_override_constants/margin_top = 20
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=801846608]
 layout_mode = 2
@@ -95,17 +109,21 @@ layout_mode = 2
 max_value = 1.2
 step = 0.01
 
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer" unique_id=2088136455]
+layout_mode = 2
+theme_override_constants/margin_top = 40
+
 [node name="HBoxContainer5" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=842632934]
 layout_mode = 2
 alignment = 1
 
-[node name="Cancel" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer5" unique_id=1441208169]
+[node name="Cancel" parent="MarginContainer/VBoxContainer/HBoxContainer5" unique_id=1441208169 instance=ExtResource("2_v5qja")]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Abbrechen"
 
-[node name="Save" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer5" unique_id=1492382582]
+[node name="Save" parent="MarginContainer/VBoxContainer/HBoxContainer5" unique_id=1492382582 instance=ExtResource("2_v5qja")]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 4
