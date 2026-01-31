@@ -1,4 +1,5 @@
 using System.Linq;
+using GlobalGameJam.Scripts.Core;
 using Godot;
 using Godot.Collections;
 
@@ -16,10 +17,19 @@ public partial class GameHud : Control
 
     public override void _Ready()
     {
+        this.ProcessMode = ProcessModeEnum.Always;
         this.PauseDialog.ProcessMode = ProcessModeEnum.WhenPaused;
         this.WonDialog.ProcessMode = ProcessModeEnum.WhenPaused;
         this.WonDialog.Visible = false;
         this.PauseDialog.Visible = false;
+    }
+
+    public override void _Input(InputEvent @event)
+    {
+		if (Input.IsActionJustPressedByEvent(InputAction.Menu, @event))
+		{
+			this.PauseDialog.ToggleDialog();
+		}
     }
 
     public void SetActiveLayer(int layerIndex)
@@ -40,11 +50,6 @@ public partial class GameHud : Control
             layer.LayerName = layerName;
             this.LayerList.AddChild(layer);
         }
-    }
-
-    public void TogglePauseMenu()
-    {
-        this.PauseDialog.ToggleDialog();
     }
 
     public void ShowWonMenu()

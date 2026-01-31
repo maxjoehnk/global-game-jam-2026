@@ -5,9 +5,18 @@ public partial class PauseMenu : CenterContainer
 {
     private Control ResumeButton => (this.FindChild("Resume") as Control)!;
 
+    public override void _Process(double delta)
+    {
+		if (Input.IsActionJustPressed(InputAction.Cancel))
+        {
+            this.ToggleDialog();
+        }
+    }
+
     public void ToggleDialog()
     {
         this.Visible = !this.Visible;
+        this.GetTree().Paused = this.Visible;
         if (this.Visible)
         {
             this.ResumeButton.GrabFocus();

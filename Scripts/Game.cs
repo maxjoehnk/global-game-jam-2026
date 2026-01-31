@@ -8,7 +8,7 @@ using Godot.Collections;
 public partial class Game : Node2D
 {
 	[Export]
-	public int InitialLayer = 0;
+	public int InitialLayer;
 
 	private const int PhysicsBaseLayer = 8;
 
@@ -49,21 +49,16 @@ public partial class Game : Node2D
 		}
 	}
 
-	public override void _Process(double delta)
+	public override void _Input(InputEvent @event)
 	{
-		if (Input.IsActionJustPressed(InputAction.LayerUp))
+		if (Input.IsActionJustPressedByEvent(InputAction.LayerUp, @event))
 		{
 			this.NextLayer();
 		}
 
-		if (Input.IsActionJustPressed(InputAction.LayerDown))
+		if (Input.IsActionJustPressedByEvent(InputAction.LayerDown, @event))
 		{
 			this.PreviousLayer();
-		}
-
-		if (Input.IsActionJustPressed(InputAction.Menu))
-		{
-			this.TogglePause();
 		}
 	}
 
@@ -110,12 +105,5 @@ public partial class Game : Node2D
 	private void OnPlayerReachedGoal()
 	{
 		this.Hud.ShowWonMenu();
-		this.GetTree().Paused = true;
-	}
-
-	private void TogglePause()
-	{
-		this.Hud.TogglePauseMenu();
-		this.GetTree().Paused = true;
 	}
 }

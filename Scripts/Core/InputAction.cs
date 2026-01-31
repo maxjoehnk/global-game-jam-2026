@@ -8,4 +8,5 @@ public static class InputAction
     public const string LayerUp = "layer_up";
     public const string LayerDown = "layer_down";
     public const string Menu = "menu";
+    public const string Cancel = "ui_cancel";
 }

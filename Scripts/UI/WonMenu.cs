@@ -8,6 +8,7 @@ public partial class WonMenu : CenterContainer
     public void ShowDialog()
     {
         this.Visible = true;
+        this.GetTree().Paused = true;
         this.NextLevelButton.GrabFocus();
     }
     
