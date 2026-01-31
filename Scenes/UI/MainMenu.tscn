@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://baqvbxbmv7o0u" path="res://Scripts/UI/MainMenu.cs" id="1_g18y6"]
 [ext_resource type="PackedScene" uid="uid://bsldn8e7jelex" path="res://Scenes/UI/SpahnButton.tscn" id="2_72sra"]
 [ext_resource type="AudioStream" uid="uid://buxqnht6axxs0" path="res://Assets/Sounds/Quotes/MöglicherweiseImmerWieder.wav" id="2_mjmdf"]
+[ext_resource type="LabelSettings" uid="uid://c581imawvcllk" path="res://Themes/TitleLabel.tres" id="2_t6w0q"]
 
 [node name="MainMenu" type="Panel" unique_id=603471195]
 anchors_preset = 15
@@ -29,15 +30,30 @@ custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="LevelSelector" parent="MarginContainer/VBoxContainer" unique_id=1995207131 instance=ExtResource("2_72sra")]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1121468531]
 layout_mode = 2
-text = "Levels"
+text = "Maske kann auch geil sein"
+label_settings = ExtResource("2_t6w0q")
+horizontal_alignment = 1
 
-[node name="Settings" parent="MarginContainer/VBoxContainer" unique_id=458406655 instance=ExtResource("2_72sra")]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer" unique_id=1959960639]
+layout_mode = 2
+theme_override_constants/margin_top = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=457217760]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="LevelSelector" parent="MarginContainer/VBoxContainer/VBoxContainer" unique_id=1995207131 instance=ExtResource("2_72sra")]
+layout_mode = 2
+
+[node name="Settings" parent="MarginContainer/VBoxContainer/VBoxContainer" unique_id=458406655 instance=ExtResource("2_72sra")]
 layout_mode = 2
 text = "Settings"
 
-[node name="Exit" parent="MarginContainer/VBoxContainer" unique_id=1674875753 instance=ExtResource("2_72sra")]
+[node name="Exit" parent="MarginContainer/VBoxContainer/VBoxContainer" unique_id=1674875753 instance=ExtResource("2_72sra")]
 layout_mode = 2
 text = "Exit"
 
@@ -46,6 +62,6 @@ stream = ExtResource("2_mjmdf")
 autoplay = true
 bus = &"Quotes"
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/LevelSelector" to="." method="OnOpenLevelSelector"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Settings" to="." method="OnOpenSettings"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Exit" to="." method="OnExit"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/LevelSelector" to="." method="OnOpenLevelSelector"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/Settings" to="." method="OnOpenSettings"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/Exit" to="." method="OnExit"]
