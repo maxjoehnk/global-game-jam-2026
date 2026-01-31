@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://dy5opi42vhi4y"]
+
+[ext_resource type="PackedScene" uid="uid://cob0k4wpkvr8g" path="res://Scenes/Enemies/enemy.tscn" id="1_6fdt5"]
+[ext_resource type="Script" uid="uid://cpr48s1gshc80" path="res://Scripts/Enemies/WalkingEnemy.cs" id="2_tunih"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tunih"]
+size = Vector2(116, 53)
+
+[node name="WalkingEnemy" unique_id=1736735301 instance=ExtResource("1_6fdt5")]
+collision_mask = 10
+script = ExtResource("2_tunih")
+MovementSpeed = 100.0
+
+[node name="Area2D" type="Area2D" parent="." index="4" unique_id=290467187]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0" unique_id=1913363959]
+position = Vector2(1, 55.5)
+shape = SubResource("RectangleShape2D_tunih")

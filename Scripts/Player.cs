@@ -8,13 +8,14 @@ public enum State
 	Jump,
 	Fall, 
 	WallJump,
-	Dive
+	Dive,
+	Hurt
 }
 
 
 public partial class Player : CharacterBody2D
 {
-	private const uint BaseCollisionLayer = 0b1110;
+	private const uint BaseCollisionLayer = 0b1100;
 	private const float ResetHeight = 1200f;
 	private const float MoveTol = 0.01f;
 	// Physics
@@ -102,6 +103,12 @@ public partial class Player : CharacterBody2D
 			case State.Dive:
 				this.dive_state(delta);
 				break;
+			case State.Hurt:
+				if (!this.AnimationPlayer.IsPlaying())
+				{
+					this.EmitSignalPlayerDied();
+				}
+				return;
 		}
 
 		this.MoveAndSlide();
@@ -170,6 +177,9 @@ public partial class Player : CharacterBody2D
 					this.AnimationPlayer.Play("dive_right");
 				}
 				break;
+			case State.Hurt:
+				this.AnimationPlayer.Play("hurt");
+				break;
 		}
 
 		if (this.CurrentState == State.Run)
@@ -194,6 +204,26 @@ public partial class Player : CharacterBody2D
 			this.Velocity = velocity;
 			this.set_new_state(State.Run);
 		}
+	}
+
+	public void Reset()
+	{
+		this.AnimationPlayer.Play("RESET");
+		this.AnimationPlayer.Seek(0.0, true);
+		this.CurrentState = State.Idle;
+	}
+
+	public void Hit(Vector2 HitSource)
+	{
+		if (!(this.CurrentState == State.Hurt))
+		{
+			this.set_new_state(State.Hurt);
+		}
+	}
+
+	public bool WasHit()
+	{
+		return this.CurrentState == State.Hurt;
 	}
 
 	public void update_look_direction(float direction){

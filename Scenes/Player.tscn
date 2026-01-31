@@ -61,6 +61,30 @@ tracks/3/keys = {
 "update": 0,
 "values": [0.0]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprites/Kopf:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-12, -146)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprites:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_nn08x"]
 resource_name = "dive_left"
@@ -120,6 +144,69 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [0.23911011, -0.07853982, 0.19198622]
+}
+
+[sub_resource type="Animation" id="Animation_52ee3"]
+resource_name = "hurt"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/Body:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.66497046]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprites/Kopf:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.39793506]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprites/Kopf:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-70, -116.000015)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprites:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -1.43117]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprites:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.43333337, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-71, -14), Vector2(-120.00001, 52.000008)]
 }
 
 [sub_resource type="Animation" id="Animation_dewec"]
@@ -219,12 +306,13 @@ _data = {
 &"RESET": SubResource("Animation_kyqiw"),
 &"dive_left": SubResource("Animation_nn08x"),
 &"dive_right": SubResource("Animation_5ixxa"),
+&"hurt": SubResource("Animation_52ee3"),
 &"idle": SubResource("Animation_dewec"),
 &"walking": SubResource("Animation_gntrk")
 }
 
 [node name="Player" type="CharacterBody2D" unique_id=1038420454]
-collision_mask = 65294
+collision_mask = 65292
 floor_max_angle = 1.134464
 platform_on_leave = 1
 platform_floor_layers = 4294967288
@@ -254,7 +342,7 @@ scale = Vector2(0.2053989, 0.2053989)
 texture = ExtResource("3_dewec")
 
 [node name="Kopf" type="Sprite2D" parent="Sprites" unique_id=1014666892]
-position = Vector2(-13, -142)
+position = Vector2(-12, -146)
 scale = Vector2(0.05906107, 0.05906107)
 texture = ExtResource("3_gntrk")
 

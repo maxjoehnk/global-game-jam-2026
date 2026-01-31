@@ -59,7 +59,7 @@ public partial class Game : Node2D
 						 .Where(c => c is PhysicsBody2D)
 						 .Cast<PhysicsBody2D>())
 			{
-				physicsBody2D.CollisionLayer = (physicsBody2D.CollisionLayer & Consts.NonLayerMask) | layerMask;
+				physicsBody2D.CollisionLayer = (physicsBody2D.CollisionLayer & Consts.NonLayerMask) | layerMask;		
 			}
 
 			if (layer is TileMapLayer)
@@ -110,7 +110,7 @@ public partial class Game : Node2D
 		this.activeLayerIndex += 1;
 		if (this.activeLayerIndex >= this.LayerCount)
 		{
-			this.activeLayerIndex = this.LayerCount-1;//0;
+			this.activeLayerIndex = 0;
 		}
 
 		this.UpdateActiveLayer();
@@ -121,7 +121,7 @@ public partial class Game : Node2D
 		this.activeLayerIndex -= 1;
 		if (this.activeLayerIndex < 0)
 		{
-			this.activeLayerIndex = 0; //this.LayerCount - 1;
+			this.activeLayerIndex = this.LayerCount - 1;
 		}
 
 		this.UpdateActiveLayer();
@@ -137,7 +137,7 @@ public partial class Game : Node2D
 			layer.Scale = new Vector2(scaling_value, scaling_value);
 			if (i != this.activeLayerIndex)
 			{
-				layer.Modulate *= LayerColorList[i].Lerp(new Color(1.0f,1.0f,1.0f), 0.2f);
+				layer.Modulate *= LayerColorList[i].Lerp(new Color(1.0f,1.0f,1.0f), 0.15f);
 			}
 		}
 		Player.SetActiveCollisionLayer(this.ActivePhysicsLayer);
@@ -148,6 +148,7 @@ public partial class Game : Node2D
 		this.activeLayerIndex = this.InitialLayer;
 		this.UpdateActiveLayer();
 		this.Player.GlobalPosition = this.RespawnMarker.GlobalPosition;
+		this.Player.Reset();
 	}
 
 	private void OnPlayerReachedGoal()
