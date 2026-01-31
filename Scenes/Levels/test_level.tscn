@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dq8bmx6sugagf" path="res://Scenes/Levels/_BaseLevel.tscn" id="1_7t06c"]
 [ext_resource type="TileSet" uid="uid://b0qj4rvg8nt0x" path="res://Assets/TileSet.tres" id="2_b07c4"]
 [ext_resource type="PackedScene" uid="uid://dy5opi42vhi4y" path="res://Scenes/Enemies/walking_enemy.tscn" id="3_db73o"]
+[ext_resource type="PackedScene" uid="uid://bekb2vc085vb5" path="res://Scenes/Enemies/burning_trash.tscn" id="4_k8g1k"]
 [ext_resource type="Texture2D" uid="uid://b3cvrve3kidwy" path="res://Assets/Elements/Atlas.png" id="4_npfmg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k8g1k"]
@@ -83,6 +84,15 @@ tile_set = ExtResource("2_b07c4")
 [node name="WalkingEnemy" parent="Layers/TileMapLayer" index="0" unique_id=1736735301 instance=ExtResource("3_db73o")]
 position = Vector2(378, 219)
 MovementSpeed = 150.0
+
+[node name="BurningTrash" parent="Layers/TileMapLayer" index="1" unique_id=1555317447 instance=ExtResource("4_k8g1k")]
+position = Vector2(-574, 321)
+
+[node name="BurningTrash2" parent="Layers/TileMapLayer" index="2" unique_id=172788999 instance=ExtResource("4_k8g1k")]
+position = Vector2(-506, 320)
+
+[node name="BurningTrash3" parent="Layers/TileMapLayer" index="3" unique_id=153490793 instance=ExtResource("4_k8g1k")]
+position = Vector2(-437, 319)
 
 [node name="TileMapLayer2" type="TileMapLayer" parent="Layers" parent_id_path=PackedInt32Array(1705662681) index="1" unique_id=1488375411]
 position = Vector2(960, 540)

@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://bekb2vc085vb5"]
+
+[ext_resource type="PackedScene" uid="uid://gt8jv8n1hmlw" path="res://Scenes/Enemies/trap.tscn" id="1_2aj4m"]
+[ext_resource type="Texture2D" uid="uid://bd1ykxkia00bl" path="res://Assets/Elements/Papierkorb.png" id="2_l2ssk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n6wav"]
+size = Vector2(60, 74)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2k1iw"]
+size = Vector2(57, 20)
+
+[node name="BurningTrash" unique_id=1555317447 instance=ExtResource("1_2aj4m")]
+
+[node name="CollisionShape2D" parent="." index="0" unique_id=1241471898]
+position = Vector2(0, -36)
+shape = SubResource("RectangleShape2D_n6wav")
+
+[node name="CollisionShape2D" parent="PlayerDetectArea" parent_id_path=PackedInt32Array(1076572822) index="0" unique_id=2015629880]
+position = Vector2(0.5, -78)
+shape = SubResource("RectangleShape2D_2k1iw")
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="2" unique_id=372617460]
+position = Vector2(0, -52)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("2_l2ssk")
