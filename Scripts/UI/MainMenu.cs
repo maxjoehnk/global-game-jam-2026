@@ -5,12 +5,17 @@ namespace GlobalGameJam.Scripts.UI;
 
 public partial class MainMenu : Panel
 {
-	private Control LevelSelector => (this.FindChild("LevelSelector") as Control)!;
+	private Control LevelSelector => (this.FindChild("Play") as Control)!;
 
 	public override void _Ready()
 	{
 		this.LevelSelector.GrabFocus();
 		GlobalAudioPlayback.Instance.StartAllPlayback();
+	}
+
+	public void OnPlay()
+	{
+		SceneManager.Instance.LoadCurrentLevel();
 	}
 
 	public void OnOpenLevelSelector()

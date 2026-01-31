@@ -27,6 +27,7 @@ public partial class LevelSelector : Control
 		Button button = this.LevelButton.Instantiate<Button>();
 		button.CustomMinimumSize = new Vector2(300, 0);
 		button.Text = level.Name;
+		button.Disabled = !level.IsUnlocked;
 		button.Pressed += () => { SceneManager.Instance.OpenLevel(level); };
 		
 		return button;

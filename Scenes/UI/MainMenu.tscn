@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dk7nxjlht6iqe" path="res://Scenes/UI/AnimatedSpahnKopf.tscn" id="3_k8um8"]
 [ext_resource type="PackedScene" uid="uid://dldf13bwc50mu" path="res://Scenes/UI/JensSpahnFordert.tscn" id="5_k8um8"]
 [ext_resource type="Theme" uid="uid://d1wiq2lhxalpu" path="res://Themes/PaperUi.tres" id="6_kl3t2"]
+[ext_resource type="Texture2D" uid="uid://cd0pu57ikuu1c" path="res://Assets/UI/Title.png" id="7_744d7"]
 
 [node name="MainMenu" type="Panel" unique_id=603471195]
 anchors_preset = 15
@@ -34,6 +35,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1121468531]
+visible = false
 layout_mode = 2
 text = "Maske kann auch geil sein"
 label_settings = ExtResource("2_t6w0q")
@@ -49,15 +51,23 @@ layout_mode = 2
 size_flags_horizontal = 4
 alignment = 1
 
-[node name="LevelSelector" parent="MarginContainer/VBoxContainer/VBoxContainer" unique_id=1995207131 instance=ExtResource("2_72sra")]
+[node name="Play" parent="MarginContainer/VBoxContainer/VBoxContainer" unique_id=1995207131 instance=ExtResource("2_72sra")]
 layout_mode = 2
+theme = null
+text = "Play"
+
+[node name="LevelSelector" parent="MarginContainer/VBoxContainer/VBoxContainer" unique_id=1303483968 instance=ExtResource("2_72sra")]
+layout_mode = 2
+theme = null
 
 [node name="Settings" parent="MarginContainer/VBoxContainer/VBoxContainer" unique_id=458406655 instance=ExtResource("2_72sra")]
 layout_mode = 2
+theme = null
 text = "Settings"
 
 [node name="Exit" parent="MarginContainer/VBoxContainer/VBoxContainer" unique_id=1674875753 instance=ExtResource("2_72sra")]
 layout_mode = 2
+theme = null
 text = "Exit"
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer" unique_id=284010176]
@@ -67,6 +77,12 @@ theme_override_constants/margin_top = 50
 [node name="JensSpahnFordert" parent="MarginContainer/VBoxContainer" unique_id=540377989 instance=ExtResource("5_k8um8")]
 layout_mode = 2
 
+[node name="Title" type="Sprite2D" parent="." unique_id=292525494]
+position = Vector2(1000.00006, 385.00003)
+scale = Vector2(0.28447646, 0.28447646)
+texture = ExtResource("7_744d7")
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/Play" to="." method="OnPlay"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/LevelSelector" to="." method="OnOpenLevelSelector"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/Settings" to="." method="OnOpenSettings"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/Exit" to="." method="OnExit"]
