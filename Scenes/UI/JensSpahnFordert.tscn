@@ -1,0 +1,73 @@
+[gd_scene format=3 uid="uid://dldf13bwc50mu"]
+
+[ext_resource type="Script" uid="uid://dne46e10dyasf" path="res://Scripts/UI/JensSpahnFordert.cs" id="1_4ycte"]
+[ext_resource type="LabelSettings" uid="uid://c581imawvcllk" path="res://Themes/TitleLabel.tres" id="1_g46ch"]
+[ext_resource type="LabelSettings" uid="uid://cs5xntv3h0phe" path="res://Themes/LabelSettings.tres" id="2_4ycte"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g46ch"]
+bg_color = Color(0.18223408, 0.61519533, 0.99999994, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[node name="JensSpahnFordert" type="PanelContainer" unique_id=1848436369]
+custom_minimum_size = Vector2(1000, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -920.0
+offset_bottom = -680.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_g46ch")
+script = ExtResource("1_4ycte")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1186669499]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1775402543]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer" unique_id=221306851]
+layout_mode = 2
+text = "Jens Spahn fordert"
+label_settings = ExtResource("2_4ycte")
+
+[node name="Quote" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1044820481]
+layout_mode = 2
+text = "Spahn fordert »besonnene Antwort« auf Trump"
+label_settings = ExtResource("1_g46ch")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1067268089]
+layout_mode = 2
+
+[node name="Date" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1067404040]
+layout_mode = 2
+text = "Datum"
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1597670886]
+layout_mode = 2
+text = "-"
+
+[node name="Source" type="LinkButton" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=11457072]
+layout_mode = 2
+text = "Quelle"
+
+[node name="HTTPRequest" type="HTTPRequest" parent="." unique_id=954791627]
+use_threads = true
+timeout = 30.0
+
+[node name="NextQuoteTimer" type="Timer" parent="." unique_id=1431406897]
+wait_time = 10.0

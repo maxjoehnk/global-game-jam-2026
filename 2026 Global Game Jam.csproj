@@ -7,6 +7,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.46" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Scripts\Physics\cutable_ridgid_body.gd" />
     <Content Include="Scripts\Physics\CutAreas\cut_stencil.gd" />
   </ItemGroup>

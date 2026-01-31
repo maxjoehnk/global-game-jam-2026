@@ -6,7 +6,7 @@ namespace GlobalGameJam.Scripts.Core;
 
 public partial class SceneManager : Node
 {
-	public static SceneManager Instance = null!;
+	public static SceneManager Instance { get; private set; } = null!;
 	private Node CurrentScene { get; set; } = null!;
 
 	private AvailableLevel? activeLevel;
@@ -24,6 +24,7 @@ public partial class SceneManager : Node
 	public void OpenMainMenu()
 	{
 		this.LoadScene("res://Scenes/UI/MainMenu.tscn");
+		GlobalAudioPlayback.Instance.StartAllPlayback();
 	}
 
 	public void OpenLevelSelector()
@@ -39,6 +40,7 @@ public partial class SceneManager : Node
 	public void OpenLevel(AvailableLevel level)
 	{
 		this.LoadScene($"res://Scenes/Levels/{level.Path}");
+		GlobalAudioPlayback.Instance.StopAllPlayback();
 		this.activeLevel = level;
 	}
 

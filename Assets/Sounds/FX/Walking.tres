@@ -1,0 +1,29 @@
+[gd_resource type="AudioStreamPlaylist" format=3 uid="uid://b24itg572qpas"]
+
+[ext_resource type="AudioStream" uid="uid://c3uwc784sv3rw" path="res://Assets/Sounds/FX/2026-Global-Game-Jam - Track 6.wav" id="1_8qt8g"]
+[ext_resource type="AudioStream" uid="uid://de6xfjxr8qnql" path="res://Assets/Sounds/FX/2026-Global-Game-Jam - Track 7.wav" id="2_nj7hl"]
+[ext_resource type="AudioStream" uid="uid://bjs61t8pv8xx2" path="res://Assets/Sounds/FX/2026-Global-Game-Jam - walking-on-concrete-ver-2-268513.wav" id="3_1bpxu"]
+[ext_resource type="AudioStream" uid="uid://dum8ag0h701e" path="res://Assets/Sounds/FX/2026-Global-Game-Jam - Track 8.wav" id="4_jwrxx"]
+[ext_resource type="AudioStream" uid="uid://dpmcjoyak1jqu" path="res://Assets/Sounds/FX/2026-Global-Game-Jam - Track 9.wav" id="5_7cplf"]
+[ext_resource type="AudioStream" uid="uid://b3g88ou0ibtib" path="res://Assets/Sounds/FX/2026-Global-Game-Jam - Track 10.wav" id="6_3yk4t"]
+[ext_resource type="AudioStream" uid="uid://doivdwccteitr" path="res://Assets/Sounds/FX/2026-Global-Game-Jam - Track 11.wav" id="7_vxb1b"]
+[ext_resource type="AudioStream" uid="uid://cjs7luxt8c0m" path="res://Assets/Sounds/FX/2026-Global-Game-Jam - Track 12.wav" id="8_yn7x5"]
+[ext_resource type="AudioStream" uid="uid://bd71143bdt6rv" path="res://Assets/Sounds/FX/2026-Global-Game-Jam - Track 13.wav" id="9_w156b"]
+[ext_resource type="AudioStream" uid="uid://4kattpi6deja" path="res://Assets/Sounds/FX/2026-Global-Game-Jam - Track 14.wav" id="10_ddvex"]
+[ext_resource type="AudioStream" uid="uid://cmhrcxwxrmb8e" path="res://Assets/Sounds/FX/2026-Global-Game-Jam - Track 15.wav" id="11_y564i"]
+
+[resource]
+shuffle = true
+fade_time = 0.0
+stream_count = 11
+stream_0 = ExtResource("1_8qt8g")
+stream_1 = ExtResource("2_nj7hl")
+stream_2 = ExtResource("4_jwrxx")
+stream_3 = ExtResource("5_7cplf")
+stream_4 = ExtResource("6_3yk4t")
+stream_5 = ExtResource("7_vxb1b")
+stream_6 = ExtResource("8_yn7x5")
+stream_7 = ExtResource("9_w156b")
+stream_8 = ExtResource("10_ddvex")
+stream_9 = ExtResource("11_y564i")
+stream_10 = ExtResource("3_1bpxu")

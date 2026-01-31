@@ -52,6 +52,18 @@ public partial class Player : CharacterBody2D
 	[Signal]
 	public delegate void PlayerDiedEventHandler();
 
+	[Signal]
+	public delegate void PlayerStartedWalkingEventHandler();
+
+	[Signal]
+	public delegate void PlayerStoppedWalkingEventHandler();
+
+	[Signal]
+	public delegate void PlayerDivedEventHandler();
+
+	[Signal]
+	public delegate void PlayerJumpedEventHandler();
+
 	public void SetActiveCollisionLayer(uint layer)
 	{
 		this.CutTool.SetActiveLayers(layer);
@@ -116,10 +128,12 @@ public partial class Player : CharacterBody2D
 
 			case State.Run:
 				this.AnimationPlayer.Play("walking");
+				this.EmitSignalPlayerStartedWalking();
 				break;
 
 			case State.Jump:
 				this.AnimationPlayer.Play("idle");
+				this.EmitSignalPlayerJumped();
 				velocity.Y = this.JumpSpeed;
 				this.Velocity = velocity;
 				break;
@@ -138,6 +152,7 @@ public partial class Player : CharacterBody2D
 				this.Velocity = velocity;
 				break;
 			case State.Dive:
+				this.EmitSignalPlayerDived();
 				float direction = Input.GetAxis(InputAction.MoveLeft, 
 												InputAction.MoveRight);
 				if (direction == 0)
@@ -155,6 +170,11 @@ public partial class Player : CharacterBody2D
 					this.AnimationPlayer.Play("dive_right");
 				}
 				break;
+		}
+
+		if (this.CurrentState == State.Run)
+		{
+			this.EmitSignalPlayerStoppedWalking();
 		}
 		this.CurrentState = NewState;
 	}

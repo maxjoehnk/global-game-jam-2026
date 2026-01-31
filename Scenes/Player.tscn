@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://c4ywtwlnwcvwe" path="res://Assets/Character/SpahnBody.png" id="3_dewec"]
 [ext_resource type="Texture2D" uid="uid://c3qqe2ap7tgh" path="res://Assets/Character/SpahnKopf.png" id="3_gntrk"]
 [ext_resource type="PackedScene" uid="uid://c735bd2pgysm" path="res://Scenes/Physics/CutAreas/tile_map_cutter.tscn" id="5_5ixxa"]
+[ext_resource type="AudioStream" uid="uid://b24itg572qpas" path="res://Assets/Sounds/FX/Walking.tres" id="6_nn08x"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kyqiw"]
 radius = 35.0
@@ -271,4 +272,10 @@ bus = &"Quotes"
 [node name="TileMapCutter" parent="." unique_id=1935722058 instance=ExtResource("5_5ixxa")]
 position = Vector2(75, 2)
 
+[node name="WalkingSounds" type="AudioStreamPlayer" parent="." unique_id=848594469]
+stream = ExtResource("6_nn08x")
+bus = &"FX"
+
 [connection signal="PlayerDied" from="." to="PlayerDiedQuote" method="play"]
+[connection signal="PlayerStartedWalking" from="." to="WalkingSounds" method="play"]
+[connection signal="PlayerStoppedWalking" from="." to="WalkingSounds" method="stop"]
