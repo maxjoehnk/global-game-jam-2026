@@ -6,7 +6,7 @@ public partial class WalkingEnemy : Enemy
 	[Export] public float MovementSpeed = 150f;
 
 	private int direction = 1; // 1 for right, -1 for left
-
+	private Node2D SpriteNode => GetNode<Node2D>("SpriteNode");
 	private Area2D PlayerScanArea => GetNode<Area2D>("Area2D");
 	private Player? PlayerNode = null;
 
@@ -57,7 +57,7 @@ public partial class WalkingEnemy : Enemy
 			}
 		}
 		Velocity = Velocity with { X = MovementSpeed * direction };
-
+		this.SpriteNode.Scale = new Vector2(direction, 1.0f);
 		this.MoveAndSlide();
 
 		if (this.PlayerNode != null){
