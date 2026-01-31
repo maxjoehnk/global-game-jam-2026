@@ -41,11 +41,17 @@ public partial class Player : CharacterBody2D
 
 	[Export] public float DiveStrength = 350f;
 
+	private bool DieAnimationDone = false;
+
 	private Item? holdingItem;
 
 	public float Gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
 	// Graphics
 	private AnimationPlayer AnimationPlayer => GetNode<AnimationPlayer>("AnimationPlayer");
+	private AnimationTree AnimTree => GetNode<AnimationTree>("AnimationTree");
+	private AnimationNodeStateMachinePlayback Playback => (AnimationNodeStateMachinePlayback)
+			AnimTree.Get("parameters/StateMachine/playback");
+	
 	private State CurrentState = State.Idle;
 	private Sprite2D Head => GetNode<Sprite2D>("Sprites/Kopf");
 	private Node2D SpriteContainer => GetNode<Node2D>("Sprites");
@@ -77,16 +83,26 @@ public partial class Player : CharacterBody2D
 	public override void _Ready()
 	{
 		this.Rotation = 0;
+		this.AnimTree.Active = true;
 	}
 
 	public override void _Input(InputEvent @event)
 	{
 		if (Input.IsActionJustPressedByEvent(InputAction.Throw, @event))
 		{
-			if (this.holdingItem != null)
+			if (this.holdingItem != null && this.CurrentState != State.Hurt)
 			{
 				this.holdingItem.Throw(this.GetParent(), this.GlobalPosition, this.Head.FlipH);
 				this.holdingItem = null;
+				
+				bool isThrowing = (bool)this.AnimTree.Get("parameters/OneShot/active");
+				if (!isThrowing)
+				{
+					this.AnimTree.Set(
+						"parameters/OneShot/request",
+						(int)AnimationNodeOneShot.OneShotRequest.Fire
+					);
+				}
 			}
 		}
 	}
@@ -119,10 +135,6 @@ public partial class Player : CharacterBody2D
 				this.dive_state(delta);
 				break;
 			case State.Hurt:
-				if (!this.AnimationPlayer.IsPlaying())
-				{
-					this.EmitSignalPlayerDied();
-				}
 				return;
 		}
 
@@ -145,16 +157,16 @@ public partial class Player : CharacterBody2D
 		switch (NewState)
 		{
 			case State.Idle:
-				this.AnimationPlayer.Play("idle");
+				this.Playback.Travel("idle");
 				break;
 
 			case State.Run:
-				this.AnimationPlayer.Play("walking");
+				this.Playback.Travel("walking");
 				this.EmitSignalPlayerStartedWalking();
 				break;
 
 			case State.Jump:
-				this.AnimationPlayer.Play("jump");
+				this.Playback.Travel("jump");
 				this.EmitSignalPlayerJumped();
 				velocity.Y = this.JumpSpeed;
 				this.Velocity = velocity;
@@ -168,7 +180,7 @@ public partial class Player : CharacterBody2D
 				this.Velocity = velocity;
 				break;
 			case State.WallJump:
-				this.AnimationPlayer.Play("jump");
+				this.Playback.Travel("jump");
 				velocity.Y = this.WallJumpY;
 				velocity.X = this.LastWallDir * this.WallJumpX;
 				this.Velocity = velocity;
@@ -185,11 +197,11 @@ public partial class Player : CharacterBody2D
 				this.Velocity = velocity;
 				if (direction < 0)
 				{
-					this.AnimationPlayer.Play("dive_left");
+					this.Playback.Travel("dive_left");
 				}
 				else
 				{
-					this.AnimationPlayer.Play("dive_right");
+					this.Playback.Travel("dive_right");
 				}
 				break;
 			case State.Hurt:
@@ -222,8 +234,7 @@ public partial class Player : CharacterBody2D
 
 	public void Reset()
 	{
-		this.AnimationPlayer.Play("RESET");
-		this.AnimationPlayer.Seek(0.0, true);
+		this.Playback.Travel("RESET");
 		this.CurrentState = State.Idle;
 	}
 
@@ -231,14 +242,15 @@ public partial class Player : CharacterBody2D
 	{
 		if (!(this.CurrentState == State.Hurt))
 		{
+			this.DieAnimationDone = false;
 			this.set_new_state(State.Hurt);
 			if (HitSource.X > this.GlobalPosition.X)
 			{
-				this.AnimationPlayer.Play("hurt_left");
+				this.Playback.Travel("hurt_left");
 			}
 			else
 			{
-				this.AnimationPlayer.Play("hurt_right");
+				this.Playback.Travel("hurt_right");
 			}
 		}
 	}
@@ -247,6 +259,12 @@ public partial class Player : CharacterBody2D
 	{
 		return this.CurrentState == State.Hurt;
 	}
+
+	public void DieAnimationOver()
+	{
+		this.EmitSignalPlayerDied();
+	}
+
 
 	public void update_look_direction(float direction){
 		if (direction > 0)
