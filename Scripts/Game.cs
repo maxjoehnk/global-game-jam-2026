@@ -15,7 +15,7 @@ public partial class Game : Node2D
 	private const int PhysicsBaseLayer = 8;
 	private const int CutBaseLayer = 5;
 	private const uint NonPhysicsLayerMask = 0b11111111;
-	private const float LayerScaling = 0.05f;
+	private const float LayerScaling = 0.025f;
 
 	private Node2D LayerContainer => GetNode<Node2D>("Layers");
 	private Player Player => GetNode<Player>("Player");
