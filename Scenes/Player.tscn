@@ -226,7 +226,6 @@ collision_mask = 65294
 platform_on_leave = 1
 platform_floor_layers = 4294967288
 script = ExtResource("1_rpqav")
-MovementSpeed = 200.0
 
 [node name="Polygon2D" type="CollisionShape2D" parent="." unique_id=791607480]
 position = Vector2(0, 18)
@@ -246,6 +245,7 @@ scale = Vector2(0.20000002, 0.20000002)
 texture = ExtResource("2_kyqiw")
 
 [node name="Body" type="Sprite2D" parent="Sprites" unique_id=1712788532]
+texture_filter = 1
 position = Vector2(1.9999999, 0.9999996)
 scale = Vector2(0.2053989, 0.2053989)
 texture = ExtResource("3_dewec")

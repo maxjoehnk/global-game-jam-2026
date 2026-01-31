@@ -8,6 +8,9 @@ size = Vector2(1022, 1051)
 
 [node name="DiveLevel" unique_id=14346899 instance=ExtResource("1_ey7x2")]
 
+[node name="CollisionShape2D" parent="FixedBoundary/StaticBody2D" parent_id_path=PackedInt32Array(1330150538) index="0" unique_id=1417060749]
+disabled = true
+
 [node name="Layer1" type="Node2D" parent="Layers" parent_id_path=PackedInt32Array(1705662681) index="0" unique_id=297126256]
 position = Vector2(-1242, 690)
 

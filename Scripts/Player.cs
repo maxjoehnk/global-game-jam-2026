@@ -33,8 +33,8 @@ public partial class Player : CharacterBody2D
 	private Timer WallJumpTimer => GetNode<Timer>("WallJumpTimer");
 	private float LastWallDir = 0.0f;
 
-	[Export] public float FallPull = 250f;
-	[Export] public float FallTransition = 60f;
+	[Export] public float FallPull = 400f;
+	[Export] public float FallTransition = 70f;
 	private Timer CoyoteTimer => GetNode<Timer>("CoyoteTimer");
 
 	[Export] public float DiveStrength = 350f;
@@ -298,12 +298,14 @@ public partial class Player : CharacterBody2D
 	}
 
 	public void dive_state(double delta){
+		Vector2 velocity = this.Velocity;
 		if (this.IsOnFloor())
 		{
+			velocity.X /= 2.0f;
+			this.Velocity = velocity;
 			this.set_new_state(State.Run);
 			return;
 		}
-		Vector2 velocity = this.Velocity;
 		velocity.Y += this.Gravity * (float)delta;
 		this.Velocity = velocity;
 		float direction = Input.GetAxis(InputAction.MoveLeft, InputAction.MoveRight);
