@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://lhi7csxw410n"]
 
+[ext_resource type="Theme" uid="uid://d1wiq2lhxalpu" path="res://Themes/PaperUi.tres" id="1_hfiyb"]
 [ext_resource type="Script" uid="uid://bimg08dp34kbv" path="res://Scripts/UI/Settings.cs" id="1_mj2lg"]
-[ext_resource type="LabelSettings" uid="uid://c581imawvcllk" path="res://Themes/TitleLabel.tres" id="2_sc1bs"]
 [ext_resource type="PackedScene" uid="uid://bsldn8e7jelex" path="res://Scenes/UI/SpahnButton.tscn" id="2_v5qja"]
-[ext_resource type="LabelSettings" uid="uid://cs5xntv3h0phe" path="res://Themes/LabelSettings.tres" id="3_hfiyb"]
+[ext_resource type="Theme" uid="uid://df35olqvawmkw" path="res://Themes/PaperUiBlackedText.tres" id="3_sc1bs"]
 
 [node name="Settings" type="Panel" unique_id=603471195]
 anchors_preset = 15
@@ -11,6 +11,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_hfiyb")
 script = ExtResource("1_mj2lg")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=495377600]
@@ -31,8 +32,8 @@ alignment = 1
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer" unique_id=234807790]
 layout_mode = 2
+theme_override_font_sizes/font_size = 48
 text = "Settings"
-label_settings = ExtResource("2_sc1bs")
 horizontal_alignment = 1
 
 [node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer" unique_id=1922368282]
@@ -41,8 +42,8 @@ theme_override_constants/margin_top = 30
 
 [node name="Label2" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1064750278]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "Audio"
-label_settings = ExtResource("3_hfiyb")
 horizontal_alignment = 1
 
 [node name="MarginContainer3" type="MarginContainer" parent="MarginContainer/VBoxContainer" unique_id=328339877]
@@ -56,6 +57,7 @@ alignment = 1
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=358713059]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+theme = ExtResource("3_sc1bs")
 text = "Main Volume"
 
 [node name="MainVolume" type="HSlider" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1337686170]
@@ -71,6 +73,7 @@ alignment = 1
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=925270389]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+theme = ExtResource("3_sc1bs")
 text = "Music"
 
 [node name="MusicVolume" type="HSlider" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1128197148]
@@ -86,6 +89,7 @@ alignment = 1
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer3" unique_id=1180068141]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+theme = ExtResource("3_sc1bs")
 text = "Effects"
 
 [node name="EffectsVolume" type="HSlider" parent="MarginContainer/VBoxContainer/HBoxContainer3" unique_id=626440828]
@@ -101,6 +105,7 @@ alignment = 1
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer4" unique_id=723479222]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+theme = ExtResource("3_sc1bs")
 text = "Quotes"
 
 [node name="QuotesVolume" type="HSlider" parent="MarginContainer/VBoxContainer/HBoxContainer4" unique_id=531906819]

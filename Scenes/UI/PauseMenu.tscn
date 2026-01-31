@@ -1,8 +1,19 @@
 [gd_scene format=3 uid="uid://dg06nvdxick6h"]
 
 [ext_resource type="Script" uid="uid://cwdmp8s8j4jkj" path="res://Scripts/UI/PauseMenu.cs" id="1_eod5q"]
-[ext_resource type="LabelSettings" uid="uid://cs5xntv3h0phe" path="res://Themes/LabelSettings.tres" id="2_238ko"]
+[ext_resource type="Texture2D" uid="uid://c0o1usg8p1ec4" path="res://Assets/UI/MenuBackground.png" id="2_2bpff"]
 [ext_resource type="PackedScene" uid="uid://bsldn8e7jelex" path="res://Scenes/UI/SpahnButton.tscn" id="2_v5qja"]
+[ext_resource type="Theme" uid="uid://d1wiq2lhxalpu" path="res://Themes/PaperUi.tres" id="5_gdh0q"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8hc20"]
+bg_color = Color(0, 0, 0, 0.19607843)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8hc20"]
+texture = ExtResource("2_2bpff")
+expand_margin_left = 150.0
+expand_margin_top = 50.0
+expand_margin_right = 150.0
+expand_margin_bottom = 50.0
 
 [node name="PauseDialog" type="CenterContainer" unique_id=1635492489]
 anchors_preset = 15
@@ -10,10 +21,28 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("5_gdh0q")
 script = ExtResource("1_eod5q")
+
+[node name="Control" type="Control" parent="." unique_id=1229184843]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Control" unique_id=112781201]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -960.0
+offset_top = -540.0
+offset_right = 960.0
+offset_bottom = 540.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8hc20")
 
 [node name="Panel" type="PanelContainer" parent="." unique_id=1334316072]
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_8hc20")
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=1344343719]
 layout_mode = 2
@@ -29,8 +58,8 @@ alignment = 1
 
 [node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer" unique_id=1211335470]
 layout_mode = 2
+theme_override_font_sizes/font_size = 40
 text = "Paused"
-label_settings = ExtResource("2_238ko")
 horizontal_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/VBoxContainer" unique_id=1830583064]

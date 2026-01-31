@@ -1,8 +1,9 @@
 [gd_scene format=3 uid="uid://cfuuhd2fencb1"]
 
-[ext_resource type="LabelSettings" uid="uid://c581imawvcllk" path="res://Themes/TitleLabel.tres" id="1_6r133"]
 [ext_resource type="PackedScene" uid="uid://bsldn8e7jelex" path="res://Scenes/UI/SpahnButton.tscn" id="1_cc4ho"]
 [ext_resource type="Script" uid="uid://b0vocoln4lnfo" path="res://Scripts/UI/LevelSelector.cs" id="1_o3ex8"]
+[ext_resource type="Theme" uid="uid://d1wiq2lhxalpu" path="res://Themes/PaperUi.tres" id="1_rinbb"]
+[ext_resource type="LabelSettings" uid="uid://d1wnrxsnlcr3f" path="res://Themes/PaperLabel.tres" id="2_rinbb"]
 
 [node name="LevelSelector" type="Panel" unique_id=466009]
 anchors_preset = 15
@@ -10,6 +11,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_rinbb")
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="." unique_id=1966198729]
 custom_minimum_size = Vector2(400, 500)
@@ -30,7 +32,7 @@ alignment = 1
 [node name="Label" type="Label" parent="VBoxContainer2" unique_id=27183115]
 layout_mode = 2
 text = "Levels"
-label_settings = ExtResource("1_6r133")
+label_settings = ExtResource("2_rinbb")
 horizontal_alignment = 1
 
 [node name="FlowContainer" type="VFlowContainer" parent="VBoxContainer2" unique_id=1891231098]
