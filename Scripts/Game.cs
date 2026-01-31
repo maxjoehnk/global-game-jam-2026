@@ -29,23 +29,20 @@ public partial class Game : Node2D
 		int physicsLayer = PhysicsBaseLayer;
 		Array<Node> layers = this.LayerContainer.GetChildren();
 		this.Hud.SetLayers(new Array<string>(layers.Select(l => l.Name.ToString())));
-		foreach (Node child in layers)
+		foreach (Node layer in layers)
 		{
-			foreach (PhysicsBody2D physicsBody2D in child.FindChildren("*", type: nameof(PhysicsBody2D))
+			foreach (PhysicsBody2D physicsBody2D in layer.FindChildren("*", type: nameof(PhysicsBody2D))
 						 .Where(c => c is PhysicsBody2D)
 						 .Cast<PhysicsBody2D>())
 			{
 				physicsBody2D.CollisionLayer |= (uint)1 << physicsLayer;
 			}
 
-			foreach (TileMapLayer tilemap in child.FindChildren("*", type: nameof(TileMapLayer))
-						 .Where(c => c is TileMapLayer)
-						 .Cast<TileMapLayer>())
+			if (layer is TileMapLayer tileMapLayer)
 			{
-				uint tile_layers = tilemap.TileSet.GetPhysicsLayerCollisionLayer(0);
-				tilemap.TileSet.SetPhysicsLayerCollisionLayer(
-					0, (uint)1 << physicsLayer | tile_layers
-				);
+				TileSet uniqueTileSet = (tileMapLayer.TileSet.Duplicate() as TileSet)!;
+				uniqueTileSet.SetPhysicsLayerCollisionLayer(0, (uint)1 << physicsLayer);
+				tileMapLayer.TileSet = uniqueTileSet;
 			}
 
 			physicsLayer++;
