@@ -6,8 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://c3qqe2ap7tgh" path="res://Assets/Character/SpahnKopf.png" id="3_gntrk"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kyqiw"]
-radius = 37.0
-height = 242.0
+radius = 35.0
+height = 160.0
 
 [sub_resource type="Animation" id="Animation_kyqiw"]
 length = 0.001
@@ -46,6 +46,78 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprites/Body:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_nn08x"]
+resource_name = "dive_left"
+length = 2.0
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [-1.9198621771937625, -2.0001473227855016, -1.8413223608540177, -2.0804324683772406]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprites/Kopf:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.75, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.23911011, -0.07853982, 0.19198622]
+}
+
+[sub_resource type="Animation" id="Animation_5ixxa"]
+resource_name = "dive_right"
+length = 2.0
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [1.9198622, 2.0001473, 1.8413223, 2.0804324]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprites/Kopf:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.75, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.23911011, -0.07853982, 0.19198622]
 }
 
 [sub_resource type="Animation" id="Animation_dewec"]
@@ -87,6 +159,18 @@ tracks/2/keys = {
 "update": 1,
 "values": [0.0]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprites/Body:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_gntrk"]
 resource_name = "walking"
@@ -115,10 +199,24 @@ tracks/1/keys = {
 "update": 1,
 "values": [0.0, -0.12217305, 0.08726646]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprites/Body:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dewec"]
 _data = {
 &"RESET": SubResource("Animation_kyqiw"),
+&"dive_left": SubResource("Animation_nn08x"),
+&"dive_right": SubResource("Animation_5ixxa"),
 &"idle": SubResource("Animation_dewec"),
 &"walking": SubResource("Animation_gntrk")
 }
@@ -131,14 +229,16 @@ script = ExtResource("1_rpqav")
 MovementSpeed = 200.0
 
 [node name="Polygon2D" type="CollisionShape2D" parent="." unique_id=791607480]
+position = Vector2(0, 18)
 shape = SubResource("CapsuleShape2D_kyqiw")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=542213054]
 libraries/ = SubResource("AnimationLibrary_dewec")
 autoplay = &"idle"
+playback_default_blend_time = 0.3
 
 [node name="Sprites" type="Node2D" parent="." unique_id=1401642733]
-scale = Vector2(0.6, 0.6)
+scale = Vector2(0.5, 0.5)
 
 [node name="Sprite2D" type="Sprite2D" parent="Sprites" unique_id=1649439057]
 visible = false

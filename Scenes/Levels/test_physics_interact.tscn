@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ccdrgf16pa6mt"]
 
-[ext_resource type="PackedScene" path="res://Scenes/Levels/_BaseLevel.tscn" id="1_yc501"]
+[ext_resource type="PackedScene" uid="uid://dq8bmx6sugagf" path="res://Scenes/Levels/_BaseLevel.tscn" id="1_yc501"]
 [ext_resource type="PackedScene" uid="uid://cb6vue6iaxmm3" path="res://Scenes/Physics/cutable_ridgid_body.tscn" id="2_5b38m"]
 [ext_resource type="PackedScene" uid="uid://ckjmwmvnnhh5u" path="res://Scenes/Physics/CutAreas/cut_stencil.tscn" id="3_2jhka"]
 
@@ -9,7 +9,6 @@
 [node name="Layer1" type="Node2D" parent="Layers" parent_id_path=PackedInt32Array(1705662681) index="0" unique_id=1906378061]
 
 [node name="CutableRidgidBody" parent="Layers/Layer1" index="0" unique_id=1693820037 instance=ExtResource("2_5b38m")]
-collision_layer = 16
 freeze = true
 
 [node name="CollisionPolygon2D" parent="Layers/Layer1/CutableRidgidBody" index="0" unique_id=1255628665]

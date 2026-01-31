@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ciskn3kh6rmmo" path="res://Scripts/Game.cs" id="1_n8wt5"]
 [ext_resource type="PackedScene" uid="uid://cw3x8fe8c2ghf" path="res://Scenes/Player.tscn" id="2_1rdqr"]
-[ext_resource type="PackedScene" path="res://Scenes/UI/GameHUD.tscn" id="2_qawov"]
+[ext_resource type="PackedScene" uid="uid://d3ylock0hdv0d" path="res://Scenes/UI/GameHUD.tscn" id="2_qawov"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_n8wt5"]
 

@@ -6,7 +6,9 @@ public enum State
 	Idle,
 	Run,
 	Jump,
-	Fall
+	Fall, 
+	WallJump,
+	Dive
 }
 
 
@@ -16,16 +18,24 @@ public partial class Player : CharacterBody2D
 	private const float ResetHeight = 1200f;
 	private const float MoveTol = 0.01f;
 
-	[Export] public float MovementSpeed = 140f;
-	[Export] public float MovementAccel = 160f;
-	[Export] public float MovementFriction = 85f;
+	[Export] public float MovementSpeed = 260f;
+	[Export] public float MovementAccel = 350f;
+	[Export] public float MovementFriction = 200f;
+	[Export] public float MovementStartDash = 70f;
 
-	[Export] public float JumpSpeed = -700f;
-	[Export] public float AirSpeed = 180f;
-	[Export] public float AirAccel = 150f;
+	[Export] public float JumpSpeed = -650f;
+	[Export] public float AirSpeed = 200f;
+	[Export] public float AirAccel = 220f;
 
-	[Export] public float FallPull = 100f;
+	[Export] public float WallJumpX = 400f;
+	[Export] public float WallJumpY = -600f;
+	[Export] public float WallJumpInputLimit = -0.9f;
+
+	[Export] public float FallPull = 250f;
+	[Export] public float FallTransition = 60f;
 	private Timer CoyoteTimer => GetNode<Timer>("CoyoteTimer");
+
+	[Export] public float DiveStrength = 350f;
 
 	public float Gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
 
@@ -65,6 +75,14 @@ public partial class Player : CharacterBody2D
 			case State.Fall:
 				this.fall_state(delta);
 				break;
+
+			case State.WallJump:
+				this.jump_state(delta);
+				break;
+
+			case State.Dive:
+				this.dive_state(delta);
+				break;
 		}
 
 		this.MoveAndSlide();
@@ -87,16 +105,41 @@ public partial class Player : CharacterBody2D
 				break;
 
 			case State.Jump:
+				this.AnimationPlayer.Play("idle");
 				velocity.Y = this.JumpSpeed;
 				this.Velocity = velocity;
 				break;
 			
 			case State.Fall:
-				if (this.CurrentState != State.Jump){
+				if (this.CurrentState != State.Jump && this.CurrentState != State.WallJump){
 					this.CoyoteTimer.Start();
 				}
 				velocity.Y += this.FallPull;
 				this.Velocity = velocity;
+				break;
+			case State.WallJump:
+				this.AnimationPlayer.Play("idle");
+				velocity.Y = this.WallJumpY;
+				velocity.X = this.GetWallNormal().X * this.WallJumpX;
+				this.Velocity = velocity;
+				break;
+			case State.Dive:
+				float direction = Input.GetAxis(InputAction.MoveLeft, 
+												InputAction.MoveRight);
+				if (direction == 0)
+				{
+					direction = Mathf.Sign(this.Velocity.X);
+				}
+				velocity.X += this.DiveStrength * direction;
+				this.Velocity = velocity;
+				if (direction < 0)
+				{
+					this.AnimationPlayer.Play("dive_left");
+				}
+				else
+				{
+					this.AnimationPlayer.Play("dive_right");
+				}
 				break;
 		}
 		this.CurrentState = NewState;
@@ -112,20 +155,15 @@ public partial class Player : CharacterBody2D
 		}
 		float direction = Input.GetAxis(InputAction.MoveLeft, InputAction.MoveRight);
 		if (Mathf.Abs(direction) > MoveTol){
+			Vector2 velocity = this.Velocity;
+			velocity.X = this.MovementStartDash * direction;
+			this.Velocity = velocity;
 			this.set_new_state(State.Run);
 		}
 	}
 
 	public void update_look_direction(float direction){
-		if (direction > 0)
-		{
-			Head.FlipH = true;
-		}
-
-		if (direction < 0)
-		{
-			Head.FlipH = false;
-		}
+		Head.FlipH = direction > 0;
 	}
 
 	public void run_state(double delta){
@@ -142,14 +180,18 @@ public partial class Player : CharacterBody2D
 		float direction = Input.GetAxis(InputAction.MoveLeft, InputAction.MoveRight);
 		this.update_look_direction(direction);
 		velocity.Y = 0.0f;
-		velocity.X = Mathf.MoveToward(
-			velocity.X, 
-			direction * this.MovementSpeed, 
-			(float)delta * this.MovementAccel * this.scale_accel(direction * velocity.X > 0)
-		);
-		if (Mathf.Abs(direction) < MoveTol){
+		if (Mathf.Abs(direction) > MoveTol && Mathf.Abs(velocity.X) < this.MovementSpeed)
+		{
 			velocity.X = Mathf.MoveToward(
-				velocity.X, 0.0f, (float)delta * this.MovementFriction
+				velocity.X, 
+				direction * this.MovementSpeed, 
+				(float)delta * this.MovementAccel * this.scale_accel(direction * velocity.X > 0)
+			);	
+		}
+		if (Mathf.Abs(direction) < MoveTol || direction * velocity.X < 0.0f){
+			float friciton_scale = Mathf.Max(1.0f, this.Velocity.X / this.MovementSpeed);
+			velocity.X = Mathf.MoveToward(
+				velocity.X, 0.0f, friciton_scale * (float)delta * this.MovementFriction
 			);
 		}
 		this.Velocity = velocity;
@@ -169,7 +211,7 @@ public partial class Player : CharacterBody2D
 	}
 
 	public void jump_state(double delta){
-		if (this.Velocity.Y >= 0.0f){
+		if (this.Velocity.Y >= this.FallTransition){
 			this.set_new_state(State.Fall);
 			return;
 		}
@@ -178,16 +220,28 @@ public partial class Player : CharacterBody2D
 			this.set_new_state(State.Run);
 			return;
 		}
+		else if (Input.IsActionJustPressed("dive"))
+		{
+			this.set_new_state(State.Dive);
+			return;			
+		}
 		Vector2 velocity = this.Velocity;
 		float direction = Input.GetAxis(InputAction.MoveLeft, InputAction.MoveRight);
 		this.update_look_direction(direction);
 		velocity.Y += this.Gravity * (float)delta;;
-		velocity.X = Mathf.MoveToward(
+		if (Mathf.Abs(velocity.X) < this.AirSpeed || velocity.X * direction < 0.0f)
+		{
+			velocity.X = Mathf.MoveToward(
 			velocity.X, 
 			direction * this.AirSpeed, 
-			(float)delta * this.AirAccel * this.scale_accel(direction * velocity.X > 0)
-		);
+			(float)delta * this.AirAccel * this.scale_accel(direction * velocity.X > 0));	
+		}
 		this.Velocity = velocity;
+		if (this.check_wall_jump(direction))
+		{
+			this.set_new_state(State.WallJump);
+			return;
+		}
 	}
 
 	public void fall_state(double delta){
@@ -200,6 +254,11 @@ public partial class Player : CharacterBody2D
 			this.set_new_state(State.Run);
 			return;
 		}
+		else if (Input.IsActionJustPressed("dive"))
+		{
+			this.set_new_state(State.Dive);
+			return;			
+		}
 		Vector2 velocity = this.Velocity;
 		float direction = Input.GetAxis(InputAction.MoveLeft, InputAction.MoveRight);
 		this.update_look_direction(direction);
@@ -208,6 +267,38 @@ public partial class Player : CharacterBody2D
 			velocity.X, direction * this.AirSpeed, (float)delta * this.AirAccel
 		);
 		this.Velocity = velocity;
+		if (this.check_wall_jump(direction))
+		{
+			this.set_new_state(State.WallJump);
+			return;
+		}
+	}
+
+	public bool check_wall_jump(float input_x){
+		if (this.IsOnWall() && Input.IsActionJustPressed("jump"))
+		{
+			if(this.GetWallNormal().X * input_x < this.WallJumpInputLimit)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public void dive_state(double delta){
+		if (this.IsOnFloor())
+		{
+			this.set_new_state(State.Run);
+			return;
+		}
+		Vector2 velocity = this.Velocity;
+		velocity.Y += this.Gravity * (float)delta;
+		this.Velocity = velocity;
+		float direction = Input.GetAxis(InputAction.MoveLeft, InputAction.MoveRight);
+		if (this.check_wall_jump(direction))
+		{
+			this.set_new_state(State.WallJump);
+		}
 	}
 
 }
