@@ -24,7 +24,11 @@ public partial class GameHud : CanvasLayer
 
 	public override void _Input(InputEvent @event)
 	{
-		if (Input.IsActionJustPressedByEvent(InputAction.Menu, @event))
+		if (WonDialog.Visible)
+		{
+			return;
+		}
+		if (Input.IsActionJustPressedByEvent(InputAction.Menu, @event) || (Input.IsActionJustPressedByEvent(InputAction.Cancel, @event) && this.PauseDialog.Visible))
 		{
 			this.PauseDialog.ToggleDialog();
 		}
