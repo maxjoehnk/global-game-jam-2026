@@ -2,18 +2,21 @@
 
 [ext_resource type="AudioStream" uid="uid://ct8cbm2k2t77g" path="res://Assets/Sounds/Quotes/2026-Global-Game-Jam - Spahn Quote 1.wav" id="1_8bujl"]
 [ext_resource type="AudioStream" uid="uid://bl1skxshgv631" path="res://Assets/Sounds/Quotes/2026-Global-Game-Jam - Spahn Quote 2.wav" id="2_551up"]
+[ext_resource type="AudioStream" uid="uid://cakv45l743vcr" path="res://Assets/Sounds/Quotes/2026-Global-Game-Jam - Spahn Quote 11.wav" id="3_nnpyr"]
 [ext_resource type="AudioStream" uid="uid://bb7ii452k1d1k" path="res://Assets/Sounds/Quotes/2026-Global-Game-Jam - Spahn Quote 3.wav" id="3_puewp"]
 [ext_resource type="AudioStream" uid="uid://dapogam3ibokt" path="res://Assets/Sounds/Quotes/2026-Global-Game-Jam - Spahn Quote 4.wav" id="4_nnpyr"]
 [ext_resource type="AudioStream" uid="uid://djnx4nf5euh8x" path="res://Assets/Sounds/Quotes/2026-Global-Game-Jam - Spahn Quote 5.wav" id="5_tkwe7"]
 [ext_resource type="AudioStream" uid="uid://c2sjqsxgwquxj" path="res://Assets/Sounds/Quotes/2026-Global-Game-Jam - Spahn Quote 6.wav" id="6_j8rmm"]
 [ext_resource type="AudioStream" uid="uid://dmeq72a6irhe1" path="res://Assets/Sounds/Quotes/2026-Global-Game-Jam - Spahn Quote 7.wav" id="7_sq3r4"]
 [ext_resource type="AudioStream" uid="uid://drhp6342o3dwa" path="res://Assets/Sounds/Quotes/2026-Global-Game-Jam - Spahn Quote 8.wav" id="8_ptpwn"]
+[ext_resource type="AudioStream" uid="uid://buaxco6ynjapf" path="res://Assets/Sounds/Quotes/2026-Global-Game-Jam - Spahn Quote 9.wav" id="10_tkwe7"]
+[ext_resource type="AudioStream" uid="uid://buxqpy4hmmgh5" path="res://Assets/Sounds/Quotes/2026-Global-Game-Jam - Spahn Quote 10.wav" id="11_j8rmm"]
 
 [resource]
 shuffle = true
 loop = false
 fade_time = 0.0
-stream_count = 8
+stream_count = 11
 stream_0 = ExtResource("1_8bujl")
 stream_1 = ExtResource("2_551up")
 stream_2 = ExtResource("3_puewp")
@@ -22,3 +25,6 @@ stream_4 = ExtResource("5_tkwe7")
 stream_5 = ExtResource("6_j8rmm")
 stream_6 = ExtResource("7_sq3r4")
 stream_7 = ExtResource("8_ptpwn")
+stream_8 = ExtResource("10_tkwe7")
+stream_9 = ExtResource("11_j8rmm")
+stream_10 = ExtResource("3_nnpyr")
