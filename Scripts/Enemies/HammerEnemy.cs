@@ -40,13 +40,10 @@ public partial class HammerEnemy : Enemy
 		{ 
 			Player player_node = (Player)body;
 			if (player_node.WasHit()){return;}
-
+			this.PlayerNode = player_node;
 			if (this.CheckOnSameLayer(player_node.CollisionMask))
 			{
-				this.CurrentState = HammerEnemyState.Hunt;
-			}
-			else{
-				this.PlayerNode = player_node;
+				this.SetNewState(HammerEnemyState.Hunt);
 			}
 		}
 	}
@@ -56,7 +53,7 @@ public partial class HammerEnemy : Enemy
 		this.PlayerNode = null;
 		if (this.CurrentState == HammerEnemyState.Hunt)
 		{
-			this.CurrentState = HammerEnemyState.Walk;
+			this.SetNewState(HammerEnemyState.Walk);
 		}
 	}
 
@@ -67,12 +64,28 @@ public partial class HammerEnemy : Enemy
 			Player player_node = (Player)body;
 			if (player_node.WasHit()){return;}
 
+			this.PlayerNodeAttack = player_node;
 			if (this.CheckOnSameLayer(player_node.CollisionMask))
 			{
-				this.CurrentState = HammerEnemyState.Hunt;
+				this.SetNewState(HammerEnemyState.Attack);
 			}
-			else{
-				this.PlayerNode = player_node;
+		}
+	}
+
+	private void SetNewState(HammerEnemyState NewState)
+	{
+		if (this.CurrentState != HammerEnemyState.Attack)
+		{
+			this.CurrentState = NewState;
+			if (NewState == HammerEnemyState.Attack)
+			{
+				this.StartAttack();
+			}
+			if (NewState == HammerEnemyState.Hunt && this.PlayerNode != null)
+			{
+				this.direction = Mathf.Sign(
+					this.PlayerNode.GlobalPosition.X - this.GlobalPosition.X
+				);
 			}
 		}
 	}
@@ -84,7 +97,15 @@ public partial class HammerEnemy : Enemy
 
 	private void StartAttack()
 	{
-		this.CurrentState = HammerEnemyState.Attack;
+		if (this.PlayerNodeAttack != null)
+		{
+			int dir = Mathf.Sign(
+				this.PlayerNodeAttack.GlobalPosition.X - this.GlobalPosition.X
+			);
+			this.SpriteNode.Scale = new Vector2(
+				dir, 1.0f);   
+		}
+		this.AniPlayer.Play("attack");
 	}
 
 	public void AttackPlayer()
@@ -107,10 +128,14 @@ public partial class HammerEnemy : Enemy
 				this.WalkState(delta);
 				break;
 			case HammerEnemyState.Hunt:
-				this.AniPlayer.Play("walk");
+				this.AniPlayer.Play("run");
 				this.HuntState(delta);
 				break;
 			case HammerEnemyState.Attack:
+				if (!this.AniPlayer.IsPlaying())
+				{
+					this.CurrentState = HammerEnemyState.Walk;
+				}
 				break;
 		}
 	}
@@ -151,13 +176,10 @@ public partial class HammerEnemy : Enemy
 		if (!CanWalk)
 		{
 			direction *= -1;
-			this.CurrentState = HammerEnemyState.Walk;
-
 		}
 		if (this.IsOnWall()){
 			if (this.GetWallNormal().X * this.direction < 0){
 				direction *= -1;
-				this.CurrentState = HammerEnemyState.Walk;
 			}
 		}
 		Velocity = Velocity with { X = this.HuntSpeed * direction};
@@ -176,16 +198,16 @@ public partial class HammerEnemy : Enemy
 			{
 				if (this.PlayerNodeAttack != null)
 				{
-					this.StartAttack();
+					this.SetNewState(HammerEnemyState.Attack);
 				}
 				else if (this.CurrentState == HammerEnemyState.Walk)
 				{
-					this.CurrentState = HammerEnemyState.Hunt;
+					this.SetNewState(HammerEnemyState.Hunt);
 				}
 			}
 			else
 			{
-				this.CurrentState = HammerEnemyState.Walk;
+				this.SetNewState(HammerEnemyState.Walk);
 			}
 		}  
 	}
