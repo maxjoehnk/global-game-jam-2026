@@ -49,7 +49,7 @@ tile_set = ExtResource("2_7rkqp")
 
 [node name="TileMapLayer5" type="TileMapLayer" parent="Layers" parent_id_path=PackedInt32Array(1705662681) index="4" unique_id=715287715]
 position = Vector2(1000, 540)
-tile_map_data = PackedByteArray("AADt//7/AAABAAQAAADx//7/AAABAAQAAAD1//7/AAABAAQAAADp//7/AAABAAQAAAA=")
+tile_map_data = PackedByteArray("AADt//7/AAABAAQAAADx//7/AAABAAQAAAD1//7/AAABAAQAAADp//7/AAABAAQAAAD5//7/AAABAAQAAAA=")
 tile_set = ExtResource("2_7rkqp")
 
 [node name="LevelFinish" parent="Layers/TileMapLayer5" index="0" unique_id=1423001190 instance=ExtResource("3_83k5p")]

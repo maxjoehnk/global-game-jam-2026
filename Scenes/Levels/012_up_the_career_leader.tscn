@@ -1,0 +1,21 @@
+[gd_scene format=4 uid="uid://cf1tnq0ss2uav"]
+
+[ext_resource type="PackedScene" uid="uid://dq8bmx6sugagf" path="res://Scenes/Levels/_BaseLevel.tscn" id="1_kdp21"]
+[ext_resource type="TileSet" uid="uid://dla10wbktycmr" path="res://Assets/TileSet.tres" id="2_f5cg4"]
+[ext_resource type="PackedScene" uid="uid://d2rcj02dpqrfb" path="res://Scenes/BuildingBlocks/LevelFinish.tscn" id="3_kdp21"]
+
+[node name="012UpTheCareerLeader" unique_id=14346899 instance=ExtResource("1_kdp21")]
+CameraBoundsY = Vector2(-1800, 1080)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="Layers" parent_id_path=PackedInt32Array(1705662681) index="0" unique_id=1928993305]
+position = Vector2(960, 540)
+tile_map_data = PackedByteArray("AADu/wgAAAABAAQAAADy/wgAAAABAAQAAAD2/wgAAAABAAQAAAD6/wgAAAABAAQAAAD+/wgAAAABAAQAAAACAAgAAAABAAQAAAAGAAgAAAABAAQAAAAKAAgAAAABAAQAAAAOAAgAAAABAAQAAAASAAgAAAABAAQAAAD5//3/AAABAAQAAAD9//3/AAABAAQAAAABAP3/AAABAAQAAAAFAP3/AAABAAQAAAD9//H/AAABAAQAAAABAPH/AAABAAQAAAD//+f/AAABAAQAAAD//9//AAABAAQAAAA=")
+tile_set = ExtResource("2_f5cg4")
+
+[node name="LevelFinish" parent="Layers/TileMapLayer" index="0" unique_id=1423001190 instance=ExtResource("3_kdp21")]
+position = Vector2(-31, -2029)
+
+[node name="TileMapLayer2" type="TileMapLayer" parent="Layers" parent_id_path=PackedInt32Array(1705662681) index="1" unique_id=1986864727]
+position = Vector2(960, 540)
+tile_map_data = PackedByteArray("AAD5/wEAAAACAAQAAAD9/wEAAAACAAQAAAABAAEAAAACAAQAAAAFAAEAAAACAAQAAAD9//b/AAACAAQAAAABAPb/AAACAAQAAAAEAOr/AAACAAQAAAD6/+H/AAACAAQAAAA=")
+tile_set = ExtResource("2_f5cg4")

@@ -1,0 +1,18 @@
+[gd_scene format=4 uid="uid://gk6cf4ttgrqa"]
+
+[ext_resource type="PackedScene" uid="uid://dq8bmx6sugagf" path="res://Scenes/Levels/_BaseLevel.tscn" id="1_7x50l"]
+[ext_resource type="TileSet" uid="uid://dla10wbktycmr" path="res://Assets/TileSet.tres" id="2_517cp"]
+[ext_resource type="PackedScene" uid="uid://dy5opi42vhi4y" path="res://Scenes/Enemies/walking_enemy.tscn" id="3_xpcoj"]
+[ext_resource type="PackedScene" uid="uid://d2rcj02dpqrfb" path="res://Scenes/BuildingBlocks/LevelFinish.tscn" id="4_517cp"]
+
+[node name="018KarlIsHere" unique_id=14346899 instance=ExtResource("1_7x50l")]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="Layers" parent_id_path=PackedInt32Array(1705662681) index="0" unique_id=283459424]
+tile_map_data = PackedByteArray("AAABABMAAAABAAQAAAAFABMAAAABAAQAAAAJABMAAAABAAQAAAAPABEAAAABAAQAAAATABEAAAABAAQAAAAXABEAAAABAAQAAAAcAA4AAAABAAQAAAAgAA4AAAABAAQAAAAkAA4AAAABAAQAAAA=")
+tile_set = ExtResource("2_517cp")
+
+[node name="WalkingEnemy" parent="Layers/TileMapLayer" index="0" unique_id=1736735301 instance=ExtResource("3_xpcoj")]
+position = Vector2(1113, 725)
+
+[node name="LevelFinish" parent="Layers/TileMapLayer" index="1" unique_id=1423001190 instance=ExtResource("4_517cp")]
+position = Vector2(1701, 547)

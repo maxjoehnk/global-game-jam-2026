@@ -1367,6 +1367,10 @@ floor_max_angle = 1.134464
 platform_on_leave = 1
 platform_floor_layers = 4294967288
 script = ExtResource("1_rpqav")
+MovementSpeed = 310.0
+JumpSpeed = -780.0
+AirSpeed = 300.0
+AirAccel = 500.0
 
 [node name="Polygon2D" type="CollisionShape2D" parent="." unique_id=791607480]
 position = Vector2(0, 18)

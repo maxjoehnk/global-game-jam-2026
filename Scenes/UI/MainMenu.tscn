@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://baqvbxbmv7o0u" path="res://Scripts/UI/MainMenu.cs" id="1_g18y6"]
 [ext_resource type="PackedScene" uid="uid://bsldn8e7jelex" path="res://Scenes/UI/SpahnButton.tscn" id="2_72sra"]
 [ext_resource type="LabelSettings" uid="uid://c581imawvcllk" path="res://Themes/TitleLabel.tres" id="2_t6w0q"]
-[ext_resource type="PackedScene" uid="uid://dk7nxjlht6iqe" path="res://Scenes/UI/AnimatedSpahnKopf.tscn" id="3_k8um8"]
+[ext_resource type="PackedScene" path="res://Scenes/UI/AnimatedSpahnKopf.tscn" id="3_k8um8"]
 [ext_resource type="PackedScene" uid="uid://dldf13bwc50mu" path="res://Scenes/UI/JensSpahnFordert.tscn" id="5_k8um8"]
 [ext_resource type="Theme" uid="uid://of2ae14ao6ha" path="res://Themes/PaperUi.tres" id="6_kl3t2"]
 [ext_resource type="Texture2D" uid="uid://cd0pu57ikuu1c" path="res://Assets/UI/Title.png" id="7_744d7"]
@@ -53,6 +53,7 @@ alignment = 1
 
 [node name="Play" parent="MarginContainer/VBoxContainer/VBoxContainer" unique_id=1995207131 instance=ExtResource("2_72sra")]
 layout_mode = 2
+focus_neighbor_top = NodePath("../Exit")
 theme = null
 text = "Play"
 
@@ -67,6 +68,7 @@ text = "Settings"
 
 [node name="Exit" parent="MarginContainer/VBoxContainer/VBoxContainer" unique_id=1674875753 instance=ExtResource("2_72sra")]
 layout_mode = 2
+focus_neighbor_bottom = NodePath("../Play")
 theme = null
 text = "Exit"
 

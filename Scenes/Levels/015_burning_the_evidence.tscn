@@ -1,0 +1,44 @@
+[gd_scene format=4 uid="uid://dlvk6e21amsmm"]
+
+[ext_resource type="PackedScene" uid="uid://dq8bmx6sugagf" path="res://Scenes/Levels/_BaseLevel.tscn" id="1_nxjuc"]
+[ext_resource type="TileSet" uid="uid://dla10wbktycmr" path="res://Assets/TileSet.tres" id="2_uda22"]
+[ext_resource type="PackedScene" uid="uid://dweykadsk8bdk" path="res://Scenes/Enemies/burning_trash.tscn" id="3_c0wvh"]
+[ext_resource type="PackedScene" uid="uid://d2rcj02dpqrfb" path="res://Scenes/BuildingBlocks/LevelFinish.tscn" id="4_uda22"]
+
+[node name="015BurningTheEvidence" unique_id=14346899 instance=ExtResource("1_nxjuc")]
+CameraBoundsX = Vector2(0, 3840)
+CameraBoundsY = Vector2(-600, 1080)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="Layers" parent_id_path=PackedInt32Array(1705662681) index="0" unique_id=66836493]
+tile_map_data = PackedByteArray("AAABABMAAAABAAQAAAAFABMAAAABAAQAAAAJABMAAAABAAQAAAANABMAAAABAAQAAAARAA8AAAADAAMAAAAVAA0AAAAEAAMAAAAZAA0AAAAEAAMAAAAdAA0AAAAEAAMAAAAhAAsAAAADAAMAAAAlAAsAAAABAAQAAAApAAsAAAABAAQAAAAtAAsAAAABAAQAAAAxAAcAAAADAAMAAAA1AAcAAAABAAQAAAA5AAcAAAABAAQAAAA9AAcAAAABAAQAAABBAAMAAAADAAMAAABFAAMAAAABAAQAAABJAAMAAAABAAQAAAA=")
+tile_set = ExtResource("2_uda22")
+
+[node name="BurningTrash" parent="Layers/TileMapLayer" index="0" unique_id=1555317447 instance=ExtResource("3_c0wvh")]
+position = Vector2(538, 936)
+
+[node name="BurningTrash2" parent="Layers/TileMapLayer" index="1" unique_id=2139311881 instance=ExtResource("3_c0wvh")]
+position = Vector2(1161, 736)
+
+[node name="BurningTrash3" parent="Layers/TileMapLayer" index="2" unique_id=700765670 instance=ExtResource("3_c0wvh")]
+position = Vector2(1229, 736)
+
+[node name="BurningTrash4" parent="Layers/TileMapLayer" index="3" unique_id=148106061 instance=ExtResource("3_c0wvh")]
+position = Vector2(1942, 540)
+
+[node name="BurningTrash5" parent="Layers/TileMapLayer" index="4" unique_id=1273602999 instance=ExtResource("3_c0wvh")]
+position = Vector2(2209, 537)
+
+[node name="BurningTrash6" parent="Layers/TileMapLayer" index="5" unique_id=1971936064 instance=ExtResource("3_c0wvh")]
+position = Vector2(2670, 338)
+
+[node name="BurningTrash7" parent="Layers/TileMapLayer" index="6" unique_id=1543681290 instance=ExtResource("3_c0wvh")]
+position = Vector2(2738, 338)
+
+[node name="BurningTrash8" parent="Layers/TileMapLayer" index="7" unique_id=881956555 instance=ExtResource("3_c0wvh")]
+position = Vector2(2961, 338)
+
+[node name="BurningTrash9" parent="Layers/TileMapLayer" index="8" unique_id=1055860254 instance=ExtResource("3_c0wvh")]
+position = Vector2(3029, 338)
+
+[node name="LevelFinish" parent="Layers/TileMapLayer" index="9" unique_id=1423001190 instance=ExtResource("4_uda22")]
+position = Vector2(3574, 2)

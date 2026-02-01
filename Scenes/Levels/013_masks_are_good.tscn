@@ -1,9 +1,14 @@
-[gd_resource type="TileSet" format=3 uid="uid://dla10wbktycmr"]
+[gd_scene format=4 uid="uid://cph8jdmvl08ni"]
 
-[ext_resource type="Texture2D" uid="uid://b3cvrve3kidwy" path="res://Assets/Elements/Atlas.png" id="1_bwu17"]
+[ext_resource type="PackedScene" uid="uid://dq8bmx6sugagf" path="res://Scenes/Levels/_BaseLevel.tscn" id="1_racnq"]
+[ext_resource type="TileSet" uid="uid://dla10wbktycmr" path="res://Assets/TileSet.tres" id="2_ih32x"]
+[ext_resource type="PackedScene" uid="uid://d2rcj02dpqrfb" path="res://Scenes/BuildingBlocks/LevelFinish.tscn" id="3_2nmfg"]
+[ext_resource type="Texture2D" uid="uid://b3cvrve3kidwy" path="res://Assets/Elements/Atlas.png" id="3_8q852"]
+[ext_resource type="PackedScene" uid="uid://coav4qwmeq0b0" path="res://Scenes/Enemies/covid_cloud.tscn" id="4_c3g8y"]
+[ext_resource type="PackedScene" uid="uid://bnwufpfb7lbal" path="res://Scenes/BuildingBlocks/mask.tscn" id="6_2nmfg"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_v51m0"]
-texture = ExtResource("1_bwu17")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2nmfg"]
+texture = ExtResource("3_8q852")
 texture_region_size = Vector2i(200, 200)
 0:3/size_in_atlas = Vector2i(1, 2)
 0:3/0 = 0
@@ -63,19 +68,46 @@ texture_region_size = Vector2i(200, 200)
 8:4/next_alternative_id = 2
 8:4/0 = 0
 8:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-100.24713, 40.66295, -73.38605, 28.81247, 45.513733, 25.652344, 100.02594, 35.92276, 100.42096, 101.49539, -100.64215, 100.70535)
-1:8/size_in_atlas = Vector2i(1, 2)
-1:8/0 = 0
-1:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(62.5, 150, 62.5, -200, -62.5, -200, -62.5, 150)
-0:9/0 = 0
-0:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-100, 50, -100, 100, 100, 100, 100, 50)
-2:8/size_in_atlas = Vector2i(1, 2)
-2:8/0 = 0
-2:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-100, -75, 100, -75, 100, 150, -100, 150)
-3:9/0 = 0
-3:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-100, -100, 100, -100, 100, 50, -100, 50)
 
-[resource]
+[sub_resource type="TileSet" id="TileSet_c3g8y"]
 resource_local_to_scene = true
 tile_size = Vector2i(50, 50)
 physics_layer_0/collision_layer = 0
-sources/0 = SubResource("TileSetAtlasSource_v51m0")
+sources/0 = SubResource("TileSetAtlasSource_2nmfg")
+
+[node name="013CovidMask" unique_id=14346899 instance=ExtResource("1_racnq")]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="Layers" parent_id_path=PackedInt32Array(1705662681) index="0" unique_id=943990516]
+position = Vector2(960, 540)
+tile_map_data = PackedByteArray("AAD2/wgAAAABAAQAAAD6/wYAAAABAAYAAAD+/wgAAAABAAQAAAACAAgAAAABAAQAAAD//wQAAAAEAAUAAAAGAP//AAABAAQAAAAKAP3/AAABAAYAAAAOAP3/AAABAAYAAAASAP3/AAABAAYAAADu/wQAAAABAAQAAADy/wQAAAABAAQAAAA=")
+tile_set = ExtResource("2_ih32x")
+
+[node name="LevelFinish" parent="Layers/TileMapLayer" index="0" unique_id=1423001190 instance=ExtResource("3_2nmfg")]
+position = Vector2(776, -197)
+
+[node name="CovidCloud" parent="Layers/TileMapLayer" index="1" unique_id=1736735301 instance=ExtResource("4_c3g8y")]
+position = Vector2(-25, -108)
+
+[node name="CovidCloud2" parent="Layers/TileMapLayer" index="2" unique_id=578390836 instance=ExtResource("4_c3g8y")]
+position = Vector2(-23, -407)
+
+[node name="TileMapLayer2" type="TileMapLayer" parent="Layers" parent_id_path=PackedInt32Array(1705662681) index="1" unique_id=675398207]
+position = Vector2(960, 540)
+tile_map_data = PackedByteArray("AAD2/wYAAAACAAQAAAD6/wYAAAACAAQAAAD+/wgAAAABAAQAAAACAAgAAAABAAQAAAA=")
+tile_set = SubResource("TileSet_c3g8y")
+
+[node name="TileMapLayer3" type="TileMapLayer" parent="Layers" parent_id_path=PackedInt32Array(1705662681) index="2" unique_id=1681849103]
+position = Vector2(960, 540)
+tile_map_data = PackedByteArray("AAD+/wYAAAACAAQAAAACAAYAAAACAAQAAAAGAAgAAAABAAQAAAAKAAgAAAABAAQAAAA=")
+tile_set = SubResource("TileSet_c3g8y")
+
+[node name="TileMapLayer4" type="TileMapLayer" parent="Layers" parent_id_path=PackedInt32Array(1705662681) index="3" unique_id=336490663]
+position = Vector2(960, 540)
+tile_map_data = PackedByteArray("AAAGAAYAAAACAAQAAAAKAAYAAAACAAQAAAAOAAgAAAABAAQAAAASAAgAAAABAAQAAAAGAP//AAABAAQAAAAKAP3/AAABAAYAAAAOAP3/AAABAAYAAAASAP3/AAABAAYAAAAQAAUAAAAHAAQAAAAWAP3/AAABAAYAAAAaAP3/AAABAAYAAAA=")
+tile_set = SubResource("TileSet_c3g8y")
+
+[node name="Mask" parent="Layers/TileMapLayer4" index="0" unique_id=1895334144 instance=ExtResource("6_2nmfg")]
+position = Vector2(820, 201)
+
+[node name="Player" parent="." index="5" unique_id=1038420454]
+position = Vector2(187, 613)

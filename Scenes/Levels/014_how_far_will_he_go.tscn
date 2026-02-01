@@ -1,9 +1,12 @@
-[gd_resource type="TileSet" format=3 uid="uid://dla10wbktycmr"]
+[gd_scene format=4 uid="uid://cbt4tpsr4nt1p"]
 
-[ext_resource type="Texture2D" uid="uid://b3cvrve3kidwy" path="res://Assets/Elements/Atlas.png" id="1_bwu17"]
+[ext_resource type="PackedScene" uid="uid://dq8bmx6sugagf" path="res://Scenes/Levels/_BaseLevel.tscn" id="1_f6tmq"]
+[ext_resource type="TileSet" uid="uid://dla10wbktycmr" path="res://Assets/TileSet.tres" id="2_b3w1d"]
+[ext_resource type="Texture2D" uid="uid://b3cvrve3kidwy" path="res://Assets/Elements/Atlas.png" id="3_b3w1d"]
+[ext_resource type="PackedScene" uid="uid://d2rcj02dpqrfb" path="res://Scenes/BuildingBlocks/LevelFinish.tscn" id="4_8hdb2"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_v51m0"]
-texture = ExtResource("1_bwu17")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8hdb2"]
+texture = ExtResource("3_b3w1d")
 texture_region_size = Vector2i(200, 200)
 0:3/size_in_atlas = Vector2i(1, 2)
 0:3/0 = 0
@@ -63,19 +66,29 @@ texture_region_size = Vector2i(200, 200)
 8:4/next_alternative_id = 2
 8:4/0 = 0
 8:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-100.24713, 40.66295, -73.38605, 28.81247, 45.513733, 25.652344, 100.02594, 35.92276, 100.42096, 101.49539, -100.64215, 100.70535)
-1:8/size_in_atlas = Vector2i(1, 2)
-1:8/0 = 0
-1:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(62.5, 150, 62.5, -200, -62.5, -200, -62.5, 150)
-0:9/0 = 0
-0:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-100, 50, -100, 100, 100, 100, 100, 50)
-2:8/size_in_atlas = Vector2i(1, 2)
-2:8/0 = 0
-2:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-100, -75, 100, -75, 100, 150, -100, 150)
-3:9/0 = 0
-3:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-100, -100, 100, -100, 100, 50, -100, 50)
 
-[resource]
+[sub_resource type="TileSet" id="TileSet_5lpy1"]
 resource_local_to_scene = true
 tile_size = Vector2i(50, 50)
 physics_layer_0/collision_layer = 0
-sources/0 = SubResource("TileSetAtlasSource_v51m0")
+sources/0 = SubResource("TileSetAtlasSource_8hdb2")
+
+[node name="014HowFarWillHeGo" unique_id=14346899 instance=ExtResource("1_f6tmq")]
+CameraBoundsX = Vector2(0, 6000)
+CameraBoundsY = Vector2(-300, 3000)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="Layers" parent_id_path=PackedInt32Array(1705662681) index="0" unique_id=1285751225]
+position = Vector2(960, 540)
+tile_map_data = PackedByteArray("AAD5/wIAAAABAAQAAAD1/wAAAAABAAYAAADx/wAAAAABAAYAAADt/wAAAAABAAYAAAApAA0AAAABAAQAAAAtAA0AAAABAAQAAAAxAA0AAAABAAQAAAA1AAQAAAABAAQAAAA=")
+tile_set = ExtResource("2_b3w1d")
+
+[node name="TileMapLayer2" type="TileMapLayer" parent="Layers" parent_id_path=PackedInt32Array(1705662681) index="1" unique_id=1719932771]
+position = Vector2(960, 540)
+tile_map_data = PackedByteArray("AAAPAAkAAAABAAQAAAATAAkAAAABAAQAAAAXAAkAAAABAAQAAAAYAAUAAAAAAAMAAAA1AAkAAAABAAQAAAA1AP//AAABAAQAAABJAAIAAAABAAQAAABNAAIAAAABAAQAAABRAAIAAAABAAQAAAA=")
+tile_set = SubResource("TileSet_5lpy1")
+
+[node name="LevelFinish" parent="Layers/TileMapLayer2" index="0" unique_id=1423001190 instance=ExtResource("4_8hdb2")]
+position = Vector2(3862, -52)
+
+[node name="Player" parent="." index="5" unique_id=1038420454]
+position = Vector2(291, 479)
