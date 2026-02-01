@@ -55,6 +55,8 @@ public partial class Player : CharacterBody2D
 	private State CurrentState = State.Idle;
 	private Sprite2D Head => GetNode<Sprite2D>("Sprites/Kopf");
 	private Node2D SpriteContainer => GetNode<Node2D>("Sprites");
+
+	private Sprite2D MaskSprite => GetNode<Sprite2D>("Sprites/Kopf/Mask");
 	// Interact with world:
 	private const float CutPosX = 75.0f;
 	private TileMapCutter CutTool => GetNode<TileMapCutter>("TileMapCutter");
@@ -84,6 +86,7 @@ public partial class Player : CharacterBody2D
 	{
 		this.Rotation = 0;
 		this.AnimTree.Active = true;
+		this.MaskSprite.Visible = false;
 	}
 
 	public override void _Input(InputEvent @event)
@@ -105,6 +108,16 @@ public partial class Player : CharacterBody2D
 				}
 			}
 		}
+	}
+
+	public bool HasMask()
+	{
+		return this.MaskSprite.Visible;
+	}
+
+	public void GotMask()
+	{
+		this.MaskSprite.Visible = true;
 	}
 
 	public override void _PhysicsProcess(double delta)

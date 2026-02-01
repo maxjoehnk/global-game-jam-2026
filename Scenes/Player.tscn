@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://d3p82052wwsel" path="res://Assets/Character/LegRight.png" id="5_miouo"]
 [ext_resource type="AudioStream" uid="uid://b24itg572qpas" path="res://Assets/Sounds/FX/Walking.tres" id="6_nn08x"]
 [ext_resource type="Texture2D" uid="uid://xxb5ndv0j7lq" path="res://Assets/Character/Torso.png" id="6_o3h8g"]
+[ext_resource type="Texture2D" uid="uid://du3yrn3wwayrx" path="res://Assets/Elements/MaskeFace.png" id="8_ksbbd"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kyqiw"]
 radius = 35.0
@@ -1404,6 +1405,7 @@ texture = ExtResource("5_miouo")
 
 [node name="Body" type="Sprite2D" parent="Sprites" unique_id=1712788532]
 texture_filter = 1
+position = Vector2(1.9999999, 0.9999996)
 scale = Vector2(0.2053989, 0.2053989)
 texture = ExtResource("6_o3h8g")
 
@@ -1411,6 +1413,12 @@ texture = ExtResource("6_o3h8g")
 position = Vector2(-12, -146)
 scale = Vector2(0.05906107, 0.05906107)
 texture = ExtResource("3_gntrk")
+
+[node name="Mask" type="Sprite2D" parent="Sprites/Kopf" unique_id=26733676]
+visible = false
+position = Vector2(9, 155)
+scale = Vector2(3.805, 3.805)
+texture = ExtResource("8_ksbbd")
 
 [node name="CoyoteTimer" type="Timer" parent="." unique_id=1319522194]
 wait_time = 0.5

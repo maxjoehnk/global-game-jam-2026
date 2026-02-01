@@ -8,6 +8,7 @@ public partial class WalkingEnemy : Enemy
 	private int direction = 1; // 1 for right, -1 for left
 	private Node2D SpriteNode => GetNode<Node2D>("SpriteNode");
 	private Area2D PlayerScanArea => GetNode<Area2D>("Area2D");
+	private AnimationPlayer AniPlayer => GetNode<AnimationPlayer>("AnimationPlayer");
 	private Player? PlayerNode = null;
 
 	public override void _Ready()
@@ -22,13 +23,10 @@ public partial class WalkingEnemy : Enemy
 		{ 
 			Player player_node = (Player)body;
 			if (player_node.WasHit()){return;}
-
+			this.PlayerNode = player_node;
 			if (this.CheckOnSameLayer(player_node.CollisionMask))
 			{
-				player_node.Hit(this.GlobalPosition);
-			}
-			else{
-				this.PlayerNode = player_node;
+				this.AttackPlayer();
 			}
 		}
 	}
@@ -66,9 +64,29 @@ public partial class WalkingEnemy : Enemy
 			}
 			else if (this.CheckOnSameLayer(this.PlayerNode.CollisionMask))
 			{
-				this.PlayerNode.Hit(this.GlobalPosition);
-				this.PlayerNode = null;
+				this.AttackPlayer();
 			}
 		}
+	}
+
+	private void AttackPlayer(){
+		if (this.PlayerNode == null){return;}
+		if (!this.PlayerNode.HasMask()){
+			this.PlayerNode.Hit(this.GlobalPosition);
+			this.PlayerNode = null;
+		}   
+		else{
+			this.Hit(null);
+		}
+	}
+
+	public override void Hit(Projectile? projectile)
+	{
+		CollisionShape2D CollShape = GetNode<CollisionShape2D>("Polygon2D");
+		CollShape.Disabled = true;
+		this.SetPhysicsProcess(false);
+		this.PlayerScanArea.QueueFree();
+		this.PlayerNode = null;
+		this.AniPlayer.Play("die");
 	}
 }

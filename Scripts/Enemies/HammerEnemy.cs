@@ -211,4 +211,16 @@ public partial class HammerEnemy : Enemy
 			}
 		}  
 	}
+
+	public override void Hit(Projectile? projectile)
+	{
+		CollisionShape2D CollShape = GetNode<CollisionShape2D>("Polygon2D");
+		CollShape.Disabled = true;
+		this.SetPhysicsProcess(false);
+		this.PlayerScanArea.QueueFree();
+		this.PlayerAttackArea.QueueFree();
+		this.PlayerNodeAttack = null;
+		this.PlayerNode = null;
+		this.AniPlayer.Play("die");
+	}
 }

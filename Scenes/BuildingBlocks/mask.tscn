@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://bnwufpfb7lbal"]
+
+[ext_resource type="Script" uid="uid://chqf6xoah3cpr" path="res://Scripts/BuildingBlocks/Mask.cs" id="1_ccvt4"]
+[ext_resource type="Texture2D" uid="uid://bcfxv71ye5p8u" path="res://Assets/Elements/MaskeItem.png" id="1_ov54o"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ov54o"]
+radius = 51.47815
+
+[sub_resource type="Animation" id="Animation_ov54o"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.034906585]
+}
+
+[sub_resource type="Animation" id="Animation_ccvt4"]
+resource_name = "idle"
+length = 2.0
+loop_mode = 1
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -5), Vector2(0, 5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.034906585, 0.034906585]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lynrx"]
+_data = {
+&"RESET": SubResource("Animation_ov54o"),
+&"idle": SubResource("Animation_ccvt4")
+}
+
+[node name="Mask" type="Area2D" unique_id=1895334144]
+script = ExtResource("1_ccvt4")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1771757125]
+rotation = -0.034906585
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("1_ov54o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=981132139]
+shape = SubResource("CircleShape2D_ov54o")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1432957603]
+libraries/ = SubResource("AnimationLibrary_lynrx")
+autoplay = &"idle"

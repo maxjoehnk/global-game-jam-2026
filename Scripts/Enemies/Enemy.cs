@@ -29,7 +29,7 @@ public partial class Enemy : CharacterBody2D, IAssignableLayer
 		return (otherMask & this.AssignedLayer) == this.AssignedLayer;
 	}
 
-	public void Hit(Projectile projectile)
+	public virtual void Hit(Projectile? projectile)
 	{
 		this.QueueFree();
 	}
