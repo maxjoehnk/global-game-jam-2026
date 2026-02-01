@@ -1,0 +1,23 @@
+[gd_scene format=4 uid="uid://mlrulojard6w"]
+
+[ext_resource type="PackedScene" uid="uid://dq8bmx6sugagf" path="res://Scenes/Levels/_BaseLevel.tscn" id="1_0wj58"]
+[ext_resource type="TileSet" uid="uid://dla10wbktycmr" path="res://Assets/TileSet.tres" id="2_cjicr"]
+[ext_resource type="PackedScene" uid="uid://bwe7nn0f8cmwb" path="res://Scenes/Enemies/hammer_enemy.tscn" id="3_nb5ao"]
+
+[node name="021RobertIsHere" unique_id=14346899 instance=ExtResource("1_0wj58")]
+CameraBoundsX = Vector2(0, 4800)
+CameraBoundsY = Vector2(0, 1500)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="Layers" parent_id_path=PackedInt32Array(1705662681) index="0" unique_id=465169009]
+tile_map_data = PackedByteArray("AAABABMAAAABAAQAAAAFABMAAAABAAQAAAAJABMAAAAFAAMAAAANABUAAAAGAAQAAAARABUAAAAEAAMAAAAVABUAAAAEAAMAAAAZABUAAAAEAAMAAAAdABMAAAADAAMAAAAhABMAAAABAAQAAAArABAAAAABAAQAAAAvABAAAAABAAQAAAAzABAAAAABAAQAAAAnABAAAAABAAQAAAA=")
+tile_set = ExtResource("2_cjicr")
+
+[node name="HammerEnemy" parent="Layers/TileMapLayer" index="0" unique_id=1736735301 instance=ExtResource("3_nb5ao")]
+position = Vector2(961, 1011)
+
+[node name="HammerEnemy2" parent="Layers/TileMapLayer" index="1" unique_id=2043552836 instance=ExtResource("3_nb5ao")]
+position = Vector2(2279, 669)
+
+[node name="TileMapLayer2" type="TileMapLayer" parent="Layers" parent_id_path=PackedInt32Array(1705662681) index="1" unique_id=2070264346]
+tile_map_data = PackedByteArray("AAAnAA4AAAACAAQAAAAzAA4AAAACAAQAAAArABAAAAABAAQAAAAvABAAAAABAAQAAAA3ABAAAAABAAQAAAA7ABAAAAABAAQAAAA=")
+tile_set = ExtResource("2_cjicr")

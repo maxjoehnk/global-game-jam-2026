@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" format=3 uid="uid://bksjfspg8uqg3"]
 
-[ext_resource type="Shader" uid="uid://clbwrfl6goddc" path="res://Assets/fire.gdshader" id="1_1skkt"]
+[ext_resource type="Shader" path="res://Assets/fire.gdshader" id="1_1skkt"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_l2ssk"]
 noise_type = 3

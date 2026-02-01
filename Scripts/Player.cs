@@ -230,7 +230,7 @@ public partial class Player : CharacterBody2D
 		}
 
 		if (this.CurrentState is State.Fall or State.Dive or State.Jump or State.WallJump &&
-		    NewState is State.Idle or State.Run)
+			NewState is State.Idle or State.Run)
 		{
 			this.EmitSignalPlayerLanded();
 		}
