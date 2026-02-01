@@ -3,6 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://dq8bmx6sugagf" path="res://Scenes/Levels/_BaseLevel.tscn" id="1_owfue"]
 [ext_resource type="TileSet" uid="uid://dla10wbktycmr" path="res://Assets/TileSet.tres" id="2_6hdfc"]
 [ext_resource type="PackedScene" uid="uid://d2rcj02dpqrfb" path="res://Scenes/BuildingBlocks/LevelFinish.tscn" id="3_6hdfc"]
+[ext_resource type="PackedScene" uid="uid://c8kt0f2my0n02" path="res://Scenes/Enemies/schredder.tscn" id="3_ql5ne"]
+[ext_resource type="PackedScene" uid="uid://vygd7ca2vqba" path="res://Scenes/BuildingBlocks/antrag.tscn" id="4_a0w2b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6hdfc"]
 size = Vector2(45, 1080)
@@ -31,8 +33,15 @@ shape = SubResource("RectangleShape2D_6hdfc")
 tile_map_data = PackedByteArray("AAD//xAAAAABAAQAAAADABAAAAABAAQAAAAHABAAAAABAAQAAAAOAA0AAAABAAQAAAASAA0AAAABAAQAAAAWAA0AAAABAAQAAAAdAAkAAAABAAQAAAAhAAkAAAABAAQAAAAlAAkAAAABAAQAAAA=")
 tile_set = ExtResource("2_6hdfc")
 
-[node name="LevelFinish" parent="Layers/TileMapLayer" index="0" unique_id=1423001190 instance=ExtResource("3_6hdfc")]
-position = Vector2(1659, 320)
+[node name="Schredder" parent="Layers/TileMapLayer" index="0" unique_id=1555317447 node_paths=PackedStringArray("level_finish_node") instance=ExtResource("3_ql5ne")]
+position = Vector2(1720, 384)
+level_finish_node = NodePath("../LevelFinish")
+
+[node name="LevelFinish" parent="Layers/TileMapLayer" index="1" unique_id=1423001190 instance=ExtResource("3_6hdfc")]
+position = Vector2(2510, -53)
+
+[node name="Antrag" parent="Layers/TileMapLayer" index="2" unique_id=2070757456 instance=ExtResource("4_a0w2b")]
+position = Vector2(934, 530)
 
 [node name="Player" parent="." index="5" unique_id=1038420454]
 position = Vector2(93, 669)

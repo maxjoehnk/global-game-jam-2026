@@ -1,8 +1,8 @@
 using Godot;
+using System;
 
 namespace GlobalGameJam.Scripts.BuildingBlocks;
-
-public partial class LevelFinish : Area2D, IAssignableLayer
+public partial class Antrag : Area2D, IAssignableLayer
 {
 	[Signal]
 	public delegate void PlayerReachedGoalEventHandler();
@@ -18,14 +18,10 @@ public partial class LevelFinish : Area2D, IAssignableLayer
 
 			if ((player.CollisionMask & this.AssignedLayer) == this.AssignedLayer)
 			{
-				this.EmitSignalPlayerReachedGoal();
+				player.GotAntrag(true);
+				this.QueueFree();
 			}
 		};
-	}
-
-	public void LevelDone()
-	{
-		this.EmitSignalPlayerReachedGoal();
 	}
 
 	public uint AssignedLayer

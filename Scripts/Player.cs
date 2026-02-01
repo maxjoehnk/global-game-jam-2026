@@ -43,7 +43,9 @@ public partial class Player : CharacterBody2D
 
 	private bool DieAnimationDone = false;
 
-	private Item? holdingItem;
+	public Item? holdingItem;
+
+	public bool HasAntrag = false;
 
 	public float Gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
 	// Graphics
@@ -57,6 +59,9 @@ public partial class Player : CharacterBody2D
 	private Node2D SpriteContainer => GetNode<Node2D>("Sprites");
 
 	private Sprite2D MaskSprite => GetNode<Sprite2D>("Sprites/Kopf/Mask");
+	private Sprite2D PaperSprite => GetNode<Sprite2D>("Sprites/ArmL/Antrag");
+
+
 	// Interact with world:
 	private const float CutPosX = 75.0f;
 	private TileMapCutter CutTool => GetNode<TileMapCutter>("TileMapCutter");
@@ -93,6 +98,7 @@ public partial class Player : CharacterBody2D
 		this.Rotation = 0;
 		this.AnimTree.Active = true;
 		this.MaskSprite.Visible = false;
+		this.PaperSprite.Visible = false;
 	}
 
 	public override void _Input(InputEvent @event)
@@ -102,6 +108,7 @@ public partial class Player : CharacterBody2D
 			if (this.holdingItem != null && this.CurrentState != State.Hurt)
 			{
 				this.holdingItem.Throw(this.GetParent(), this.GlobalPosition, this.Head.FlipH);
+				this.PaperSprite.Visible = false;
 				this.holdingItem = null;
 				this.EmitSignalItemChanged(null);
 				
@@ -125,6 +132,12 @@ public partial class Player : CharacterBody2D
 	public void GotMask()
 	{
 		this.MaskSprite.Visible = true;
+	}
+
+	public void GotAntrag(bool got_it)
+	{
+		this.HasAntrag = got_it;
+		this.PaperSprite.Visible = got_it;
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -481,6 +494,7 @@ public partial class Player : CharacterBody2D
 	{
 		this.holdingItem?.QueueFree();
 		this.holdingItem = item;
+		this.PaperSprite.Visible = true;
 		this.EmitSignalItemChanged(item);
 	}
 }

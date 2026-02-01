@@ -1,0 +1,41 @@
+[gd_scene format=4 uid="uid://dhshpqe2u8ffo"]
+
+[ext_resource type="PackedScene" uid="uid://dq8bmx6sugagf" path="res://Scenes/Levels/_BaseLevel.tscn" id="1_d6jj8"]
+[ext_resource type="TileSet" uid="uid://dla10wbktycmr" path="res://Assets/TileSet.tres" id="2_16qbc"]
+[ext_resource type="PackedScene" uid="uid://bwe7nn0f8cmwb" path="res://Scenes/Enemies/hammer_enemy.tscn" id="3_hfmxa"]
+[ext_resource type="PackedScene" uid="uid://coav4qwmeq0b0" path="res://Scenes/Enemies/covid_cloud.tscn" id="4_456gl"]
+[ext_resource type="PackedScene" uid="uid://d2rcj02dpqrfb" path="res://Scenes/BuildingBlocks/LevelFinish.tscn" id="4_ksf16"]
+[ext_resource type="PackedScene" uid="uid://bnwufpfb7lbal" path="res://Scenes/BuildingBlocks/mask.tscn" id="5_456gl"]
+
+[node name="022RobertAndMasks" unique_id=14346899 instance=ExtResource("1_d6jj8")]
+CameraBoundsX = Vector2(-1500, 2200)
+CameraBoundsY = Vector2(-1080, 1000)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="Layers" parent_id_path=PackedInt32Array(1705662681) index="0" unique_id=1977679055]
+tile_map_data = PackedByteArray("AAAAAA0AAAABAAQAAAAEAA0AAAABAAQAAAAIAA0AAAABAAQAAAABABMAAAAEAAMAAAAFABMAAAAEAAMAAAAJABMAAAAEAAMAAAAFABEAAAAEAAUAAAAMAA0AAAABAAQAAAAAAAMAAAABAAQAAAAEAAMAAAABAAQAAAASAA0AAAABAAQAAAAWAA0AAAABAAQAAAAaAA0AAAABAAQAAAAeAA0AAAABAAQAAAAUAAYAAAAAAAkAAAAYAAYAAAAAAAkAAAAcAAYAAAAAAAkAAAAUAAQAAAACAAgAAAAYAAQAAAACAAgAAAAcAAQAAAACAAgAAAAUAAAAAAABAAgAAAAcAAAAAAABAAgAAAAUAPv/AAABAAgAAAAcAPv/AAABAAgAAAAcAPb/AAABAAgAAAAUAPb/AAABAAgAAAAUAPH/AAABAAgAAAAcAPH/AAABAAgAAAAcAOz/AAABAAgAAAAUAOz/AAABAAgAAAD8//z/AAACAAQAAADo//z/AAACAAQAAAD4//7/AAABAAQAAAD0//7/AAABAAQAAADw//7/AAABAAQAAADs//7/AAABAAQAAAAmAA0AAAABAAQAAAAqAA0AAAABAAQAAAAoAAkAAAAHAAUAAAA=")
+tile_set = ExtResource("2_16qbc")
+
+[node name="HammerEnemy" parent="Layers/TileMapLayer" index="0" unique_id=1736735301 instance=ExtResource("3_hfmxa")]
+position = Vector2(1213, 532)
+
+[node name="LevelFinish" parent="Layers/TileMapLayer" index="1" unique_id=1423001190 instance=ExtResource("4_ksf16")]
+position = Vector2(2020, 288)
+
+[node name="TileMapLayer2" type="TileMapLayer" parent="Layers" parent_id_path=PackedInt32Array(1705662681) index="1" unique_id=1251199625]
+tile_map_data = PackedByteArray("AAAAAAgAAAABAAQAAAAEAAgAAAABAAQAAAAAAP7/AAABAAQAAAAEAP7/AAABAAQAAAD8//7/AAABAAQAAAD4//7/AAABAAQAAAASAA0AAAABAAQAAAAUAAYAAAAAAAkAAAAYAAYAAAAAAAkAAAAcAAYAAAAAAAkAAAAWAA0AAAABAAQAAAAaAA0AAAABAAQAAAAeAA0AAAABAAQAAAAUAAQAAAACAAgAAAAYAAQAAAACAAgAAAAcAAQAAAACAAgAAAAUAAAAAAABAAgAAAAUAPv/AAABAAgAAAAUAPb/AAABAAgAAAAUAPH/AAABAAgAAAAUAOz/AAABAAgAAAAcAAAAAAABAAgAAAAcAPv/AAABAAgAAAAcAPb/AAABAAgAAAAcAPH/AAABAAgAAAAcAOz/AAABAAgAAAD0//7/AAABAAQAAADw//7/AAABAAQAAADs//7/AAABAAQAAADo//7/AAABAAQAAADk//7/AAABAAQAAADg//7/AAABAAQAAAA=")
+tile_set = ExtResource("2_16qbc")
+
+[node name="CovidCloud" parent="Layers/TileMapLayer2" index="0" unique_id=951963075 instance=ExtResource("4_456gl")]
+position = Vector2(1226, 515)
+
+[node name="CovidCloud2" parent="Layers/TileMapLayer2" index="1" unique_id=498326547 instance=ExtResource("4_456gl")]
+position = Vector2(-701, -286)
+
+[node name="CovidCloud3" parent="Layers/TileMapLayer2" index="2" unique_id=2064158373 instance=ExtResource("4_456gl")]
+position = Vector2(-703, -587)
+
+[node name="Mask" parent="Layers/TileMapLayer2" index="3" unique_id=1895334144 instance=ExtResource("5_456gl")]
+position = Vector2(-1375, -238)
+
+[node name="Player" parent="." index="5" unique_id=1038420454]
+position = Vector2(523, 524)

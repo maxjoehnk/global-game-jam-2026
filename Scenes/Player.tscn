@@ -2,9 +2,11 @@
 
 [ext_resource type="Script" uid="uid://ccsfuebrfr65" path="res://Scripts/Player.cs" id="1_rpqav"]
 [ext_resource type="Texture2D" uid="uid://csc0gn8mdtn6g" path="res://Assets/Character/ArmLeft.png" id="2_yoq75"]
+[ext_resource type="Texture2D" uid="uid://cuv8hpbeuq4kd" path="res://Assets/Elements/Antrag.png" id="3_5v66d"]
 [ext_resource type="Texture2D" uid="uid://c3qqe2ap7tgh" path="res://Assets/Character/SpahnKopf.png" id="3_gntrk"]
 [ext_resource type="Texture2D" uid="uid://u63i0lludve3" path="res://Assets/Character/ArmRight.png" id="3_ksbbd"]
 [ext_resource type="Texture2D" uid="uid://faukmt4ehmgb" path="res://Assets/Character/LegLeft.png" id="4_glx4g"]
+[ext_resource type="Texture2D" uid="uid://c4bowiomdcntm" path="res://Assets/Particles/BildThrowable.png" id="4_m0x7a"]
 [ext_resource type="PackedScene" uid="uid://c735bd2pgysm" path="res://Scenes/Physics/CutAreas/tile_map_cutter.tscn" id="5_5ixxa"]
 [ext_resource type="AudioStream" uid="uid://c3fmtk0ii2708" path="res://Assets/Sounds/Quotes/VielWerdenVerzeihenMüssen.wav" id="5_52ee3"]
 [ext_resource type="Texture2D" uid="uid://d3p82052wwsel" path="res://Assets/Character/LegRight.png" id="5_miouo"]
@@ -1413,10 +1415,24 @@ scale = Vector2(0.5, 0.5)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_yoq75")
 
+[node name="Antrag" type="Sprite2D" parent="Sprites/ArmL" unique_id=696452261]
+visible = false
+position = Vector2(-369.865, 150)
+rotation = -0.9896017
+scale = Vector2(2, 2)
+texture = ExtResource("3_5v66d")
+
 [node name="ArmR" type="Sprite2D" parent="Sprites" unique_id=1838468986]
 position = Vector2(4.76, 1.61)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_ksbbd")
+
+[node name="Paper" type="Sprite2D" parent="Sprites/ArmR" unique_id=785479548]
+visible = false
+show_behind_parent = true
+position = Vector2(396.2, 101.949974)
+rotation = 2.141519
+texture = ExtResource("4_m0x7a")
 
 [node name="LegL" type="Sprite2D" parent="Sprites" unique_id=1816099241]
 scale = Vector2(0.2, 0.2)

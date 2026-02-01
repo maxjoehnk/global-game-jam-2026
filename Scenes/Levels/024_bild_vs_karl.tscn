@@ -1,0 +1,33 @@
+[gd_scene format=4 uid="uid://bqmsto87pn7wd"]
+
+[ext_resource type="PackedScene" uid="uid://dq8bmx6sugagf" path="res://Scenes/Levels/_BaseLevel.tscn" id="1_lty1y"]
+[ext_resource type="TileSet" uid="uid://dla10wbktycmr" path="res://Assets/TileSet.tres" id="2_mq8ha"]
+[ext_resource type="PackedScene" uid="uid://dy5opi42vhi4y" path="res://Scenes/Enemies/walking_enemy.tscn" id="3_fvvl0"]
+[ext_resource type="PackedScene" uid="uid://bswuxr4vm5fm7" path="res://Scenes/Items/Bild.tscn" id="4_gg6v6"]
+[ext_resource type="PackedScene" uid="uid://d2rcj02dpqrfb" path="res://Scenes/BuildingBlocks/LevelFinish.tscn" id="5_4am5o"]
+
+[node name="024BildVsKarl" unique_id=14346899 instance=ExtResource("1_lty1y")]
+CameraBoundsX = Vector2(-200, 1920)
+CameraBoundsY = Vector2(-1500, 800)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="Layers" parent_id_path=PackedInt32Array(1705662681) index="0" unique_id=133167463]
+tile_map_data = PackedByteArray("AAAAAA8AAAABAAQAAAAEAA8AAAABAAQAAAAIAA8AAAABAAQAAAAMAA8AAAABAAQAAAAQAAsAAAADAAMAAAAUAAkAAAAEAAMAAAAYAAkAAAAEAAMAAAAcAAkAAAAEAAMAAAAgAAcAAAADAAMAAAAkAAcAAAABAAQAAAD8/w8AAAABAAQAAAD7/wsAAAACAAgAAAD7/wcAAAACAAgAAAD7/wMAAAACAAgAAAD7////AAACAAgAAAD4/w8AAAABAAQAAAAaAAYAAAABAAQAAAAWAAYAAAABAAQAAAASAAYAAAABAAQAAAAOAAYAAAABAAQAAAAKAAYAAAABAAQAAAAaAAIAAAACAAgAAAAWAAIAAAACAAgAAAASAAIAAAACAAgAAAASAP7/AAACAAgAAAAWAP7/AAACAAgAAAAaAP7/AAACAAgAAAAaAPr/AAACAAgAAAAWAPr/AAACAAgAAAASAPr/AAACAAgAAAASAPb/AAACAAgAAAAWAPb/AAACAAgAAAAaAPb/AAACAAgAAAD7//v/AAACAAgAAAD7//f/AAACAAgAAAD7//P/AAACAAgAAAASAPL/AAACAAgAAAAWAPL/AAACAAgAAAAaAPL/AAACAAgAAAD7/+//AAACAAgAAAD///3/AAABAAQAAAADAP3/AAABAAQAAAASAO7/AAACAAgAAAAWAO7/AAACAAgAAAAaAO7/AAACAAgAAAAaAOr/AAACAAgAAAAWAOr/AAACAAgAAAASAOr/AAACAAgAAAD7/+v/AAACAAgAAAD7/+f/AAACAAgAAAASAOb/AAACAAgAAAAWAOb/AAACAAgAAAAaAOb/AAACAAgAAAAOAPX/AAABAAQAAAAKAPX/AAABAAQAAAA=")
+tile_set = ExtResource("2_mq8ha")
+
+[node name="WalkingEnemy" parent="Layers/TileMapLayer" index="0" unique_id=1736735301 instance=ExtResource("3_fvvl0")]
+position = Vector2(1054, 413)
+
+[node name="Item" parent="Layers/TileMapLayer" index="1" unique_id=1748474714 instance=ExtResource("4_gg6v6")]
+position = Vector2(585, -684)
+
+[node name="Item2" parent="Layers/TileMapLayer" index="2" unique_id=227504238 instance=ExtResource("4_gg6v6")]
+position = Vector2(675, -685)
+
+[node name="Item3" parent="Layers/TileMapLayer" index="3" unique_id=1629682058 instance=ExtResource("4_gg6v6")]
+position = Vector2(767, -689)
+
+[node name="LevelFinish" parent="Layers/TileMapLayer" index="4" unique_id=1423001190 instance=ExtResource("5_4am5o")]
+position = Vector2(1799, 207)
+
+[node name="Player" parent="." index="5" unique_id=1038420454]
+position = Vector2(146, 615)

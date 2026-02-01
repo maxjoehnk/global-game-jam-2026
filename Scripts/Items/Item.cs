@@ -27,7 +27,7 @@ public partial class Item : RigidBody2D, IAssignableLayer
 	{
 		if (body is Player player)
 		{
-			if ((player.CollisionMask & this.AssignedLayer) == this.AssignedLayer)
+			if ((player.CollisionMask & this.AssignedLayer) == this.AssignedLayer && player.holdingItem == null)
 			{
 				player.PickUp(this);
 				this.CallDeferred(nameof(this.RemoveFromWorld));

@@ -22,7 +22,7 @@ public partial class Trap : StaticBody2D, IAssignableLayer
 		return (OtherMask & this.AssignedLayer) == this.AssignedLayer;
 	}
 
-	private void OnPlayerEntered(Node body)
+	public virtual void OnPlayerEntered(Node body)
 	{
 		if (body is Player)
 		{ 
