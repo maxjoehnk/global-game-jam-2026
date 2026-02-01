@@ -1,5 +1,4 @@
 using Godot;
-using System;
 using GlobalGameJam.Scripts;
 
 public partial class Trap : StaticBody2D, IAssignableLayer

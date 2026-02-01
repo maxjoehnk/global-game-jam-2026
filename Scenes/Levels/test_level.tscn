@@ -1,9 +1,9 @@
-[gd_scene format=4 uid="uid://chttlfwdvrtuq"]
+[gd_scene format=4 uid="uid://b8ptbs2yv0jcs"]
 
 [ext_resource type="PackedScene" uid="uid://dq8bmx6sugagf" path="res://Scenes/Levels/_BaseLevel.tscn" id="1_7t06c"]
 [ext_resource type="TileSet" uid="uid://dla10wbktycmr" path="res://Assets/TileSet.tres" id="2_b07c4"]
 [ext_resource type="PackedScene" uid="uid://dy5opi42vhi4y" path="res://Scenes/Enemies/walking_enemy.tscn" id="3_db73o"]
-[ext_resource type="PackedScene" uid="uid://bekb2vc085vb5" path="res://Scenes/Enemies/burning_trash.tscn" id="4_k8g1k"]
+[ext_resource type="PackedScene" uid="uid://dweykadsk8bdk" path="res://Scenes/Enemies/burning_trash.tscn" id="4_k8g1k"]
 [ext_resource type="Texture2D" uid="uid://b3cvrve3kidwy" path="res://Assets/Elements/Atlas.png" id="4_npfmg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k8g1k"]
