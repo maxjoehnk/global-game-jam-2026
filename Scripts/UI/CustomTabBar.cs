@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 public partial class CustomTabBar : CanvasLayer
 {
 	private PackedScene TabLabel => GD.Load<PackedScene>("res://Scenes/UI/tab_label.tscn");
-	private Color FadeColor = new Color(0.3f, 0.3f, 0.3f);
+	private Color FadeColor = new Color(0.4f, 0.4f, 0.4f);
 	private HBoxContainer LayerContainer => GetNode<HBoxContainer>("OuterVBox/LabelBox");
 	private TextureRect TextureBorder => GetNode<TextureRect>("OuterVBox/TextureRect");
 	private Label TimeLabel => GetNode<Label>("TimerBox/LabelBox/TimeLabel");
@@ -18,7 +18,8 @@ public partial class CustomTabBar : CanvasLayer
 	}
 	public void SetActiveLayer(int layerIndex)
 	{
-		foreach (Label child in this.LayerContainer.GetChildren()){
+		foreach (Label child in this.LayerContainer.GetChildren())
+		{
 			child.SelfModulate = this.FadeColor;
 		}
 		Label ActiveLabel = (Label)this.LayerContainer.GetChild(layerIndex);

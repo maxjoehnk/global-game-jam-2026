@@ -12,13 +12,13 @@ using System.Numerics;
 public partial class Game : Node2D
 {
 	private static Lazy<AudioStreamPlaylist> LevelLoadedQuotes = new(() => GD.Load<AudioStreamPlaylist>("res://Assets/Sounds/Quotes/LevelLoadedQuote.tres"));
-	
+
 	[Export]
 	public int InitialLayer;
 
-	[Export] public Godot.Vector2 CameraBoundsX = new Godot.Vector2(0.0f, 1920.0f); 
+	[Export] public Godot.Vector2 CameraBoundsX = new Godot.Vector2(0.0f, 1920.0f);
 	[Export] public Godot.Vector2 CameraBoundsY = new Godot.Vector2(0.0f, 1080.0f);
-	
+
 	private const int PhysicsBaseLayer = 8;
 	private const int CutBaseLayer = 5;
 	private const float LayerScaling = 0.0f;
@@ -39,14 +39,14 @@ public partial class Game : Node2D
 
 	private static readonly Color[] LayerColorList =
 	{
-		new Color(0.996f, 0.0f, 0.246f),
-		new Color(0.2f, 0.256f, 1.0f),
-		new Color(0.264f, 0.494f, 0.0f),
-		new Color(0.825f, 0.042f, 0.602f, 1.0f),
-		new Color(0.68f, 0.46f, 0.0f),
-		new Color(0.08f, 0.561f, 0.734f),
-		new Color(0.77f, 0.26f, 0.0f),
-		new Color(0.333f, 0.747f, 0.559f),
+		Color.FromHtml("3b98cc"),
+		Color.FromHtml("d83a67"),
+		Color.FromHtml("009245"),
+		Color.FromHtml("baa45d"),
+		Color.FromHtml("5151b7"),
+		Color.FromHtml("5a93a0"),
+		Color.FromHtml("f2e29e"),
+		Color.FromHtml("847356"),
 	};
 
 	private double LevelTime = 0.0;
@@ -63,19 +63,19 @@ public partial class Game : Node2D
 			{
 				assignableLayer.AssignedLayer = layerMask;
 			}
-			
+
 			foreach (PhysicsBody2D physicsBody2D in layer.FindChildren("*", type: nameof(PhysicsBody2D))
 						 .Where(c => c is PhysicsBody2D)
 						 .Cast<PhysicsBody2D>())
 			{
-				physicsBody2D.CollisionLayer = (physicsBody2D.CollisionLayer & Consts.NonLayerMask) | layerMask;		
+				physicsBody2D.CollisionLayer = (physicsBody2D.CollisionLayer & Consts.NonLayerMask) | layerMask;
 			}
 
 			if (layer is TileMapLayer)
 			{
 				ApplyMaskLayerToTileMapLayer((TileMapLayer)layer, layerMask);
 			}
-			
+
 			foreach (TileMapLayer tileMapLayer in layer.GetChildren().Where(c => c is TileMapLayer).Cast<TileMapLayer>())
 			{
 				ApplyMaskLayerToTileMapLayer(tileMapLayer, layerMask);
@@ -160,18 +160,19 @@ public partial class Game : Node2D
 		{
 			Node2D layer = this.LayerContainer.GetChild<Node2D>(i);
 			layer.Modulate = i == this.activeLayerIndex ? Color.FromHsv(0, 0, 1) : Color.FromHsv(0, 0, 1, 0.2f);
-			float scaling_value = 1.0f + LayerScaling*(i - this.activeLayerIndex);
+			float scaling_value = 1.0f + LayerScaling * (i - this.activeLayerIndex);
 			layer.Scale = new Godot.Vector2(scaling_value, scaling_value);
 			if (i != this.activeLayerIndex)
 			{
-				layer.Modulate *= LayerColorList[i].Lerp(new Color(1.0f,1.0f,1.0f), 0.25f);
+				layer.Modulate *= LayerColorList[i].Lerp(new Color(1.0f, 1.0f, 1.0f), 0.25f);
 			}
 		}
 		Player.SetActiveCollisionLayer(this.ActivePhysicsLayer);
 		this.Hud.SetActiveLayer(this.activeLayerIndex);
 	}
 
-	private void RespawnPlayer(){
+	private void RespawnPlayer()
+	{
 		this.activeLayerIndex = this.InitialLayer;
 		this.UpdateActiveLayer();
 		this.Player.GlobalPosition = this.RespawnMarker.GlobalPosition;

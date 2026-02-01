@@ -1,12 +1,17 @@
 [gd_scene format=3 uid="uid://vuvnc1k5iy3h"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cpdhy"]
-bg_color = Color(1, 1, 1, 1)
+[ext_resource type="Texture2D" uid="uid://dwg3htghbifaj" path="res://Assets/UI/Tabs.png" id="1_gyjcu"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hjxt2"]
+texture = ExtResource("1_gyjcu")
+texture_margin_left = 10.0
+expand_margin_bottom = 6.0
 
 [node name="TabLabel" type="Label" unique_id=1430094857]
 custom_minimum_size = Vector2(150, 0)
+offset_right = 150.0
+offset_bottom = 41.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 32
-theme_override_styles/normal = SubResource("StyleBoxFlat_cpdhy")
+theme_override_styles/normal = SubResource("StyleBoxTexture_hjxt2")
 text = "Mask 1"
-horizontal_alignment = 1
