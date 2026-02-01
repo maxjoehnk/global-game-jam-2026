@@ -180,3 +180,6 @@ tile_set = SubResource("TileSet_utnjn")
 position = Vector2(960, 540)
 tile_map_data = PackedByteArray(0, 0, 14, 0, 255, 255, 0, 0, 1, 0, 6, 0, 0, 0, 10, 0, 1, 0, 0, 0, 1, 0, 4, 0, 0, 0, 18, 0, 1, 0, 0, 0, 1, 0, 4, 0, 0, 0)
 tile_set = SubResource("TileSet_utnjn")
+
+[node name="Player" parent="." index="5" unique_id=1038420454]
+position = Vector2(203, 697)

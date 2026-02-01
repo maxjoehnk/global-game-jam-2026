@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://dhlosaephfjcl" path="res://Assets/Character/LauterTorso.png" id="6_s3blc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_amqvb"]
-size = Vector2(850, 116)
+size = Vector2(850, 233)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6fqxa"]
 size = Vector2(300, 207)
@@ -752,7 +752,7 @@ texture = ExtResource("4_s3blc")
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0" unique_id=960627957]
-position = Vector2(1, 24)
+position = Vector2(1, -34.5)
 shape = SubResource("RectangleShape2D_amqvb")
 
 [node name="Area2DAttack" type="Area2D" parent="." index="4" unique_id=953766806]

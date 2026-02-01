@@ -4,6 +4,8 @@
 [ext_resource type="TileSet" uid="uid://dla10wbktycmr" path="res://Assets/TileSet.tres" id="2_ns4dd"]
 [ext_resource type="PackedScene" uid="uid://dweykadsk8bdk" path="res://Scenes/Enemies/burning_trash.tscn" id="3_78g45"]
 [ext_resource type="PackedScene" uid="uid://d2rcj02dpqrfb" path="res://Scenes/BuildingBlocks/LevelFinish.tscn" id="4_ns4dd"]
+[ext_resource type="PackedScene" uid="uid://vygd7ca2vqba" path="res://Scenes/BuildingBlocks/antrag.tscn" id="5_fwqfi"]
+[ext_resource type="PackedScene" uid="uid://c8kt0f2my0n02" path="res://Scenes/Enemies/schredder.tscn" id="6_5sp07"]
 
 [node name="016MoreEvidence" unique_id=14346899 instance=ExtResource("1_0uli4")]
 CameraBoundsX = Vector2(0, 2200)
@@ -46,4 +48,11 @@ position = Vector2(1788, 641)
 position = Vector2(1940, 489)
 
 [node name="LevelFinish" parent="Layers/TileMapLayer" index="11" unique_id=1423001190 instance=ExtResource("4_ns4dd")]
-position = Vector2(2082, 364)
+position = Vector2(2083, 1126)
+
+[node name="Antrag" parent="Layers/TileMapLayer" index="12" unique_id=2070757456 instance=ExtResource("5_fwqfi")]
+position = Vector2(1078, 699)
+
+[node name="Schredder" parent="Layers/TileMapLayer" index="13" unique_id=612854840 node_paths=PackedStringArray("level_finish_node") instance=ExtResource("6_5sp07")]
+position = Vector2(2098, 437)
+level_finish_node = NodePath("../LevelFinish")
