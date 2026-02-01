@@ -26,6 +26,14 @@ public partial class Settings : Panel
 		this.QuotesVolumeSlider.ValueChanged += this.OnQuotesVolumeChanged;
 	}
 
+	public override void _Input(InputEvent @event)
+	{
+		if (Input.IsActionJustPressedByEvent(InputAction.Cancel, @event))
+		{
+			this.OnBackPressed();
+		}
+	}
+
 	private void OnMainVolumeChanged(double value)
 	{
 		SettingsManager.MainVolume = value;

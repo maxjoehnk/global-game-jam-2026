@@ -22,6 +22,14 @@ public partial class LevelSelector : Control
 		FirstLevel?.GrabFocus();
 	}
 
+	public override void _Input(InputEvent @event)
+	{
+		if (Input.IsActionJustPressedByEvent(InputAction.Cancel, @event))
+		{
+			this.OnBackPressed();
+		}
+	}
+
 	private Button CreateLevelButton(AvailableLevel level)
 	{
 		LevelSelectButton button = this.LevelButton.Instantiate<LevelSelectButton>();
