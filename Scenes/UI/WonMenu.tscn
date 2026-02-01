@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://y4ek6m5qeius" path="res://Scripts/UI/WonMenu.cs" id="1_f7pny"]
 [ext_resource type="PackedScene" uid="uid://bsldn8e7jelex" path="res://Scenes/UI/SpahnButton.tscn" id="2_v5qja"]
 [ext_resource type="PackedScene" uid="uid://dk7nxjlht6iqe" path="res://Scenes/UI/AnimatedSpahnKopf.tscn" id="3_wahdk"]
-[ext_resource type="Theme" uid="uid://d1wiq2lhxalpu" path="res://Themes/PaperUi.tres" id="5_bidud"]
+[ext_resource type="Theme" uid="uid://of2ae14ao6ha" path="res://Themes/PaperUi.tres" id="5_bidud"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cshkm"]
 bg_color = Color(0, 0, 0, 0.19607843)
