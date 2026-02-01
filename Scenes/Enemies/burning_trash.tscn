@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" path="res://Scenes/Enemies/trap.tscn" id="1_2aj4m"]
 [ext_resource type="Script" uid="uid://cxoy66yio6ur1" path="res://Scripts/Enemies/BurningTrash.cs" id="2_2k1iw"]
-[ext_resource type="Texture2D" uid="uid://bd1ykxkia00bl" path="res://Assets/Elements/Papierkorb.png" id="2_l2ssk"]
 [ext_resource type="Material" uid="uid://bksjfspg8uqg3" path="res://Assets/FireShader.tres" id="2_n6wav"]
+[ext_resource type="Texture2D" uid="uid://bih8n1qcgy3vn" path="res://Assets/Elements/PapierkorbNoFlame.png" id="4_n6wav"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n6wav"]
 size = Vector2(60, 74)
@@ -36,4 +36,4 @@ texture = SubResource("NoiseTexture2D_bmpu0")
 [node name="Sprite2D" type="Sprite2D" parent="." index="3" unique_id=372617460]
 position = Vector2(0, -52)
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("2_l2ssk")
+texture = ExtResource("4_n6wav")
