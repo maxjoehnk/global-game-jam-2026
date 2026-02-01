@@ -14,7 +14,6 @@ corner_radius_top_left = 16
 script = ExtResource("1_bg7v8")
 
 [node name="CustomTabBar" parent="." unique_id=520158691 instance=ExtResource("2_663bt")]
-layer = 5
 
 [node name="PauseDialog" parent="." unique_id=1635492489 instance=ExtResource("3_663bt")]
 visible = false

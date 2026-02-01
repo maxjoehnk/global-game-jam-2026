@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ct8cbm2k2t77g"
+path="res://.godot/imported/2026-Global-Game-Jam - Spahn Quote 1.wav-49e64a626f76b1b170de69d84f30cefa.sample"
+
+[deps]
+
+source_file="res://Assets/Sounds/Quotes/2026-Global-Game-Jam - Spahn Quote 1.wav"
+dest_files=["res://.godot/imported/2026-Global-Game-Jam - Spahn Quote 1.wav-49e64a626f76b1b170de69d84f30cefa.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

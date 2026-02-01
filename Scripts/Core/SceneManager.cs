@@ -10,6 +10,9 @@ public partial class SceneManager : Node
 	private Node CurrentScene { get; set; } = null!;
 
 	private AvailableLevel? activeLevel;
+
+	private int? lastFinishedLevelIndex;
+	private int? currentLevelIndex;
 	
 	public List<AvailableLevel> Levels { get; private set; }
 	
@@ -19,6 +22,7 @@ public partial class SceneManager : Node
 		Viewport root = this.GetTree().Root;
 		this.CurrentScene = root.GetChild(-1);
 		this.Levels = GetAvailableLevels();
+		this.UnlockLevels();
 	}
 
 	public void OpenMainMenu()
@@ -51,6 +55,13 @@ public partial class SceneManager : Node
 			return;
 		}
 		this.OpenLevel(this.activeLevel);
+	}
+
+	public void LoadCurrentLevel()
+	{
+		AvailableLevel currentLevel =
+			this.currentLevelIndex == null ? this.Levels.First() : this.Levels[this.currentLevelIndex.Value];
+		this.OpenLevel(currentLevel);
 	}
 
 	public void LoadNextLevel()
@@ -92,5 +103,29 @@ public partial class SceneManager : Node
 		this.GetTree().Root.AddChild(this.CurrentScene);
 		this.GetTree().CurrentScene = this.CurrentScene;
 		this.GetTree().Paused = false;
+	}
+
+	private void UnlockLevels()
+	{
+		if (OS.IsDebugBuild())
+		{
+			foreach (AvailableLevel level in this.Levels)
+			{
+				level.IsUnlocked = true;
+			}
+
+			return;
+		}
+
+		for (int i = 0; i < this.Levels.Count; i++)
+		{
+			if (i == 0)
+			{
+				this.Levels[i].IsUnlocked = true;
+				continue;
+			}
+
+			this.Levels[i].IsUnlocked = this.lastFinishedLevelIndex != null && i <= this.lastFinishedLevelIndex + 1;
+		}
 	}
 }

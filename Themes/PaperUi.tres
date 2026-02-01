@@ -1,7 +1,19 @@
 [gd_resource type="Theme" format=3 uid="uid://of2ae14ao6ha"]
 
-[ext_resource type="Texture2D" uid="uid://c574x7lr3dtp5" path="res://Assets/UI/Schwärzung2.png" id="1_s0nl2"]
+[ext_resource type="Texture2D" uid="uid://bfcb145wpt6yv" path="res://Assets/UI/DisabledButtonBackground.png" id="1_oklow"]
+[ext_resource type="Texture2D" uid="uid://c574x7lr3dtp5" path="res://Assets/UI/Schwärzung2.png" id="2_ab8s4"]
 [ext_resource type="Texture2D" uid="uid://bacnngmrpm2g2" path="res://Assets/UI/Background.png" id="2_hy8rr"]
+[ext_resource type="Texture2D" uid="uid://dco67m5i80nqy" path="res://Assets/UI/ButtonBackground.png" id="2_oklow"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ab8s4"]
+texture = ExtResource("1_oklow")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3yoxy"]
+texture = ExtResource("2_ab8s4")
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_s0nl2"]
 load_path = "res://.godot/imported/Schwärzung3.png-4d06e330a173627099cdf1494ccb6f8b.ctex"
@@ -14,7 +26,7 @@ expand_margin_right = 4.0
 expand_margin_bottom = 4.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_oklow"]
-texture = ExtResource("1_s0nl2")
+texture = ExtResource("2_oklow")
 expand_margin_top = 2.0
 expand_margin_bottom = 2.0
 
@@ -43,8 +55,13 @@ expand_margin_bottom = 4.0
 texture = ExtResource("2_hy8rr")
 
 [resource]
+Button/colors/font_color = Color(0, 0, 0, 1)
+Button/colors/font_disabled_color = Color(0, 0, 0, 0.627451)
+Button/colors/font_focus_color = Color(0.95, 0.95, 0.95, 1)
+Button/colors/font_hover_color = Color(0.95, 0.95, 0.95, 1)
 Button/font_sizes/font_size = 26
-Button/styles/focus = SubResource("StyleBoxTexture_hy8rr")
+Button/styles/disabled = SubResource("StyleBoxTexture_ab8s4")
+Button/styles/focus = SubResource("StyleBoxTexture_3yoxy")
 Button/styles/hover = SubResource("StyleBoxTexture_hy8rr")
 Button/styles/normal = SubResource("StyleBoxTexture_oklow")
 Button/styles/pressed = SubResource("StyleBoxTexture_hy8rr")

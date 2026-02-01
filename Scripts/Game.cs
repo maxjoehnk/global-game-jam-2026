@@ -11,6 +11,8 @@ using System.Numerics;
 
 public partial class Game : Node2D
 {
+	private static Lazy<AudioStreamPlaylist> LevelLoadedQuotes = new(() => GD.Load<AudioStreamPlaylist>("res://Assets/Sounds/Quotes/LevelLoadedQuote.tres"));
+	
 	[Export]
 	public int InitialLayer;
 
@@ -95,6 +97,17 @@ public partial class Game : Node2D
 		this.PlayerCam.LimitTop = (int)this.CameraBoundsY.X;
 		this.PlayerCam.LimitBottom = (int)this.CameraBoundsY.Y;
 		this.Player.ResetHeight = this.CameraBoundsY.Y + 100.0f;
+
+		this.PlayLevelLoadedQuote();
+	}
+
+	private void PlayLevelLoadedQuote()
+	{
+		AudioStreamPlaylist levelLoadedQuotes = LevelLoadedQuotes.Value;
+		int quoteIndex = GD.RandRange(0, levelLoadedQuotes.StreamCount - 1);
+		AudioStreamPlayer audioStreamPlayer = this.GetNode<AudioStreamPlayer>("LevelLoadedQuote");
+		audioStreamPlayer.Stream = levelLoadedQuotes.GetListStream(quoteIndex);
+		audioStreamPlayer.Play();
 	}
 
 	private static void ApplyMaskLayerToTileMapLayer(TileMapLayer tileMapLayer, uint physicsLayer)
