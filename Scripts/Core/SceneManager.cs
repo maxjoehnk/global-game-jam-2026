@@ -27,6 +27,7 @@ public partial class SceneManager : Node
         if (playState != null)
         {
             this.lastFinishedLevelIndex = this.Levels.FindIndex(level => level.Name == playState.LastPlayedLevelName);
+            this.currentLevelIndex = this.lastFinishedLevelIndex + 1;
             foreach (KeyValuePair<Variant, Variant> highScore in playState.HighScores)
             {
                 string levelName = highScore.Key.As<string>();
