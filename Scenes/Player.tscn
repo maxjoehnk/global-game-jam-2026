@@ -1423,6 +1423,7 @@ one_shot = true
 
 [node name="PlayerDiedQuote" type="AudioStreamPlayer" parent="." unique_id=2007516157]
 stream = ExtResource("5_52ee3")
+volume_db = -2.0
 bus = &"Quotes"
 
 [node name="TileMapCutter" parent="." unique_id=1935722058 instance=ExtResource("5_5ixxa")]
@@ -1430,7 +1431,7 @@ position = Vector2(75, 2)
 
 [node name="WalkingSounds" type="AudioStreamPlayer" parent="." unique_id=848594469]
 stream = ExtResource("6_nn08x")
-volume_db = 2.0
+volume_db = 1.0
 bus = &"FX"
 
 [node name="AudioListener2D" type="AudioListener2D" parent="." unique_id=1625100860]
