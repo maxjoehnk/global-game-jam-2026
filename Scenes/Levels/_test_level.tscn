@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://b3cvrve3kidwy" path="res://Assets/Elements/Atlas.png" id="4_npfmg"]
 [ext_resource type="PackedScene" uid="uid://bwe7nn0f8cmwb" path="res://Scenes/Enemies/hammer_enemy.tscn" id="4_x4x4f"]
 [ext_resource type="PackedScene" uid="uid://bnwufpfb7lbal" path="res://Scenes/BuildingBlocks/mask.tscn" id="7_x4x4f"]
+[ext_resource type="PackedScene" uid="uid://coav4qwmeq0b0" path="res://Scenes/Enemies/covid_cloud.tscn" id="9_7rivk"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k8g1k"]
 texture = ExtResource("4_npfmg")
@@ -97,13 +98,14 @@ position = Vector2(-437, 319)
 
 [node name="Item" parent="Layers/TileMapLayer" index="3" unique_id=1748474714 instance=ExtResource("4_l7ek2")]
 position = Vector2(-897, 228)
+HUDSprite = null
 
 [node name="HammerEnemy" parent="Layers/TileMapLayer" index="4" unique_id=1736735301 instance=ExtResource("4_x4x4f")]
 position = Vector2(441, 224)
 
 [node name="TileMapLayer2" type="TileMapLayer" parent="Layers" parent_id_path=PackedInt32Array(1705662681) index="1" unique_id=1488375411]
 position = Vector2(960, 540)
-tile_map_data = PackedByteArray("AAACAP3/AAABAAQAAAAGAP3/AAABAAQAAAAKAP3/AAABAAQAAAD5/wcAAAABAAQAAAD9/wcAAAABAAQAAAABAAcAAAABAAQAAAAFAAcAAAABAAQAAAAJAAcAAAABAAQAAAANAAcAAAABAAQAAAARAAcAAAABAAQAAAD9/wAAAAABAAYAAAAAAP3/AAABAAYAAAD0//v/AAABAAYAAADw//v/AAABAAYAAADs//v/AAABAAYAAAA=")
+tile_map_data = PackedByteArray("AAACAP3/AAABAAQAAAAGAP3/AAABAAQAAAAKAP3/AAABAAQAAAD5/wcAAAABAAQAAAD9/wcAAAABAAQAAAABAAcAAAABAAQAAAAFAAcAAAABAAQAAAAJAAcAAAABAAQAAAANAAcAAAABAAQAAAARAAcAAAABAAQAAAD9/wAAAAABAAYAAAAAAP3/AAABAAYAAAD0//v/AAABAAYAAADw//v/AAABAAYAAADs//v/AAABAAYAAAD4/wsAAAACAAQAAAD8/wsAAAACAAQAAAAAAAsAAAACAAQAAAAEAAsAAAACAAQAAAAIAAsAAAACAAQAAAA=")
 tile_set = SubResource("TileSet_x4x4f")
 
 [node name="WalkingEnemy2" parent="Layers/TileMapLayer2" index="0" unique_id=211621984 instance=ExtResource("3_db73o")]
@@ -112,6 +114,9 @@ MovementSpeed = 150.0
 
 [node name="Mask" parent="Layers/TileMapLayer2" index="1" unique_id=1895334144 instance=ExtResource("7_x4x4f")]
 position = Vector2(-746, -252)
+
+[node name="CovidCloud" parent="Layers/TileMapLayer2" index="2" unique_id=906888399 instance=ExtResource("9_7rivk")]
+position = Vector2(0, 503)
 
 [node name="Player" parent="." index="5" unique_id=1038420454]
 position = Vector2(180, 756)

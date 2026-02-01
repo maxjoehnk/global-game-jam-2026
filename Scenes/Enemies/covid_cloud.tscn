@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://coav4qwmeq0b0"]
+
+[ext_resource type="PackedScene" uid="uid://cob0k4wpkvr8g" path="res://Scenes/Enemies/enemy.tscn" id="1_lkiro"]
+[ext_resource type="Script" uid="uid://dovbbf30rvwkn" path="res://Scripts/Enemies/CovidCloud.cs" id="2_32pos"]
+[ext_resource type="Texture2D" uid="uid://rg2h3v1uq5wj" path="res://icon.svg" id="3_inxd5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aql7v"]
+size = Vector2(300, 300)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ahcjj"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(200, 200, 100)
+angular_velocity_min = -50.000015
+angular_velocity_max = 49.99998
+gravity = Vector3(0, 1, 0)
+scale_min = 0.099999994
+scale_max = 0.19999999
+
+[node name="CovidCloud" unique_id=1736735301 instance=ExtResource("1_lkiro")]
+script = ExtResource("2_32pos")
+
+[node name="Polygon2D" parent="." index="0" unique_id=1152057987]
+disabled = true
+
+[node name="RayCastLeft" parent="Raycasts" parent_id_path=PackedInt32Array(1828570703) index="0" unique_id=1623010311]
+enabled = false
+
+[node name="RayCastRight" parent="Raycasts" parent_id_path=PackedInt32Array(1828570703) index="1" unique_id=327245352]
+enabled = false
+
+[node name="Area2D" type="Area2D" parent="." index="3" unique_id=1014558005]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0" unique_id=226793924]
+shape = SubResource("RectangleShape2D_aql7v")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." index="4" unique_id=680949046]
+amount = 64
+texture = ExtResource("3_inxd5")
+lifetime = 5.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_ahcjj")
