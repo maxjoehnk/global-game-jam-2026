@@ -1432,6 +1432,9 @@ stream = ExtResource("6_nn08x")
 volume_db = 2.0
 bus = &"FX"
 
+[node name="AudioListener2D" type="AudioListener2D" parent="." unique_id=1625100860]
+current = true
+
 [connection signal="PlayerDied" from="." to="PlayerDiedQuote" method="play"]
 [connection signal="PlayerStartedWalking" from="." to="WalkingSounds" method="play"]
 [connection signal="PlayerStoppedWalking" from="." to="WalkingSounds" method="stop"]
