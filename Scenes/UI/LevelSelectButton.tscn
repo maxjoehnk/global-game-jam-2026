@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://crymy6jljeke8"]
+
+[ext_resource type="PackedScene" uid="uid://bsldn8e7jelex" path="res://Scenes/UI/SpahnButton.tscn" id="1_6o1co"]
+[ext_resource type="Script" uid="uid://d3ma10yg1wn87" path="res://Scripts/UI/LevelSelectButton.cs" id="2_77wv5"]
+
+[node name="Button" unique_id=1995207131 instance=ExtResource("1_6o1co")]
+custom_minimum_size = Vector2(300, 0)
+script = ExtResource("2_77wv5")
+
+[node name="HighScoreContainer" type="MarginContainer" parent="." index="2" unique_id=2113755879]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -20.0
+offset_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/margin_right = 10
+
+[node name="HighScore" type="Label" parent="HighScoreContainer" index="0" unique_id=1291425552]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.19800001, 0.5059999, 0.66, 1)
+theme_override_font_sizes/font_size = 12
+text = "01:00"
+horizontal_alignment = 2
