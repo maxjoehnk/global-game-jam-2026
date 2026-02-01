@@ -215,7 +215,7 @@ public partial class HammerEnemy : Enemy
 	public override void Hit(Projectile? projectile)
 	{
 		CollisionShape2D CollShape = GetNode<CollisionShape2D>("Polygon2D");
-		CollShape.Disabled = true;
+		CollShape.SetDeferred("Disabled", true);
 		this.SetPhysicsProcess(false);
 		this.PlayerScanArea.QueueFree();
 		this.PlayerAttackArea.QueueFree();

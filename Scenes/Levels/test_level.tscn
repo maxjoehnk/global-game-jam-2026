@@ -4,6 +4,7 @@
 [ext_resource type="TileSet" uid="uid://dla10wbktycmr" path="res://Assets/TileSet.tres" id="2_b07c4"]
 [ext_resource type="PackedScene" uid="uid://dy5opi42vhi4y" path="res://Scenes/Enemies/walking_enemy.tscn" id="3_db73o"]
 [ext_resource type="PackedScene" uid="uid://dweykadsk8bdk" path="res://Scenes/Enemies/burning_trash.tscn" id="4_k8g1k"]
+[ext_resource type="PackedScene" uid="uid://bswuxr4vm5fm7" path="res://Scenes/Items/Bild.tscn" id="4_l7ek2"]
 [ext_resource type="Texture2D" uid="uid://b3cvrve3kidwy" path="res://Assets/Elements/Atlas.png" id="4_npfmg"]
 [ext_resource type="PackedScene" uid="uid://bwe7nn0f8cmwb" path="res://Scenes/Enemies/hammer_enemy.tscn" id="4_x4x4f"]
 [ext_resource type="PackedScene" uid="uid://bnwufpfb7lbal" path="res://Scenes/BuildingBlocks/mask.tscn" id="7_x4x4f"]
@@ -94,7 +95,10 @@ position = Vector2(-506, 320)
 [node name="BurningTrash3" parent="Layers/TileMapLayer" index="2" unique_id=153490793 instance=ExtResource("4_k8g1k")]
 position = Vector2(-437, 319)
 
-[node name="HammerEnemy" parent="Layers/TileMapLayer" index="3" unique_id=1736735301 instance=ExtResource("4_x4x4f")]
+[node name="Item" parent="Layers/TileMapLayer" index="3" unique_id=1748474714 instance=ExtResource("4_l7ek2")]
+position = Vector2(-897, 228)
+
+[node name="HammerEnemy" parent="Layers/TileMapLayer" index="4" unique_id=1736735301 instance=ExtResource("4_x4x4f")]
 position = Vector2(441, 224)
 
 [node name="TileMapLayer2" type="TileMapLayer" parent="Layers" parent_id_path=PackedInt32Array(1705662681) index="1" unique_id=1488375411]
