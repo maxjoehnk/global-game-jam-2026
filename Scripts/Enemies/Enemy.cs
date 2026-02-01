@@ -8,6 +8,9 @@ public partial class Enemy : CharacterBody2D, IAssignableLayer
 	public RayCast2D RayRight => GetNode<RayCast2D>("Raycasts/RayCastRight");
 
 	public float Gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
+	
+	[Signal]
+	public delegate void EnemyDiedEventHandler(Projectile? projectile);
 
 	public uint AssignedLayer { 
 		get => this.CollisionLayer & Consts.LayerMask;
@@ -29,7 +32,13 @@ public partial class Enemy : CharacterBody2D, IAssignableLayer
 		return (otherMask & this.AssignedLayer) == this.AssignedLayer;
 	}
 
-	public virtual void Hit(Projectile? projectile)
+	public void Hit(Projectile? projectile)
+	{
+		this.EmitSignalEnemyDied(projectile);
+		this.WasHit();
+	}
+
+	protected virtual void WasHit()
 	{
 		this.QueueFree();
 	}

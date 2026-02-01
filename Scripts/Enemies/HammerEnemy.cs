@@ -212,10 +212,10 @@ public partial class HammerEnemy : Enemy
 		}  
 	}
 
-	public override void Hit(Projectile? projectile)
+	protected override void WasHit()
 	{
-		CollisionShape2D CollShape = GetNode<CollisionShape2D>("Polygon2D");
-		CollShape.SetDeferred("Disabled", true);
+		CollisionShape2D collShape = GetNode<CollisionShape2D>("Polygon2D");
+		collShape.SetDeferred("Disabled", true);
 		this.SetPhysicsProcess(false);
 		this.PlayerScanArea.QueueFree();
 		this.PlayerAttackArea.QueueFree();

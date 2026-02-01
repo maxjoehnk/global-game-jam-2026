@@ -21,6 +21,8 @@ public partial class AvailableLevel
 	public bool IsTestLevel { get; set; }
 
 	public bool IsUnlocked { get; set; }
+	
+	public double? HighScore { get; set; }
 
 	public AvailableLevel(string path, int fileIndex)
 	{

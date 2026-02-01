@@ -77,6 +77,9 @@ public partial class Player : CharacterBody2D
 	public delegate void PlayerJumpedEventHandler();
 
 	[Signal]
+	public delegate void PlayerLandedEventHandler();
+
+	[Signal]
 	public delegate void ItemChangedEventHandler(Item? item);
 
 	public void SetActiveCollisionLayer(uint layer)
@@ -198,6 +201,7 @@ public partial class Player : CharacterBody2D
 				break;
 			case State.WallJump:
 				this.Playback.Travel("jump");
+				this.EmitSignalPlayerJumped();
 				velocity.Y = this.WallJumpY;
 				velocity.X = this.LastWallDir * this.WallJumpX;
 				this.Velocity = velocity;
@@ -225,6 +229,12 @@ public partial class Player : CharacterBody2D
 				break;
 		}
 
+		if (this.CurrentState is State.Fall or State.Dive or State.Jump or State.WallJump &&
+		    NewState is State.Idle or State.Run)
+		{
+			this.EmitSignalPlayerLanded();
+		}
+		
 		if (this.CurrentState == State.Run)
 		{
 			this.EmitSignalPlayerStoppedWalking();

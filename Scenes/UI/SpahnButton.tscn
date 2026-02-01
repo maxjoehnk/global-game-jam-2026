@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bsldn8e7jelex"]
 
 [ext_resource type="Texture2D" uid="uid://c3qqe2ap7tgh" path="res://Assets/Character/SpahnKopf.png" id="1_dbxse"]
-[ext_resource type="Theme" uid="uid://d1wiq2lhxalpu" path="res://Themes/PaperUi.tres" id="1_e1ocm"]
+[ext_resource type="Theme" uid="uid://of2ae14ao6ha" path="res://Themes/PaperUi.tres" id="1_e1ocm"]
 [ext_resource type="PackedScene" uid="uid://dk7nxjlht6iqe" path="res://Scenes/UI/AnimatedSpahnKopf.tscn" id="1_yplre"]
 
 [node name="Button" type="Button" unique_id=1995207131]

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cob0k4wpkvr8g"]
 
 [ext_resource type="Script" uid="uid://ckd4x305lkx84" path="res://Scripts/Enemies/Enemy.cs" id="1_jcvw6"]
+[ext_resource type="AudioStream" uid="uid://jbd4nof8y03f" path="res://Assets/Sounds/FX/DeathSound.wav" id="2_jcvw6"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3pdns"]
 radius = 35.0
@@ -27,3 +28,9 @@ target_position = Vector2(0, 90)
 [node name="RayCastRight" type="RayCast2D" parent="Raycasts" unique_id=327245352]
 position = Vector2(45, 40)
 target_position = Vector2(0, 90)
+
+[node name="DeathSound" type="AudioStreamPlayer2D" parent="." unique_id=303585676]
+stream = ExtResource("2_jcvw6")
+bus = &"FX"
+
+[connection signal="EnemyDied" from="." to="DeathSound" method="play"]
