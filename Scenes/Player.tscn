@@ -1404,6 +1404,7 @@ texture = ExtResource("5_miouo")
 
 [node name="Body" type="Sprite2D" parent="Sprites" unique_id=1712788532]
 texture_filter = 1
+position = Vector2(1.9999999, 0.9999996)
 scale = Vector2(0.2053989, 0.2053989)
 texture = ExtResource("6_o3h8g")
 
