@@ -138,3 +138,7 @@ dive={
 2d_physics/layer_10="Map Layer 2"
 2d_physics/layer_11="Map Layer 3"
 2d_physics/layer_12="Map Layer 4"
+
+[rendering]
+
+textures/vram_compression/import_etc2_astc=true

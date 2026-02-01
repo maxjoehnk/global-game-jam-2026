@@ -5,11 +5,13 @@ namespace GlobalGameJam.Scripts.UI;
 
 public partial class MainMenu : Panel
 {
-	private Control LevelSelector => (this.FindChild("Play") as Control)!;
+	private Control PlayButton => (this.FindChild("Play") as Control)!;
+	private Button LevelSelector => (this.FindChild("LevelSelector") as Button)!;
 
 	public override void _Ready()
 	{
-		this.LevelSelector.GrabFocus();
+		this.PlayButton.GrabFocus();
+		this.LevelSelector.Disabled = !SceneManager.Instance.HasUnlockedALevel;
 		GlobalAudioPlayback.Instance.StartAllPlayback();
 	}
 

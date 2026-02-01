@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://lhi7csxw410n"]
 
-[ext_resource type="Theme" uid="uid://d1wiq2lhxalpu" path="res://Themes/PaperUi.tres" id="1_hfiyb"]
+[ext_resource type="Theme" uid="uid://of2ae14ao6ha" path="res://Themes/PaperUi.tres" id="1_hfiyb"]
 [ext_resource type="Script" uid="uid://bimg08dp34kbv" path="res://Scripts/UI/Settings.cs" id="1_mj2lg"]
 [ext_resource type="PackedScene" uid="uid://bsldn8e7jelex" path="res://Scenes/UI/SpahnButton.tscn" id="2_v5qja"]
 [ext_resource type="Theme" uid="uid://df35olqvawmkw" path="res://Themes/PaperUiBlackedText.tres" id="3_sc1bs"]
@@ -114,6 +114,23 @@ layout_mode = 2
 max_value = 1.2
 step = 0.01
 
+[node name="MarginContainer4" type="MarginContainer" parent="MarginContainer/VBoxContainer" unique_id=309125982]
+layout_mode = 2
+theme_override_constants/margin_top = 30
+
+[node name="Label3" type="Label" parent="MarginContainer/VBoxContainer" unique_id=574369439]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "User Data"
+horizontal_alignment = 1
+
+[node name="DeleteUserData" parent="MarginContainer/VBoxContainer" unique_id=1995207131 instance=ExtResource("2_v5qja")]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Clear  User Data"
+
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer" unique_id=2088136455]
 layout_mode = 2
 theme_override_constants/margin_top = 40
@@ -126,13 +143,14 @@ alignment = 1
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Abbrechen"
+text = "Cancel"
 
 [node name="Save" parent="MarginContainer/VBoxContainer/HBoxContainer5" unique_id=1492382582 instance=ExtResource("2_v5qja")]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Speichern"
+text = "Save"
 
+[connection signal="pressed" from="MarginContainer/VBoxContainer/DeleteUserData" to="." method="OnClearUserData"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer5/Cancel" to="." method="OnBackPressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer5/Save" to="." method="OnSaveSettings"]

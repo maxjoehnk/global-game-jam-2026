@@ -15,29 +15,47 @@ public partial class SceneManager : Node
 	private int? lastFinishedLevelIndex;
 	private int? currentLevelIndex;
 
-	public List<AvailableLevel> Levels { get; private set; }
+    public List<AvailableLevel> Levels { get; private set; }
 
-	public override void _Ready()
-	{
-		Instance = this;
-		Viewport root = this.GetTree().Root;
-		this.CurrentScene = root.GetChild(-1);
-		this.Levels = GetAvailableLevels();
-		PlayState? playState = UserDataManager.LoadUserData();
-		if (playState != null)
-		{
-			this.lastFinishedLevelIndex = this.Levels.FindIndex(level => level.Name == playState.LastPlayedLevelName);
-			foreach (KeyValuePair<Variant, Variant> highScore in playState.HighScores)
-			{
-				string levelName = highScore.Key.As<string>();
-				double time = highScore.Value.As<double>();
-				AvailableLevel? level = this.Levels.Find(level => level.Name == levelName);
-				if (level != null)
-				{
-					level.HighScore = time;
-				}
-			}
-		}
+    // The first level is always unlocked so we check for 2+ unlocked levels
+    public bool HasUnlockedALevel => this.Levels.Count(l => l.IsUnlocked) > 1;
+
+    public override void _Ready()
+    {
+        Instance = this;
+        Viewport root = this.GetTree().Root;
+        this.CurrentScene = root.GetChild(-1);
+        this.Levels = GetAvailableLevels();
+        this.ReloadUserData();
+    }
+
+    public void ReloadUserData()
+    {
+        PlayState? playState = UserDataManager.LoadUserData();
+        foreach (AvailableLevel level in this.Levels)
+        {
+            level.HighScore = null;
+        }
+        if (playState != null)
+        {
+            this.lastFinishedLevelIndex = this.Levels.FindIndex(level => level.Name == playState.LastPlayedLevelName);
+            this.currentLevelIndex = this.lastFinishedLevelIndex + 1;
+            foreach (KeyValuePair<Variant, Variant> highScore in playState.HighScores)
+            {
+                string levelName = highScore.Key.As<string>();
+                double time = highScore.Value.As<double>();
+                AvailableLevel? level = this.Levels.Find(level => level.Name == levelName);
+                if (level != null)
+                {
+                    level.HighScore = time;
+                }
+            }
+        }
+        else
+        {
+            this.lastFinishedLevelIndex = null;
+            this.currentLevelIndex = 0;
+        }
 
 		this.UnlockLevels();
 	}

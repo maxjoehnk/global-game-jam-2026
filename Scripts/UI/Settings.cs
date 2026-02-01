@@ -26,6 +26,14 @@ public partial class Settings : Panel
 		this.QuotesVolumeSlider.ValueChanged += this.OnQuotesVolumeChanged;
 	}
 
+	public override void _Input(InputEvent @event)
+	{
+		if (Input.IsActionJustPressedByEvent(InputAction.Cancel, @event))
+		{
+			this.OnBackPressed();
+		}
+	}
+
 	private void OnMainVolumeChanged(double value)
 	{
 		SettingsManager.MainVolume = value;
@@ -44,6 +52,13 @@ public partial class Settings : Panel
 	private void OnQuotesVolumeChanged(double value)
 	{
 		SettingsManager.QuotesVolume = value;
+	}
+
+	public void OnClearUserData()
+	{
+		UserDataManager.ClearUserData();
+		SceneManager.Instance.ReloadUserData();
+		SceneManager.Instance.OpenMainMenu();
 	}
 	
 	public void OnSaveSettings()

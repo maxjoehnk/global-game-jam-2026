@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dnbw8h2bfq7f1" path="res://Scripts/UI/CustomTabBar.cs" id="1_cpdhy"]
 [ext_resource type="Texture2D" uid="uid://dcvar2yqrxvj5" path="res://Assets/UI/Border.png" id="1_cw1yi"]
+[ext_resource type="Texture2D" uid="uid://c0eptv0ounhna" path="res://Assets/UI/TopBarBackground.jpg" id="2_87v2r"]
 [ext_resource type="PackedScene" uid="uid://vuvnc1k5iy3h" path="res://Scenes/UI/tab_label.tscn" id="3_j5kdl"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_87v2r"]
@@ -10,17 +11,18 @@ bg_color = Color(0, 0, 0, 1)
 [node name="CustomTabBar" type="CanvasLayer" unique_id=520158691]
 script = ExtResource("1_cpdhy")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=328771140]
+[node name="ColorRect" type="TextureRect" parent="." unique_id=867443603]
 custom_minimum_size = Vector2(0, 50)
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -960.0
 offset_right = 960.0
-offset_bottom = 45.0
+offset_bottom = 50.0
 grow_horizontal = 2
 size_flags_vertical = 2
-color = Color(0, 0, 0, 1)
+texture = ExtResource("2_87v2r")
+expand_mode = 1
 
 [node name="OuterVBox" type="VBoxContainer" parent="." unique_id=300245134]
 anchors_preset = 15
