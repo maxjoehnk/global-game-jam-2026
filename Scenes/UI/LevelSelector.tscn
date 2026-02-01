@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bsldn8e7jelex" path="res://Scenes/UI/SpahnButton.tscn" id="1_cc4ho"]
 [ext_resource type="Script" uid="uid://b0vocoln4lnfo" path="res://Scripts/UI/LevelSelector.cs" id="1_o3ex8"]
-[ext_resource type="Theme" uid="uid://d1wiq2lhxalpu" path="res://Themes/PaperUi.tres" id="1_rinbb"]
+[ext_resource type="Theme" uid="uid://of2ae14ao6ha" path="res://Themes/PaperUi.tres" id="1_rinbb"]
 [ext_resource type="LabelSettings" uid="uid://d1wnrxsnlcr3f" path="res://Themes/PaperLabel.tres" id="2_rinbb"]
 
 [node name="LevelSelector" type="Panel" unique_id=466009]

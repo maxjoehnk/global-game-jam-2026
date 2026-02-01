@@ -181,6 +181,7 @@ public partial class Game : Node2D
 	private void OnPlayerReachedGoal()
 	{
 		this.Hud.ShowWonMenu();
+		SceneManager.Instance.FinishedLevel(this.LevelTime);
 	}
 
 	public override void _Process(double delta)
