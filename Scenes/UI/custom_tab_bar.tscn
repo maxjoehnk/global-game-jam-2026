@@ -3,10 +3,7 @@
 [ext_resource type="Script" uid="uid://dnbw8h2bfq7f1" path="res://Scripts/UI/CustomTabBar.cs" id="1_cpdhy"]
 [ext_resource type="Texture2D" uid="uid://dcvar2yqrxvj5" path="res://Assets/UI/Border.png" id="1_cw1yi"]
 [ext_resource type="Texture2D" uid="uid://c0eptv0ounhna" path="res://Assets/UI/TopBarBackground.jpg" id="2_87v2r"]
-[ext_resource type="PackedScene" uid="uid://vuvnc1k5iy3h" path="res://Scenes/UI/tab_label.tscn" id="3_j5kdl"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_87v2r"]
-bg_color = Color(0, 0, 0, 1)
+[ext_resource type="Theme" uid="uid://df35olqvawmkw" path="res://Themes/PaperUiBlackedText.tres" id="5_k7ty5"]
 
 [node name="CustomTabBar" type="CanvasLayer" unique_id=520158691]
 script = ExtResource("1_cpdhy")
@@ -66,10 +63,10 @@ custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 alignment = 2
 
-[node name="TimeLabel" parent="TimerBox/LabelBox" unique_id=1430094857 instance=ExtResource("3_j5kdl")]
+[node name="TimeLabel" type="Label" parent="TimerBox/LabelBox" unique_id=992780662]
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_styles/normal = SubResource("StyleBoxFlat_87v2r")
+theme = ExtResource("5_k7ty5")
+theme_override_font_sizes/font_size = 32
 text = "Time: 00:00"
 
 [node name="MarginContainer" type="MarginContainer" parent="TimerBox/LabelBox" unique_id=1057635468]
