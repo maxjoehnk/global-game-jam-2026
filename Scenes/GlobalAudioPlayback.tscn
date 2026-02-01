@@ -5,6 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://dstrhxi2rs3mb" path="res://Assets/Music/National_anthem_of_Germany_-_U.S._Army_1st_Armored_Division_Band.ogg" id="2_vrkvq"]
 
 [node name="GlobalAudioPlayback" type="Node" unique_id=946902306]
+process_mode = 3
 script = ExtResource("1_2rwt8")
 
 [node name="NationalHymne" type="AudioStreamPlayer" parent="." unique_id=1681606427]

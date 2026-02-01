@@ -11,6 +11,14 @@
 [ext_resource type="AudioStream" uid="uid://b24itg572qpas" path="res://Assets/Sounds/FX/Walking.tres" id="6_nn08x"]
 [ext_resource type="Texture2D" uid="uid://xxb5ndv0j7lq" path="res://Assets/Character/Torso.png" id="6_o3h8g"]
 [ext_resource type="Texture2D" uid="uid://du3yrn3wwayrx" path="res://Assets/Elements/MaskeFace.png" id="8_ksbbd"]
+[ext_resource type="PackedScene" uid="uid://be1f1agf7yj6o" path="res://Scenes/RandomAudioPlayback.tscn" id="12_ulo2v"]
+[ext_resource type="AudioStream" uid="uid://u4ub5l0iniaw" path="res://Assets/Sounds/FX/2026-Global-Game-Jam - Jump_Dive_1.wav" id="13_1iu4k"]
+[ext_resource type="AudioStream" uid="uid://cugee5w5pesmk" path="res://Assets/Sounds/FX/2026-Global-Game-Jam - Jump_Dive_2.wav" id="14_m0x7a"]
+[ext_resource type="AudioStream" uid="uid://0akssjq4ti3n" path="res://Assets/Sounds/FX/2026-Global-Game-Jam - Jump_Dive_3.wav" id="15_5v66d"]
+[ext_resource type="AudioStream" uid="uid://bqb5wp8upgg16" path="res://Assets/Sounds/FX/2026-Global-Game-Jam - Jump_Dive_4.wav" id="16_x63xi"]
+[ext_resource type="AudioStream" uid="uid://b6c3oy7x5ogwt" path="res://Assets/Sounds/FX/2026-Global-Game-Jam - Jump_Dive_5.wav" id="17_i2e8t"]
+[ext_resource type="AudioStream" uid="uid://bnxn01ighbwbh" path="res://Assets/Sounds/FX/2026-Global-Game-Jam - Jump_Dive_6.wav" id="18_qidb7"]
+[ext_resource type="AudioStream" uid="uid://ddhrrlga1lswb" path="res://Assets/Sounds/FX/2026-Global-Game-Jam - Land.wav" id="19_1iu4k"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kyqiw"]
 radius = 35.0
@@ -1361,6 +1369,17 @@ nodes/OneShot/node = SubResource("AnimationNodeOneShot_yoq75")
 nodes/OneShot/position = Vector2(160, 120)
 node_connections = [&"output", 0, &"OneShot", &"OneShot", 0, &"StateMachine", &"OneShot", 1, &"Animation"]
 
+[sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_70hv0"]
+loop = false
+fade_time = 0.0
+stream_count = 6
+stream_0 = ExtResource("13_1iu4k")
+stream_1 = ExtResource("14_m0x7a")
+stream_2 = ExtResource("15_5v66d")
+stream_3 = ExtResource("16_x63xi")
+stream_4 = ExtResource("17_i2e8t")
+stream_5 = ExtResource("18_qidb7")
+
 [node name="Player" type="CharacterBody2D" unique_id=1038420454]
 collision_mask = 65292
 floor_max_angle = 1.134464
@@ -1439,11 +1458,24 @@ position = Vector2(75, 2)
 [node name="WalkingSounds" type="AudioStreamPlayer" parent="." unique_id=848594469]
 stream = ExtResource("6_nn08x")
 volume_db = 1.0
+max_polyphony = 2
 bus = &"FX"
 
 [node name="AudioListener2D" type="AudioListener2D" parent="." unique_id=1625100860]
 current = true
 
+[node name="JumpDiveSound" parent="." unique_id=1485736282 instance=ExtResource("12_ulo2v")]
+Playlist = SubResource("AudioStreamPlaylist_70hv0")
+
+[node name="PlayerLandedSound" type="AudioStreamPlayer" parent="." unique_id=436045234]
+stream = ExtResource("19_1iu4k")
+volume_db = -5.0
+pitch_scale = 0.91
+bus = &"FX"
+
 [connection signal="PlayerDied" from="." to="PlayerDiedQuote" method="play"]
+[connection signal="PlayerDived" from="." to="JumpDiveSound" method="PlayRandomSound"]
+[connection signal="PlayerJumped" from="." to="JumpDiveSound" method="PlayRandomSound"]
+[connection signal="PlayerLanded" from="." to="PlayerLandedSound" method="play"]
 [connection signal="PlayerStartedWalking" from="." to="WalkingSounds" method="play"]
 [connection signal="PlayerStoppedWalking" from="." to="WalkingSounds" method="stop"]

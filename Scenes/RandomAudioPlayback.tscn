@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://be1f1agf7yj6o"]
+
+[ext_resource type="Script" uid="uid://dsyv67fqmt4ra" path="res://Scripts/RandomAudioPlayback.cs" id="1_0aaep"]
+
+[node name="RandomAudioPlayback" type="AudioStreamPlayer2D" unique_id=1485736282]
+bus = &"FX"
+script = ExtResource("1_0aaep")

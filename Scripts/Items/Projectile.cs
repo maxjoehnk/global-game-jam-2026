@@ -2,7 +2,7 @@ using Godot;
 
 public partial class Projectile : RigidBody2D
 {
-    private AudioStreamPlayer2D AudioPlayer => GetNode<AudioStreamPlayer2D>("AudioStreamPlayer2D");
+    private RandomAudioPlayback AudioPlayer => GetNode<RandomAudioPlayback>("RandomAudioPlayback");
     
     [Export]
     private AudioStreamPlaylist Playlist { get; set; }
@@ -11,19 +11,12 @@ public partial class Projectile : RigidBody2D
     {
         this.BodyEntered += body =>
         {
-            this.PlayHitEffect();
+            this.AudioPlayer.PlayRandomSound();
             if (body is Enemy enemy)
             {
                 enemy.Hit(this);
                 this.QueueFree();
             }
         };
-    }
-
-    private void PlayHitEffect()
-    {
-        int quoteIndex = GD.RandRange(0, this.Playlist.StreamCount - 1);
-        this.AudioPlayer.Stream = this.Playlist.GetListStream(quoteIndex);
-        this.AudioPlayer.Play();
     }
 }

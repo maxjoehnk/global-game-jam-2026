@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cilscqdj2pur8" path="res://Scripts/Items/Projectile.cs" id="1_76ih0"]
 [ext_resource type="Texture2D" uid="uid://c4bowiomdcntm" path="res://Assets/Particles/BildThrowable.png" id="1_c1i1u"]
 [ext_resource type="AudioStream" uid="uid://dac42a8lg1v83" path="res://Assets/Sounds/FX/Bild FX/BildThrowFX.tres" id="3_dutq8"]
+[ext_resource type="PackedScene" uid="uid://be1f1agf7yj6o" path="res://Scenes/RandomAudioPlayback.tscn" id="4_5l5c3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_76ih0"]
 size = Vector2(161.5, 586)
@@ -25,5 +26,5 @@ position = Vector2(0.25, 1)
 scale = Vector2(0.10520343, 0.10479662)
 shape = SubResource("RectangleShape2D_76ih0")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1401712733]
-bus = &"FX"
+[node name="RandomAudioPlayback" parent="." unique_id=1485736282 instance=ExtResource("4_5l5c3")]
+Playlist = ExtResource("3_dutq8")
