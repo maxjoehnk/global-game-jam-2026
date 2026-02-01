@@ -9,6 +9,7 @@ size = Vector2(612, 583)
 
 [node name="Item" unique_id=1748474714 instance=ExtResource("1_05h2a")]
 Projectile = ExtResource("2_ot4lx")
+HUDSprite = ExtResource("3_sm4gr")
 Velocity = 500.0
 
 [node name="Sprite2D" parent="." index="0" unique_id=1924315387]

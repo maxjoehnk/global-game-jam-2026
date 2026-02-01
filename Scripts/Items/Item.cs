@@ -6,6 +6,9 @@ public partial class Item : RigidBody2D, IAssignableLayer
 	[Export]
 	public PackedScene Projectile { get; set; }
 	
+	[Export]
+	public Texture2D HUDSprite { get; set; }
+	
 	[Export] public float Velocity { get; set; } = 1000;
 
 	private Area2D Detector => GetNode<Area2D>("Detector");

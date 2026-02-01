@@ -12,6 +12,8 @@ public partial class GameHud : CanvasLayer
 	private PauseMenu PauseDialog => GetNode<PauseMenu>("PauseDialog");
 
 	private WonMenu WonDialog => GetNode<WonMenu>("WonDialog");
+	
+	private TextureRect ItemPreview => GetNode<TextureRect>("ItemPreview");
 
 	public override void _Ready()
 	{
@@ -20,6 +22,7 @@ public partial class GameHud : CanvasLayer
 		this.WonDialog.ProcessMode = ProcessModeEnum.WhenPaused;
 		this.WonDialog.Visible = false;
 		this.PauseDialog.Visible = false;
+		this.ItemPreview.Visible = false;
 	}
 
 	public override void _Input(InputEvent @event)
@@ -60,5 +63,19 @@ public partial class GameHud : CanvasLayer
 	public void SetTime(double totalSeconds)
 	{
 		this.TabNode.SetTimeLabel(totalSeconds);
+	}
+
+	public void UpdateItem(Item? item)
+	{
+		if (item == null)
+		{
+			this.ItemPreview.Visible = false;
+			this.ItemPreview.Texture = null;
+		}
+		else
+		{
+			this.ItemPreview.Texture = item.HUDSprite;
+			this.ItemPreview.Visible = true;
+		}
 	}
 }

@@ -4,7 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://de6hgg3odsf6y" path="res://Scenes/UI/custom_tab_bar.tscn" id="2_663bt"]
 [ext_resource type="PackedScene" uid="uid://dg06nvdxick6h" path="res://Scenes/UI/PauseMenu.tscn" id="3_663bt"]
 [ext_resource type="PackedScene" uid="uid://bfmertmbklj7h" path="res://Scenes/UI/WonMenu.tscn" id="4_nbojb"]
-[ext_resource type="PackedScene" path="res://Scenes/UI/ControlsOverlay.tscn" id="5_nbojb"]
+[ext_resource type="PackedScene" uid="uid://dntvdl18dlw45" path="res://Scenes/UI/ControlsOverlay.tscn" id="5_nbojb"]
+[ext_resource type="Texture2D" uid="uid://dtmafuq4nhip8" path="res://Assets/Particles/BildCollectable.png" id="6_7a7ko"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nbojb"]
 bg_color = Color(0, 0, 0, 0.39215687)
@@ -42,3 +43,13 @@ theme_override_constants/margin_bottom = 10
 
 [node name="ControlsOverlay" parent="PanelContainer/MarginContainer" unique_id=879082475 instance=ExtResource("5_nbojb")]
 layout_mode = 2
+
+[node name="ItemPreview" type="TextureRect" parent="." unique_id=1205456646]
+anchors_preset = -1
+offset_left = 23.0
+offset_top = 73.0
+offset_right = 173.0
+offset_bottom = 223.0
+texture = ExtResource("6_7a7ko")
+expand_mode = 5
+stretch_mode = 4
