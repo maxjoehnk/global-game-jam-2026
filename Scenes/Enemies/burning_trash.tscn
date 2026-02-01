@@ -1,25 +1,39 @@
-[gd_scene format=3 uid="uid://bekb2vc085vb5"]
+[gd_scene format=3 uid="uid://dweykadsk8bdk"]
 
-[ext_resource type="PackedScene" uid="uid://gt8jv8n1hmlw" path="res://Scenes/Enemies/trap.tscn" id="1_2aj4m"]
+[ext_resource type="PackedScene" path="res://Scenes/Enemies/trap.tscn" id="1_2aj4m"]
+[ext_resource type="Script" uid="uid://cxoy66yio6ur1" path="res://Scripts/Enemies/BurningTrash.cs" id="2_2k1iw"]
 [ext_resource type="Texture2D" uid="uid://bd1ykxkia00bl" path="res://Assets/Elements/Papierkorb.png" id="2_l2ssk"]
+[ext_resource type="Material" uid="uid://bksjfspg8uqg3" path="res://Assets/FireShader.tres" id="2_n6wav"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n6wav"]
 size = Vector2(60, 74)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2k1iw"]
-size = Vector2(57, 20)
+size = Vector2(57, 66)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_2k1iw"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_bmpu0"]
+noise = SubResource("FastNoiseLite_2k1iw")
 
 [node name="BurningTrash" unique_id=1555317447 instance=ExtResource("1_2aj4m")]
+script = ExtResource("2_2k1iw")
 
 [node name="CollisionShape2D" parent="." index="0" unique_id=1241471898]
 position = Vector2(0, -36)
 shape = SubResource("RectangleShape2D_n6wav")
 
 [node name="CollisionShape2D" parent="PlayerDetectArea" parent_id_path=PackedInt32Array(1076572822) index="0" unique_id=2015629880]
-position = Vector2(0.5, -78)
+position = Vector2(0.5, -101)
 shape = SubResource("RectangleShape2D_2k1iw")
 
-[node name="Sprite2D" type="Sprite2D" parent="." index="2" unique_id=372617460]
+[node name="Fire" type="Sprite2D" parent="." index="2" unique_id=964042170]
+material = ExtResource("2_n6wav")
+position = Vector2(1, -90.99999)
+scale = Vector2(0.13312186, 0.18245704)
+texture = SubResource("NoiseTexture2D_bmpu0")
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="3" unique_id=372617460]
 position = Vector2(0, -52)
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("2_l2ssk")
