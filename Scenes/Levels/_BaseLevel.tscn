@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cw3x8fe8c2ghf" path="res://Scenes/Player.tscn" id="2_1rdqr"]
 [ext_resource type="PackedScene" uid="uid://d3ylock0hdv0d" path="res://Scenes/UI/GameHUD.tscn" id="2_qawov"]
 [ext_resource type="Texture2D" uid="uid://dslh3l7wrv2ou" path="res://Assets/Elements/Background.png" id="2_t6oia"]
+[ext_resource type="AudioStream" uid="uid://de64w02851ikg" path="res://Assets/Sounds/Quotes/LevelLoadedQuote.tres" id="5_6nsdd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qawov"]
 size = Vector2(1920, 45)
@@ -67,3 +68,7 @@ position = Vector2(148, 699)
 
 [node name="RespawnPoint" type="Marker2D" parent="." unique_id=1746357086]
 position = Vector2(80, 820)
+
+[node name="LevelLoadedQuote" type="AudioStreamPlayer" parent="." unique_id=662305712]
+stream = ExtResource("5_6nsdd")
+bus = &"Quotes"
