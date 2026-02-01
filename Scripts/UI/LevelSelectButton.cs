@@ -1,3 +1,4 @@
+using GlobalGameJam.Scripts;
 using Godot;
 
 public partial class LevelSelectButton : Button
@@ -28,12 +29,7 @@ public partial class LevelSelectButton : Button
             this.GetNode<Control>("HighScoreContainer").Visible = value != null;
             if (value != null)
             {
-                long minutes = (long)value / 60;
-                long seconds = (long)value % 60;
-
-                if (minutes > 99) minutes = 99;
-
-                this.HighScoreLabel.Text = $"{minutes:D2}:{seconds:D2}";
+                this.HighScoreLabel.Text = TimeFormat.Format((double)value);
             }
         }
     }

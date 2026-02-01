@@ -55,9 +55,9 @@ public partial class GameHud : CanvasLayer
 		this.PauseDialog.ToggleDialog();
 	}
 
-	public void ShowWonMenu()
+	public void ShowWonMenu(double time)
 	{
-		this.WonDialog.ShowDialog();
+		this.WonDialog.ShowDialog(time);
 	}
 
 	public void SetTime(double totalSeconds)

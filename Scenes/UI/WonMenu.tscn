@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://y4ek6m5qeius" path="res://Scripts/UI/WonMenu.cs" id="1_f7pny"]
 [ext_resource type="PackedScene" uid="uid://bsldn8e7jelex" path="res://Scenes/UI/SpahnButton.tscn" id="2_v5qja"]
+[ext_resource type="Theme" uid="uid://df35olqvawmkw" path="res://Themes/PaperUiBlackedText.tres" id="3_cshkm"]
 [ext_resource type="PackedScene" uid="uid://dk7nxjlht6iqe" path="res://Scenes/UI/AnimatedSpahnKopf.tscn" id="3_wahdk"]
 [ext_resource type="Theme" uid="uid://of2ae14ao6ha" path="res://Themes/PaperUi.tres" id="5_bidud"]
 
@@ -62,6 +63,13 @@ alignment = 1
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Level Cleared"
+horizontal_alignment = 1
+
+[node name="Score" type="Label" parent="Panel/MarginContainer/VBoxContainer" unique_id=100405977]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("3_cshkm")
+text = "Time"
 horizontal_alignment = 1
 
 [node name="AnimatedSpahnKopf" parent="Panel/MarginContainer/VBoxContainer" unique_id=283827496 instance=ExtResource("3_wahdk")]

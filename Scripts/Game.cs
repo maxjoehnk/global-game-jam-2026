@@ -181,7 +181,7 @@ public partial class Game : Node2D
 
 	private void OnPlayerReachedGoal()
 	{
-		this.Hud.ShowWonMenu();
+		this.Hud.ShowWonMenu(this.LevelTime);
 		SceneManager.Instance.FinishedLevel(this.LevelTime);
 	}
 
