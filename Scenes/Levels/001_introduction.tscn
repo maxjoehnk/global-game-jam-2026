@@ -1,10 +1,42 @@
 [gd_scene format=4 uid="uid://d1kxbq2ali26i"]
 
 [ext_resource type="PackedScene" uid="uid://dq8bmx6sugagf" path="res://Scenes/Levels/_BaseLevel.tscn" id="1_8glxj"]
-[ext_resource type="TileSet" uid="uid://b0qj4rvg8nt0x" path="res://Assets/TileSet.tres" id="2_2pwoe"]
+[ext_resource type="TileSet" uid="uid://dla10wbktycmr" path="res://Assets/TileSet.tres" id="2_2pwoe"]
 [ext_resource type="PackedScene" uid="uid://d2rcj02dpqrfb" path="res://Scenes/BuildingBlocks/LevelFinish.tscn" id="3_rwlrg"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rwlrg"]
+size = Vector2(1920, 45)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hmjnv"]
+size = Vector2(45, 1080)
+
 [node name="001_Introduction" unique_id=14346899 instance=ExtResource("1_8glxj")]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="FixedBoundary" parent_id_path=PackedInt32Array(1051847964) index="0" unique_id=2049962253]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FixedBoundary/StaticBody2D" index="0" unique_id=1208892911]
+position = Vector2(960, 22.5)
+shape = SubResource("RectangleShape2D_rwlrg")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="FixedBoundary" parent_id_path=PackedInt32Array(1051847964) index="1" unique_id=1343446397]
+position = Vector2(-45, 0)
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FixedBoundary/StaticBody2D2" index="0" unique_id=944712367]
+position = Vector2(22, 540)
+shape = SubResource("RectangleShape2D_hmjnv")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="FixedBoundary" parent_id_path=PackedInt32Array(1051847964) index="2" unique_id=1987319929]
+position = Vector2(1920, 0)
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FixedBoundary/StaticBody2D3" index="0" unique_id=2068023997]
+position = Vector2(22, 540)
+shape = SubResource("RectangleShape2D_hmjnv")
 
 [node name="TileMapLayer2" type="TileMapLayer" parent="Layers" parent_id_path=PackedInt32Array(1705662681) index="0" unique_id=627036990]
 tile_map_data = PackedByteArray("AAADABIAAAABAAQAAAALABIAAAABAAQAAAAXAA4AAAADAAMAAAAbAAoAAAADAAMAAAAfAAgAAAAEAAMAAAAHABAAAAAEAAMAAAD//xAAAAAEAAMAAAAjAAoAAAABAAQAAAAnAAgAAAAEAAMAAAAPABIAAAABAAQAAAATABAAAAACAAQAAAA=")
@@ -13,8 +45,8 @@ tile_set = ExtResource("2_2pwoe")
 [node name="LevelFinish" parent="Layers/TileMapLayer2" index="0" unique_id=1423001190 instance=ExtResource("3_rwlrg")]
 position = Vector2(1715, 390)
 
-[node name="Player" parent="." index="4" unique_id=1038420454]
+[node name="Player" parent="." index="5" unique_id=1038420454]
 position = Vector2(95, 772)
 
-[node name="RespawnPoint" parent="." index="5" unique_id=1746357086]
+[node name="RespawnPoint" parent="." index="6" unique_id=1746357086]
 position = Vector2(91, 739)

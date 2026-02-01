@@ -4,6 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://b3cvrve3kidwy" path="res://Assets/Elements/Atlas.png" id="2_wvq80"]
 [ext_resource type="PackedScene" uid="uid://d2rcj02dpqrfb" path="res://Scenes/BuildingBlocks/LevelFinish.tscn" id="3_ggkym"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g1mka"]
+size = Vector2(45, 1080)
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dey4k"]
 texture = ExtResource("2_wvq80")
 texture_region_size = Vector2i(200, 200)
@@ -141,6 +144,24 @@ physics_layer_0/collision_layer = 0
 sources/0 = SubResource("TileSetAtlasSource_bmsgv")
 
 [node name="004_TrippleMask" unique_id=14346899 instance=ExtResource("1_g1mka")]
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="FixedBoundary" parent_id_path=PackedInt32Array(1051847964) index="0" unique_id=1132947856]
+position = Vector2(-45, 0)
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FixedBoundary/StaticBody2D2" index="0" unique_id=1638212639]
+position = Vector2(22, 540)
+shape = SubResource("RectangleShape2D_g1mka")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="FixedBoundary" parent_id_path=PackedInt32Array(1051847964) index="1" unique_id=112412536]
+position = Vector2(1920, 0)
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FixedBoundary/StaticBody2D3" index="0" unique_id=1002977346]
+position = Vector2(22, 540)
+shape = SubResource("RectangleShape2D_g1mka")
 
 [node name="TileMapLayer4" type="TileMapLayer" parent="Layers" parent_id_path=PackedInt32Array(1705662681) index="0" unique_id=327809313]
 position = Vector2(960, 540)

@@ -1,10 +1,31 @@
 [gd_scene format=4 uid="uid://8eb7h11mc7wa"]
 
 [ext_resource type="PackedScene" uid="uid://dq8bmx6sugagf" path="res://Scenes/Levels/_BaseLevel.tscn" id="1_a5fsw"]
-[ext_resource type="TileSet" uid="uid://b0qj4rvg8nt0x" path="res://Assets/TileSet.tres" id="2_vi3xe"]
+[ext_resource type="TileSet" uid="uid://dla10wbktycmr" path="res://Assets/TileSet.tres" id="2_vi3xe"]
 [ext_resource type="PackedScene" uid="uid://d2rcj02dpqrfb" path="res://Scenes/BuildingBlocks/LevelFinish.tscn" id="3_vi3xe"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vi3xe"]
+size = Vector2(45, 1080)
+
 [node name="007_WallJump" unique_id=14346899 instance=ExtResource("1_a5fsw")]
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="FixedBoundary" parent_id_path=PackedInt32Array(1051847964) index="0" unique_id=914044655]
+position = Vector2(-45, 0)
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FixedBoundary/StaticBody2D2" index="0" unique_id=1781063173]
+position = Vector2(22, 540)
+shape = SubResource("RectangleShape2D_vi3xe")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="FixedBoundary" parent_id_path=PackedInt32Array(1051847964) index="1" unique_id=470050151]
+position = Vector2(1920, 0)
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FixedBoundary/StaticBody2D3" index="0" unique_id=201057461]
+position = Vector2(22, 540)
+shape = SubResource("RectangleShape2D_vi3xe")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="Layers" parent_id_path=PackedInt32Array(1705662681) index="0" unique_id=1469210915]
 position = Vector2(960, 540)

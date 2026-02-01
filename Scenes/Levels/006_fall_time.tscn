@@ -1,9 +1,15 @@
 [gd_scene format=4 uid="uid://cmqtc0b1bi1pf"]
 
 [ext_resource type="PackedScene" uid="uid://dq8bmx6sugagf" path="res://Scenes/Levels/_BaseLevel.tscn" id="1_ltl77"]
-[ext_resource type="TileSet" uid="uid://b0qj4rvg8nt0x" path="res://Assets/TileSet.tres" id="2_ccioi"]
+[ext_resource type="TileSet" uid="uid://dla10wbktycmr" path="res://Assets/TileSet.tres" id="2_ccioi"]
 [ext_resource type="Texture2D" uid="uid://b3cvrve3kidwy" path="res://Assets/Elements/Atlas.png" id="3_314xt"]
 [ext_resource type="PackedScene" uid="uid://d2rcj02dpqrfb" path="res://Scenes/BuildingBlocks/LevelFinish.tscn" id="3_ccioi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ccioi"]
+size = Vector2(1920, 45)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_314xt"]
+size = Vector2(45, 1080)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_c40aw"]
 texture = ExtResource("3_314xt")
@@ -75,6 +81,32 @@ sources/0 = SubResource("TileSetAtlasSource_c40aw")
 
 [node name="006_FallTime" unique_id=14346899 instance=ExtResource("1_ltl77")]
 
+[node name="StaticBody2D" type="StaticBody2D" parent="FixedBoundary" parent_id_path=PackedInt32Array(1051847964) index="0" unique_id=1490884598]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FixedBoundary/StaticBody2D" index="0" unique_id=92062148]
+position = Vector2(960, 22.5)
+shape = SubResource("RectangleShape2D_ccioi")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="FixedBoundary" parent_id_path=PackedInt32Array(1051847964) index="1" unique_id=2032188754]
+position = Vector2(-45, 0)
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FixedBoundary/StaticBody2D2" index="0" unique_id=1915235089]
+position = Vector2(22, 540)
+shape = SubResource("RectangleShape2D_314xt")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="FixedBoundary" parent_id_path=PackedInt32Array(1051847964) index="2" unique_id=1502374802]
+position = Vector2(1920, 0)
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FixedBoundary/StaticBody2D3" index="0" unique_id=822308782]
+position = Vector2(22, 540)
+shape = SubResource("RectangleShape2D_314xt")
+
 [node name="TileMapLayer" type="TileMapLayer" parent="Layers" parent_id_path=PackedInt32Array(1705662681) index="0" unique_id=1800108163]
 position = Vector2(960, 540)
 tile_map_data = PackedByteArray("AADt//v/AAAAAAIAAADx//v/AAAAAAIAAAD1//v/AAAAAAIAAAD5//3/AAABAAQAAAD9/wcAAAABAAQAAAABAAcAAAABAAQAAAAFAAUAAAAAAAIAAAAJAAUAAAAAAAIAAAANAAcAAAABAAQAAAARAAcAAAABAAQAAAD5////AAADAAIAAAD5/wIAAAADAAIAAAD5/wUAAAADAAIAAAD5/wgAAAADAAIAAAD5/wsAAAADAAIAAAD5/w4AAAADAAIAAAD1/wwAAAADAAIAAAD1/wkAAAADAAIAAAD2/wYAAAABAAIAAAD3/wQAAAACAAIAAADz/woAAAACAAIAAAAEAAAAAAADAAIAAAAEAP3/AAADAAIAAAAEAPr/AAADAAIAAAAEAPf/AAADAAIAAAAEAPT/AAADAAIAAAD9//v/AAAAAAIAAAABAPv/AAAAAAIAAAA=")
@@ -88,5 +120,5 @@ position = Vector2(960, 540)
 tile_map_data = PackedByteArray("AAD5/w4AAAADAAIAAAD5/wsAAAADAAIAAAD5/wgAAAADAAIAAAD5/wUAAAADAAIAAAD5/wIAAAADAAIAAAD5////AAADAAIAAAD5//z/AAADAAIAAAD5//n/AAADAAIAAAD5//b/AAADAAIAAAD1/w4AAAADAAIAAAD1/wsAAAADAAIAAAD1/wgAAAADAAIAAAAEAAAAAAADAAIAAAAEAP3/AAADAAIAAAAEAPr/AAADAAIAAAAEAPf/AAADAAIAAAAEAPX/AAADAAIAAAAEAAMAAAADAAIAAAAEAAYAAAADAAIAAAAEAAkAAAADAAIAAAAEAAwAAAADAAIAAAAEAA8AAAADAAIAAAAIAA8AAAADAAIAAAAIAAwAAAADAAIAAAAIAAkAAAADAAIAAAAIAAYAAAADAAIAAAAHAAMAAAABAAIAAAD3/wUAAAACAAIAAAAIAAEAAAACAAIAAAA=")
 tile_set = SubResource("TileSet_o1d7j")
 
-[node name="Player" parent="." index="4" unique_id=1038420454]
+[node name="Player" parent="." index="5" unique_id=1038420454]
 position = Vector2(119, 253)

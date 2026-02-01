@@ -16,7 +16,7 @@ public enum State
 public partial class Player : CharacterBody2D
 {
 	private const uint BaseCollisionLayer = 0b1000;
-	private const float ResetHeight = 1200f;
+	public float ResetHeight = 1200f;
 	private const float MoveTol = 0.01f;
 	private const float SpriteScale = 0.5f;
 	// Physics

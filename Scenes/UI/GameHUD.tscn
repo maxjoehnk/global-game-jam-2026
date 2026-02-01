@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://de6hgg3odsf6y" path="res://Scenes/UI/custom_tab_bar.tscn" id="2_663bt"]
 [ext_resource type="PackedScene" uid="uid://dg06nvdxick6h" path="res://Scenes/UI/PauseMenu.tscn" id="3_663bt"]
 [ext_resource type="PackedScene" uid="uid://bfmertmbklj7h" path="res://Scenes/UI/WonMenu.tscn" id="4_nbojb"]
-[ext_resource type="PackedScene" uid="uid://dntvdl18dlw45" path="res://Scenes/UI/ControlsOverlay.tscn" id="5_nbojb"]
+[ext_resource type="PackedScene" path="res://Scenes/UI/ControlsOverlay.tscn" id="5_nbojb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nbojb"]
 bg_color = Color(0, 0, 0, 0.39215687)

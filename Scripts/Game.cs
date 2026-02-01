@@ -7,18 +7,23 @@ using GlobalGameJam.Scripts.UI;
 using Godot.Collections;
 using System.ComponentModel.DataAnnotations;
 using System;
+using System.Numerics;
 
 public partial class Game : Node2D
 {
 	[Export]
 	public int InitialLayer;
 
+	[Export] public Godot.Vector2 CameraBoundsX = new Godot.Vector2(0.0f, 1920.0f); 
+	[Export] public Godot.Vector2 CameraBoundsY = new Godot.Vector2(0.0f, 1080.0f);
+	
 	private const int PhysicsBaseLayer = 8;
 	private const int CutBaseLayer = 5;
 	private const float LayerScaling = 0.025f;
 
 	private Node2D LayerContainer => GetNode<Node2D>("Layers");
 	private Player Player => GetNode<Player>("Player");
+	private Camera2D PlayerCam => GetNode<Camera2D>("Player/Camera2D");
 	private GameHud Hud => GetNode<GameHud>("UI/HUD");
 	private Marker2D RespawnMarker => GetNode<Marker2D>("RespawnPoint");
 
@@ -41,6 +46,8 @@ public partial class Game : Node2D
 		new Color(0.77f, 0.26f, 0.0f),
 		new Color(0.333f, 0.747f, 0.559f),
 	};
+
+	private double LevelTime = 0.0;
 
 	public override void _Ready()
 	{
@@ -82,6 +89,12 @@ public partial class Game : Node2D
 		{
 			finish.PlayerReachedGoal += this.OnPlayerReachedGoal;
 		}
+		// Set camera limits
+		this.PlayerCam.LimitLeft = (int)this.CameraBoundsX.X;
+		this.PlayerCam.LimitRight = (int)this.CameraBoundsX.Y;
+		this.PlayerCam.LimitTop = (int)this.CameraBoundsY.X;
+		this.PlayerCam.LimitBottom = (int)this.CameraBoundsY.Y;
+		this.Player.ResetHeight = this.CameraBoundsY.Y + 100.0f;
 	}
 
 	private static void ApplyMaskLayerToTileMapLayer(TileMapLayer tileMapLayer, uint physicsLayer)
@@ -134,10 +147,10 @@ public partial class Game : Node2D
 			Node2D layer = this.LayerContainer.GetChild<Node2D>(i);
 			layer.Modulate = i == this.activeLayerIndex ? Color.FromHsv(0, 0, 1) : Color.FromHsv(0, 0, 1, 0.2f);
 			float scaling_value = 1.0f + LayerScaling*(i - this.activeLayerIndex);
-			layer.Scale = new Vector2(scaling_value, scaling_value);
+			layer.Scale = new Godot.Vector2(scaling_value, scaling_value);
 			if (i != this.activeLayerIndex)
 			{
-				layer.Modulate *= LayerColorList[i].Lerp(new Color(1.0f,1.0f,1.0f), 0.15f);
+				layer.Modulate *= LayerColorList[i].Lerp(new Color(1.0f,1.0f,1.0f), 0.25f);
 			}
 		}
 		Player.SetActiveCollisionLayer(this.ActivePhysicsLayer);
@@ -154,5 +167,11 @@ public partial class Game : Node2D
 	private void OnPlayerReachedGoal()
 	{
 		this.Hud.ShowWonMenu();
+	}
+
+	public override void _Process(double delta)
+	{
+		this.LevelTime += delta;
+		this.Hud.SetTime(this.LevelTime);
 	}
 }

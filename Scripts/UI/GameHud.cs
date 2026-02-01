@@ -56,4 +56,9 @@ public partial class GameHud : CanvasLayer
 	{
 		this.WonDialog.ShowDialog();
 	}
+
+	public void SetTime(double totalSeconds)
+	{
+		this.TabNode.SetTimeLabel(totalSeconds);
+	}
 }

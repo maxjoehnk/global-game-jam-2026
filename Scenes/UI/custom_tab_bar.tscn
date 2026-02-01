@@ -2,6 +2,10 @@
 
 [ext_resource type="Script" uid="uid://dnbw8h2bfq7f1" path="res://Scripts/UI/CustomTabBar.cs" id="1_cpdhy"]
 [ext_resource type="Texture2D" uid="uid://dcvar2yqrxvj5" path="res://Assets/UI/Border.png" id="1_cw1yi"]
+[ext_resource type="PackedScene" uid="uid://vuvnc1k5iy3h" path="res://Scenes/UI/tab_label.tscn" id="3_j5kdl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_87v2r"]
+bg_color = Color(0, 0, 0, 1)
 
 [node name="CustomTabBar" type="CanvasLayer" unique_id=520158691]
 script = ExtResource("1_cpdhy")
@@ -40,3 +44,32 @@ layout_mode = 2
 texture_filter = 1
 layout_mode = 2
 texture = ExtResource("1_cw1yi")
+
+[node name="TimerBox" type="VBoxContainer" parent="." unique_id=2125085658]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="TimerBox" unique_id=1992474158]
+custom_minimum_size = Vector2(0, 1)
+layout_mode = 2
+
+[node name="LabelBox" type="HBoxContainer" parent="TimerBox" unique_id=326777947]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+alignment = 2
+
+[node name="TimeLabel" parent="TimerBox/LabelBox" unique_id=1430094857 instance=ExtResource("3_j5kdl")]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_87v2r")
+text = "Time: 00:00"
+
+[node name="MarginContainer" type="MarginContainer" parent="TimerBox/LabelBox" unique_id=1057635468]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2

@@ -1,10 +1,42 @@
 [gd_scene format=4 uid="uid://b20g6tjnwv431"]
 
 [ext_resource type="PackedScene" uid="uid://dq8bmx6sugagf" path="res://Scenes/Levels/_BaseLevel.tscn" id="1_lruki"]
-[ext_resource type="TileSet" uid="uid://b0qj4rvg8nt0x" path="res://Assets/TileSet.tres" id="2_hbua4"]
+[ext_resource type="TileSet" uid="uid://dla10wbktycmr" path="res://Assets/TileSet.tres" id="2_hbua4"]
 [ext_resource type="PackedScene" uid="uid://d2rcj02dpqrfb" path="res://Scenes/BuildingBlocks/LevelFinish.tscn" id="3_hbua4"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hbua4"]
+size = Vector2(1920, 45)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pt02e"]
+size = Vector2(45, 1080)
+
 [node name="009DiveToTheMoney" unique_id=14346899 instance=ExtResource("1_lruki")]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="FixedBoundary" parent_id_path=PackedInt32Array(1051847964) index="0" unique_id=740796749]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FixedBoundary/StaticBody2D" index="0" unique_id=1245275808]
+position = Vector2(960, 22.5)
+shape = SubResource("RectangleShape2D_hbua4")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="FixedBoundary" parent_id_path=PackedInt32Array(1051847964) index="1" unique_id=1516975690]
+position = Vector2(-45, 0)
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FixedBoundary/StaticBody2D2" index="0" unique_id=122163425]
+position = Vector2(22, 540)
+shape = SubResource("RectangleShape2D_pt02e")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="FixedBoundary" parent_id_path=PackedInt32Array(1051847964) index="2" unique_id=20070230]
+position = Vector2(1920, 0)
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FixedBoundary/StaticBody2D3" index="0" unique_id=2013970219]
+position = Vector2(22, 540)
+shape = SubResource("RectangleShape2D_pt02e")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="Layers" parent_id_path=PackedInt32Array(1705662681) index="0" unique_id=711403210]
 position = Vector2(960, 540)
@@ -13,3 +45,6 @@ tile_set = ExtResource("2_hbua4")
 
 [node name="LevelFinish" parent="Layers/TileMapLayer" index="0" unique_id=1423001190 instance=ExtResource("3_hbua4")]
 position = Vector2(809, 333)
+
+[node name="Player" parent="." index="5" unique_id=1038420454]
+position = Vector2(204, 708)

@@ -5,25 +5,16 @@
 [ext_resource type="PackedScene" uid="uid://d3ylock0hdv0d" path="res://Scenes/UI/GameHUD.tscn" id="2_qawov"]
 [ext_resource type="Texture2D" uid="uid://dslh3l7wrv2ou" path="res://Assets/Elements/Background.png" id="2_t6oia"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qawov"]
-size = Vector2(1920, 45)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_t6oia"]
-size = Vector2(45, 1080)
-
 [node name="_BaseLevel" type="Node2D" unique_id=14346899]
 script = ExtResource("1_n8wt5")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1627012032]
-layer = -100
+[node name="Parallax2D" type="Parallax2D" parent="." unique_id=991524638]
+scroll_scale = Vector2(0.4, 0.4)
+repeat_size = Vector2(1920, 1080)
+repeat_times = 10
 
-[node name="Background" type="TextureRect" parent="CanvasLayer" unique_id=1416079175]
-texture_filter = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D" unique_id=309331006]
+position = Vector2(960, 540)
 texture = ExtResource("2_t6oia")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=73609627]
@@ -32,38 +23,19 @@ texture = ExtResource("2_t6oia")
 
 [node name="FixedBoundary" type="Node2D" parent="." unique_id=1051847964]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="FixedBoundary" unique_id=1814309313]
-collision_layer = 8
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="FixedBoundary/StaticBody2D" unique_id=1888166405]
-position = Vector2(960, 22.5)
-shape = SubResource("RectangleShape2D_qawov")
-
-[node name="StaticBody2D2" type="StaticBody2D" parent="FixedBoundary" unique_id=1498231216]
-position = Vector2(-45, 0)
-collision_layer = 8
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="FixedBoundary/StaticBody2D2" unique_id=982663516]
-position = Vector2(22, 540)
-shape = SubResource("RectangleShape2D_t6oia")
-
-[node name="StaticBody2D3" type="StaticBody2D" parent="FixedBoundary" unique_id=2070799071]
-position = Vector2(1920, 0)
-collision_layer = 8
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="FixedBoundary/StaticBody2D3" unique_id=87953550]
-position = Vector2(22, 540)
-shape = SubResource("RectangleShape2D_t6oia")
-
 [node name="Layers" type="Node2D" parent="." unique_id=1705662681]
 
 [node name="Collectables" type="Node2D" parent="." unique_id=1371163365]
 
 [node name="Player" parent="." unique_id=1038420454 instance=ExtResource("2_1rdqr")]
-position = Vector2(148, 699)
+position = Vector2(185, 816)
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=234211526]
+limit_left = 0
+limit_top = 0
+limit_right = 1920
+limit_bottom = 1080
+position_smoothing_enabled = true
 
 [node name="RespawnPoint" type="Marker2D" parent="." unique_id=1746357086]
 position = Vector2(80, 820)

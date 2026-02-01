@@ -8,7 +8,7 @@ public partial class CustomTabBar : CanvasLayer
 	private Color FadeColor = new Color(0.3f, 0.3f, 0.3f);
 	private HBoxContainer LayerContainer => GetNode<HBoxContainer>("OuterVBox/LabelBox");
 	private TextureRect TextureBorder => GetNode<TextureRect>("OuterVBox/TextureRect");
-
+	private Label TimeLabel => GetNode<Label>("TimerBox/LabelBox/TimeLabel");
 	public void AddLabel(string Name, Color col)
 	{
 		Label NewLabel = (Label)this.TabLabel.Instantiate();
@@ -25,5 +25,13 @@ public partial class CustomTabBar : CanvasLayer
 		ActiveLabel.SelfModulate = new Color(1.0f, 1.0f, 1.0f);
 		this.TextureBorder.Modulate = ActiveLabel.Modulate;
 	}
+	public void SetTimeLabel(double totalSeconds)
+	{
+		long minutes = (long)totalSeconds / 60;
+		long seconds = (long)totalSeconds % 60;
 
+		if (minutes > 99) minutes = 99;
+
+		this.TimeLabel.Text = $"Time : {minutes:D2}:{seconds:D2}";
+	}
 }

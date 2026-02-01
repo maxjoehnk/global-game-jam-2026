@@ -4,6 +4,12 @@
 [ext_resource type="Texture2D" uid="uid://b3cvrve3kidwy" path="res://Assets/Elements/Atlas.png" id="2_bmrvs"]
 [ext_resource type="PackedScene" uid="uid://d2rcj02dpqrfb" path="res://Scenes/BuildingBlocks/LevelFinish.tscn" id="3_0pob7"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bmrvs"]
+size = Vector2(1920, 45)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0pob7"]
+size = Vector2(45, 1080)
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gaom8"]
 texture = ExtResource("2_bmrvs")
 texture_region_size = Vector2i(200, 200)
@@ -74,6 +80,32 @@ sources/0 = SubResource("TileSetAtlasSource_gaom8")
 
 [node name="010DiveAndSwitch" unique_id=14346899 instance=ExtResource("1_0resb")]
 
+[node name="StaticBody2D" type="StaticBody2D" parent="FixedBoundary" parent_id_path=PackedInt32Array(1051847964) index="0" unique_id=1857755856]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FixedBoundary/StaticBody2D" index="0" unique_id=2057784964]
+position = Vector2(960, 22.5)
+shape = SubResource("RectangleShape2D_bmrvs")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="FixedBoundary" parent_id_path=PackedInt32Array(1051847964) index="1" unique_id=336227507]
+position = Vector2(-45, 0)
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FixedBoundary/StaticBody2D2" index="0" unique_id=1501411284]
+position = Vector2(22, 540)
+shape = SubResource("RectangleShape2D_0pob7")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="FixedBoundary" parent_id_path=PackedInt32Array(1051847964) index="2" unique_id=1183752902]
+position = Vector2(1920, 0)
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FixedBoundary/StaticBody2D3" index="0" unique_id=814920714]
+position = Vector2(22, 540)
+shape = SubResource("RectangleShape2D_0pob7")
+
 [node name="TileMapLayer" type="TileMapLayer" parent="Layers" parent_id_path=PackedInt32Array(1705662681) index="0" unique_id=1391781697]
 position = Vector2(960, 540)
 tile_map_data = PackedByteArray("AAAOAAoAAAAGAAIAAAASAAoAAAAHAAIAAAAWAAoAAAAIAAIAAAAKAAoAAAAFAAIAAAD5/wcAAAADAAIAAAD5/woAAAADAAIAAAD1/wcAAAADAAIAAADx/wcAAAADAAIAAADt/wcAAAADAAIAAADt/woAAAADAAIAAADx/woAAAADAAIAAAD1/woAAAADAAIAAADs/wQAAAABAAIAAADt/wIAAAACAAIAAAAEAAgAAAAAAAUAAAAEAAYAAAAAAAUAAAAEAAQAAAAAAAUAAAAEAAIAAAAAAAUAAAAEAAAAAAAAAAUAAAAEAP7/AAAAAAUAAAAEAPz/AAAAAAUAAAAEAPr/AAAAAAUAAAAEAPj/AAAAAAUAAAAEAPb/AAAAAAUAAAAEAPT/AAAAAAUAAAABAAkAAAAAAAMAAAABAAcAAAAAAAMAAAABAAUAAAAAAAMAAAABAAMAAAAAAAMAAAABAAEAAAAAAAMAAAABAP//AAAAAAMAAAABAP3/AAAAAAMAAAABAPv/AAAAAAMAAAABAPn/AAAAAAMAAAABAPf/AAAAAAMAAAABAPX/AAAAAAMAAAA=")
@@ -83,3 +115,6 @@ tile_set = SubResource("TileSet_oh6se")
 position = Vector2(809, 333)
 
 [node name="Node2D" type="Node2D" parent="Layers" parent_id_path=PackedInt32Array(1705662681) index="1" unique_id=1985469857]
+
+[node name="Player" parent="." index="5" unique_id=1038420454]
+position = Vector2(254, 711)

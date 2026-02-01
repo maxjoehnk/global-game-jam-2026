@@ -1,10 +1,31 @@
 [gd_scene format=4 uid="uid://dgotq6it2go1m"]
 
 [ext_resource type="PackedScene" uid="uid://dq8bmx6sugagf" path="res://Scenes/Levels/_BaseLevel.tscn" id="1_owfue"]
-[ext_resource type="TileSet" uid="uid://b0qj4rvg8nt0x" path="res://Assets/TileSet.tres" id="2_6hdfc"]
+[ext_resource type="TileSet" uid="uid://dla10wbktycmr" path="res://Assets/TileSet.tres" id="2_6hdfc"]
 [ext_resource type="PackedScene" uid="uid://d2rcj02dpqrfb" path="res://Scenes/BuildingBlocks/LevelFinish.tscn" id="3_6hdfc"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6hdfc"]
+size = Vector2(45, 1080)
+
 [node name="002_IntroductionJump" unique_id=14346899 instance=ExtResource("1_owfue")]
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="FixedBoundary" parent_id_path=PackedInt32Array(1051847964) index="0" unique_id=1152300011]
+position = Vector2(-45, 0)
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FixedBoundary/StaticBody2D2" index="0" unique_id=914046552]
+position = Vector2(22, 540)
+shape = SubResource("RectangleShape2D_6hdfc")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="FixedBoundary" parent_id_path=PackedInt32Array(1051847964) index="1" unique_id=976599826]
+position = Vector2(1920, 0)
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FixedBoundary/StaticBody2D3" index="0" unique_id=861903269]
+position = Vector2(22, 540)
+shape = SubResource("RectangleShape2D_6hdfc")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="Layers" parent_id_path=PackedInt32Array(1705662681) index="0" unique_id=2029011303]
 tile_map_data = PackedByteArray("AAD//xAAAAABAAQAAAADABAAAAABAAQAAAAHABAAAAABAAQAAAAOAA0AAAABAAQAAAASAA0AAAABAAQAAAAWAA0AAAABAAQAAAAdAAkAAAABAAQAAAAhAAkAAAABAAQAAAAlAAkAAAABAAQAAAA=")
@@ -13,8 +34,8 @@ tile_set = ExtResource("2_6hdfc")
 [node name="LevelFinish" parent="Layers/TileMapLayer" index="0" unique_id=1423001190 instance=ExtResource("3_6hdfc")]
 position = Vector2(1659, 320)
 
-[node name="Player" parent="." index="4" unique_id=1038420454]
+[node name="Player" parent="." index="5" unique_id=1038420454]
 position = Vector2(93, 669)
 
-[node name="RespawnPoint" parent="." index="5" unique_id=1746357086]
+[node name="RespawnPoint" parent="." index="6" unique_id=1746357086]
 position = Vector2(84, 643)

@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://bwe7nn0f8cmwb"]
+
+[ext_resource type="PackedScene" uid="uid://cob0k4wpkvr8g" path="res://Scenes/Enemies/enemy.tscn" id="1_y8irj"]
+[ext_resource type="Script" uid="uid://eto3qb5ddu3d" path="res://Scripts/Enemies/HammerEnemy.cs" id="2_amqvb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_amqvb"]
+size = Vector2(850, 116)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6fqxa"]
+size = Vector2(300, 207)
+
+[sub_resource type="Animation" id="Animation_amqvb"]
+resource_name = "attack"
+
+[sub_resource type="Animation" id="Animation_6fqxa"]
+resource_name = "walk"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a6nge"]
+_data = {
+&"attack": SubResource("Animation_amqvb"),
+&"walk": SubResource("Animation_6fqxa")
+}
+
+[node name="HammerEnemy" unique_id=1736735301 instance=ExtResource("1_y8irj")]
+script = ExtResource("2_amqvb")
+MovementSpeed = 80.0
+HuntSpeed = 250.0
+
+[node name="Area2D" type="Area2D" parent="." index="3" unique_id=672302484]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0" unique_id=960627957]
+position = Vector2(1, 24)
+shape = SubResource("RectangleShape2D_amqvb")
+
+[node name="Area2DAttack" type="Area2D" parent="." index="4" unique_id=953766806]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2DAttack" index="0" unique_id=577741594]
+position = Vector2(1, -21.5)
+shape = SubResource("RectangleShape2D_6fqxa")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5" unique_id=1028865214]
+libraries/ = SubResource("AnimationLibrary_a6nge")
