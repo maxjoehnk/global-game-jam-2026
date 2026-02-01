@@ -1,6 +1,5 @@
 using Godot;
-using System;
-using System.Runtime.CompilerServices;
+using GlobalGameJam.Scripts;
 
 public partial class CustomTabBar : CanvasLayer
 {
@@ -13,8 +12,8 @@ public partial class CustomTabBar : CanvasLayer
 	{
 		Label NewLabel = (Label)this.TabLabel.Instantiate();
 		this.LayerContainer.AddChild(NewLabel);
-		NewLabel.Text = Name;
-		NewLabel.Modulate = col;
+		NewLabel.GetChild<Label>(0).Text = Name;
+		NewLabel.SelfModulate = col;
 	}
 	public void SetActiveLayer(int layerIndex)
 	{
@@ -28,11 +27,6 @@ public partial class CustomTabBar : CanvasLayer
 	}
 	public void SetTimeLabel(double totalSeconds)
 	{
-		long minutes = (long)totalSeconds / 60;
-		long seconds = (long)totalSeconds % 60;
-
-		if (minutes > 99) minutes = 99;
-
-		this.TimeLabel.Text = $"Time : {minutes:D2}:{seconds:D2}";
+		this.TimeLabel.Text = $"Time : {TimeFormat.Format(totalSeconds)}";
 	}
 }
