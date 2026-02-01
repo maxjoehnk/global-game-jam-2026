@@ -13,7 +13,7 @@ public partial class CustomTabBar : CanvasLayer
 		Label NewLabel = (Label)this.TabLabel.Instantiate();
 		this.LayerContainer.AddChild(NewLabel);
 		NewLabel.Text = Name;
-		NewLabel.Modulate = col;
+		NewLabel.SelfModulate = col;
 	}
 	public void SetActiveLayer(int layerIndex)
 	{

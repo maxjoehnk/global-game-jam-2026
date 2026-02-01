@@ -15,3 +15,11 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = SubResource("StyleBoxTexture_hjxt2")
 text = "Mask 1"
+
+[node name="TabLabelText" type="Label" parent="." unique_id=443418520]
+layout_mode = 0
+offset_right = 144.0
+offset_bottom = 44.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 32
+text = "Mask 1"
