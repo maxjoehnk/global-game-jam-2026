@@ -97,6 +97,7 @@ public partial class Game : Node2D
 		this.PlayerCam.LimitTop = (int)this.CameraBoundsY.X;
 		this.PlayerCam.LimitBottom = (int)this.CameraBoundsY.Y;
 		this.Player.ResetHeight = this.CameraBoundsY.Y + 100.0f;
+		this.Player.ItemChanged += this.Hud.UpdateItem;
 
 		this.PlayLevelLoadedQuote();
 	}

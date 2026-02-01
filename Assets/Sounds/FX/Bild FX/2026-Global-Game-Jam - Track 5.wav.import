@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://0rl5crprar0a"
+path="res://.godot/imported/2026-Global-Game-Jam - Track 5.wav-c7273bb76da462ff26b5a3c10c7bf6e6.sample"
+
+[deps]
+
+source_file="res://Assets/Sounds/FX/Bild FX/2026-Global-Game-Jam - Track 5.wav"
+dest_files=["res://.godot/imported/2026-Global-Game-Jam - Track 5.wav-c7273bb76da462ff26b5a3c10c7bf6e6.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

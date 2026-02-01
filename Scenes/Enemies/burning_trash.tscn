@@ -2,8 +2,9 @@
 
 [ext_resource type="PackedScene" path="res://Scenes/Enemies/trap.tscn" id="1_2aj4m"]
 [ext_resource type="Script" uid="uid://cxoy66yio6ur1" path="res://Scripts/Enemies/BurningTrash.cs" id="2_2k1iw"]
-[ext_resource type="Texture2D" uid="uid://bd1ykxkia00bl" path="res://Assets/Elements/Papierkorb.png" id="2_l2ssk"]
 [ext_resource type="Material" uid="uid://bksjfspg8uqg3" path="res://Assets/FireShader.tres" id="2_n6wav"]
+[ext_resource type="Texture2D" uid="uid://bih8n1qcgy3vn" path="res://Assets/Elements/PapierkorbNoFlame.png" id="4_n6wav"]
+[ext_resource type="AudioStream" uid="uid://beicaeg32irvt" path="res://Assets/Sounds/FX/paper-burning-1-345438.mp3" id="5_2k1iw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n6wav"]
 size = Vector2(60, 74)
@@ -29,11 +30,20 @@ shape = SubResource("RectangleShape2D_2k1iw")
 
 [node name="Fire" type="Sprite2D" parent="." index="2" unique_id=964042170]
 material = ExtResource("2_n6wav")
-position = Vector2(1, -90.99999)
+position = Vector2(1, -108)
 scale = Vector2(0.13312186, 0.18245704)
 texture = SubResource("NoiseTexture2D_bmpu0")
 
 [node name="Sprite2D" type="Sprite2D" parent="." index="3" unique_id=372617460]
 position = Vector2(0, -52)
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("2_l2ssk")
+texture = ExtResource("4_n6wav")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." index="4" unique_id=97690885]
+stream = ExtResource("5_2k1iw")
+volume_db = 1.0
+autoplay = true
+max_distance = 1500.0
+attenuation = 4.924583
+bus = &"FX"
+parameters/looping = true

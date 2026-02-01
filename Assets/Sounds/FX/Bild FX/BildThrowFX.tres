@@ -1,0 +1,17 @@
+[gd_resource type="AudioStreamPlaylist" format=3 uid="uid://dac42a8lg1v83"]
+
+[ext_resource type="AudioStream" uid="uid://blcsy4rvom76w" path="res://Assets/Sounds/FX/Bild FX/2026-Global-Game-Jam - Track 1.wav" id="1_a283r"]
+[ext_resource type="AudioStream" uid="uid://cxvan0m7rqjes" path="res://Assets/Sounds/FX/Bild FX/2026-Global-Game-Jam - Track 2.wav" id="2_quedo"]
+[ext_resource type="AudioStream" uid="uid://dgd23rgrhcsnt" path="res://Assets/Sounds/FX/Bild FX/2026-Global-Game-Jam - Track 3.wav" id="3_dq80d"]
+[ext_resource type="AudioStream" uid="uid://ctp7p71emshe8" path="res://Assets/Sounds/FX/Bild FX/2026-Global-Game-Jam - Track 4.wav" id="4_b305l"]
+[ext_resource type="AudioStream" uid="uid://0rl5crprar0a" path="res://Assets/Sounds/FX/Bild FX/2026-Global-Game-Jam - Track 5.wav" id="5_1tkiu"]
+
+[resource]
+shuffle = true
+loop = false
+stream_count = 5
+stream_0 = ExtResource("1_a283r")
+stream_1 = ExtResource("2_quedo")
+stream_2 = ExtResource("3_dq80d")
+stream_3 = ExtResource("4_b305l")
+stream_4 = ExtResource("5_1tkiu")

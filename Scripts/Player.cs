@@ -76,6 +76,9 @@ public partial class Player : CharacterBody2D
 	[Signal]
 	public delegate void PlayerJumpedEventHandler();
 
+	[Signal]
+	public delegate void ItemChangedEventHandler(Item? item);
+
 	public void SetActiveCollisionLayer(uint layer)
 	{
 		this.CutTool.SetActiveLayers(layer);
@@ -97,6 +100,7 @@ public partial class Player : CharacterBody2D
 			{
 				this.holdingItem.Throw(this.GetParent(), this.GlobalPosition, this.Head.FlipH);
 				this.holdingItem = null;
+				this.EmitSignalItemChanged(null);
 				
 				bool isThrowing = (bool)this.AnimTree.Get("parameters/OneShot/active");
 				if (!isThrowing)
@@ -467,5 +471,6 @@ public partial class Player : CharacterBody2D
 	{
 		this.holdingItem?.QueueFree();
 		this.holdingItem = item;
+		this.EmitSignalItemChanged(item);
 	}
 }
