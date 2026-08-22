@@ -15,7 +15,7 @@ jobs:
     name: Windows Export
     runs-on: ubuntu-22.04
     container:
-      image: barichello/godot-ci:mono-${{ env.GODOT_VERSION }}
+      image: barichello/godot-ci:mono-$GODOT_VERSION
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -43,7 +43,7 @@ jobs:
     name: Linux Export
     runs-on: ubuntu-22.04
     container:
-      image: barichello/godot-ci:mono-${{ env.GODOT_VERSION }}
+      image: barichello/godot-ci:mono-$GODOT_VERSION
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -69,7 +69,7 @@ jobs:
     name: Mac Export
     runs-on: ubuntu-22.04
     container:
-      image: barichello/godot-ci:mono-${{ env.GODOT_VERSION }}
+      image: barichello/godot-ci:mono-$GODOT_VERSION
     steps:
       - name: Checkout
         uses: actions/checkout@v4
