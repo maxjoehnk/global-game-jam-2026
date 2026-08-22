@@ -3,6 +3,7 @@
 name: "Godot Export"
 on:
   push:
+  pull_request:
 
 env:
   GODOT_VERSION: 4.6.3
