@@ -38,8 +38,15 @@
     <Compile Remove="Program.cs" />
   </ItemGroup>
 
-  <!-- The wasm publish is trimmed; keep what is only reached via reflection. -->
+  <!--
+    The wasm publish is trimmed. Program.cs is an empty entry point, so without
+    rooting it explicitly the trimmer drops the whole game assembly, including
+    the generated GodotPlugins.Game.Main the engine looks up on startup, and
+    every script it discovers reflectively via ScriptManagerBridge.
+  -->
   <ItemGroup Condition=" '$(GodotTargetPlatform)' == 'web' ">
+    <TrimmerRootAssembly Include="$(AssemblyName)" />
+    <TrimmerRootAssembly Include="GodotSharp" />
     <TrimmerRootAssembly Include="System.Private.CoreLib" />
     <TrimmerRootAssembly Include="System.Runtime" />
     <TrimmerRootAssembly Include="HtmlAgilityPack" />
