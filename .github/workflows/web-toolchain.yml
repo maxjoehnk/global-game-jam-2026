@@ -1,0 +1,219 @@
+# Builds the experimental C# web export toolchain (Linux) and publishes it as a
+# workflow artifact that the `Web Export` job in build.yml consumes.
+#
+# Upstream: https://github.com/ComplexRobot/godot-dotnet-web-export
+#           (godotengine/godot#106125 + xr0gu3's mono static linking work)
+#
+# This is expensive (roughly 1-1.5h) and only needs to re-run when GODOT_REF
+# changes, so it is dispatch-triggered. It also runs automatically when this
+# file changes, because `workflow_dispatch` is only offered in the Actions UI
+# for workflows that already exist on the default branch.
+
+name: Web Toolchain (experimental)
+
+on:
+  workflow_dispatch:
+    inputs:
+      godot_ref:
+        description: "Tag or branch of ComplexRobot/godot to build"
+        required: false
+        default: "4.6.3-stable"
+  push:
+    paths:
+      - ".github/workflows/web-toolchain.yml"
+
+concurrency:
+  group: web-toolchain-${{ inputs.godot_ref || '4.6.3-stable' }}
+  cancel-in-progress: true
+
+env:
+  GODOT_FORK: https://github.com/ComplexRobot/godot.git
+  # Keep in sync with GODOT_VERSION in build.yml.
+  GODOT_REF: ${{ inputs.godot_ref || '4.6.3-stable' }}
+  # emsdk 6.0.6/6.0.7 run out of memory with LTO, per upstream.
+  EMSDK_VERSION: 6.0.5
+  TOOLCHAIN_ARTIFACT: godot-web-toolchain-linux-x86_64
+  SCONSFLAGS: progress=no
+
+jobs:
+  build-editor:
+    name: Editor (linuxbsd, mono)
+    runs-on: ubuntu-22.04
+    timeout-minutes: 300
+
+    steps:
+      - name: Clone Godot fork
+        run: git clone --depth 1 --branch "$GODOT_REF" "$GODOT_FORK" godot
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.x
+
+      - name: Set up SCons
+        run: pip install scons
+
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            build-essential pkg-config \
+            libx11-dev libxcursor-dev libxinerama-dev libxi-dev libxrandr-dev \
+            libgl1-mesa-dev libglu1-mesa-dev \
+            libasound2-dev libpulse-dev libudev-dev \
+            libwayland-dev libdbus-1-dev
+
+      - name: Build editor
+        run: |
+          scons -C godot platform=linuxbsd target=editor module_mono_enabled=yes \
+            optimize=speed debug_symbols=no -j"$(nproc)"
+
+      # Pure C++ codegen, no .NET SDK needed here.
+      - name: Generate Mono glue
+        run: ./godot/bin/godot.linuxbsd.editor.x86_64.mono --headless --quit --generate-mono-glue godot/bin/glue
+
+      - name: Record engine version
+        run: |
+          ./godot/bin/godot.linuxbsd.editor.x86_64.mono --headless --quit --version > godot/bin/version.txt
+          cat godot/bin/version.txt
+
+      - name: Upload editor
+        uses: actions/upload-artifact@v4
+        with:
+          name: toolchain-editor
+          path: |
+            godot/bin/godot.linuxbsd.editor.x86_64.mono
+            godot/bin/version.txt
+            godot/bin/glue/**
+
+  build-template:
+    name: Web export template (release)
+    runs-on: ubuntu-22.04
+    timeout-minutes: 300
+    needs: build-editor
+
+    env:
+      SCONS_FLAGS: >-
+        optimize=speed
+        lto=full
+        ccflags="-DNDEBUG"
+        linkflags="-sMALLOC=mimalloc"
+
+    steps:
+      - name: Clone Godot fork
+        run: git clone --depth 1 --branch "$GODOT_REF" "$GODOT_FORK" godot
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.x
+
+      - name: Set up SCons
+        run: pip install scons
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            8.0.x
+            9.0.x
+
+      # The wasm runtime pack is fetched for net9.0, so pin the SDK band. Placed
+      # next to the `godot` checkout, mirroring upstream's layout.
+      - name: Pin .NET SDK
+        run: |
+          cat > global.json << 'EOF'
+          {
+            "sdk": {
+              "version": "9.0.100",
+              "rollForward": "latestFeature"
+            }
+          }
+          EOF
+
+      - name: Install wasm-tools
+        run: |
+          # Once for the runner's default SDK, once for the pinned 9.0 band.
+          mv global.json global.json.disabled
+          dotnet workload install wasm-tools
+          mv global.json.disabled global.json
+          dotnet workload install wasm-tools
+
+      - name: Download editor
+        uses: actions/download-artifact@v4
+        with:
+          name: toolchain-editor
+          path: godot/bin
+
+      - name: Copy Mono glue
+        run: cp -rf godot/bin/glue/* godot/modules/mono/glue
+
+      # Produces godot/bin/GodotSharp and the patched Godot.NET.Sdk / GodotSharp
+      # NuGet packages the exported project must build against.
+      - name: Build Mono assemblies
+        run: python godot/modules/mono/build_scripts/build_assemblies.py --godot-output-dir=godot/bin --push-nupkgs-local godot/bin/nuget
+
+      - name: Set up Emscripten SDK
+        uses: mymindstorm/setup-emsdk@v14
+        with:
+          version: ${{ env.EMSDK_VERSION }}
+
+      - name: Build web template (release)
+        run: |
+          scons -C godot platform=web target=template_release module_mono_enabled=yes \
+            ${{ env.SCONS_FLAGS }} -j"$(nproc)"
+
+      - name: Upload template
+        uses: actions/upload-artifact@v4
+        with:
+          name: toolchain-template
+          path: |
+            godot/bin/godot.web.template_release.wasm32.mono.zip
+            godot/bin/GodotSharp/**
+            godot/bin/nuget/**
+
+  package:
+    name: Package toolchain
+    runs-on: ubuntu-22.04
+    needs: build-template
+
+    steps:
+      - name: Download build outputs
+        uses: actions/download-artifact@v4
+        with:
+          path: bin
+          merge-multiple: true
+
+      - name: Assemble toolchain
+        run: |
+          set -euo pipefail
+
+          version_output=$(tr -d '\r\n' < bin/version.txt)
+          echo "Engine version: $version_output"
+
+          # e.g. "4.6.3.stable.mono.custom_build.d4b0745" -> 4.6.3 / stable
+          [[ $version_output =~ ^([0-9.]+)\.([^0-9.][^.]*) ]]
+          version=${BASH_REMATCH[1]}
+          status=${BASH_REMATCH[2]}
+
+          mkdir -p toolchain/templates
+          mv bin/godot.linuxbsd.editor.x86_64.mono toolchain/godot
+          chmod +x toolchain/godot
+          mv bin/GodotSharp toolchain/GodotSharp
+          mv bin/nuget toolchain/nuget
+          mv bin/godot.web.template_release.wasm32.mono.zip toolchain/templates/web_release.zip
+          cp bin/version.txt toolchain/version.txt
+
+          # Consumed verbatim by the export job to place the templates.
+          echo "${version}.${status}.mono" > toolchain/template_dir.txt
+          cat toolchain/template_dir.txt
+
+          tar -C toolchain -czf "${TOOLCHAIN_ARTIFACT}.tar.gz" .
+          ls -lh "${TOOLCHAIN_ARTIFACT}.tar.gz"
+
+      - name: Upload toolchain
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.TOOLCHAIN_ARTIFACT }}
+          path: ${{ env.TOOLCHAIN_ARTIFACT }}.tar.gz
+          retention-days: 90

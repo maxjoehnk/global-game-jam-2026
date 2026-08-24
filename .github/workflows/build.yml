@@ -8,6 +8,9 @@ env:
   GODOT_VERSION: 4.6.3
   EXPORT_NAME: Maske kann auch geil sein
   PROJECT_PATH: "."
+  # Built by .github/workflows/web-toolchain.yml.
+  TOOLCHAIN_ARTIFACT: godot-web-toolchain-linux-x86_64
+  WEB_TOOLCHAIN_WORKFLOW: web-toolchain.yml
 
 jobs:
   export-windows:
@@ -89,3 +92,142 @@ jobs:
         with:
           name: unsigned-mac
           path: build/mac
+
+  export-web:
+    name: Web Export (experimental)
+    runs-on: ubuntu-22.04
+    # The C# web export is a draft upstream feature (godotengine/godot#106125);
+    # never let it break the desktop builds.
+    continue-on-error: true
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - name: Resolve toolchain build
+        id: toolchain
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          run_id=$(gh run list \
+            --repo "$GITHUB_REPOSITORY" \
+            --workflow "$WEB_TOOLCHAIN_WORKFLOW" \
+            --status success \
+            --limit 1 \
+            --json databaseId \
+            --jq '.[0].databaseId // empty')
+          if [ -z "$run_id" ]; then
+            echo "::error::No successful '$WEB_TOOLCHAIN_WORKFLOW' run found. Run that workflow once to build the export toolchain."
+            exit 1
+          fi
+          echo "Using toolchain from run $run_id"
+          echo "run_id=$run_id" >> "$GITHUB_OUTPUT"
+
+      - name: Restore cached toolchain
+        id: cache
+        uses: actions/cache@v4
+        with:
+          path: toolchain
+          key: web-toolchain-${{ steps.toolchain.outputs.run_id }}
+
+      - name: Download toolchain
+        if: steps.cache.outputs.cache-hit != 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh run download "${{ steps.toolchain.outputs.run_id }}" \
+            --repo "$GITHUB_REPOSITORY" \
+            --name "$TOOLCHAIN_ARTIFACT" \
+            --dir toolchain-archive
+          mkdir -p toolchain
+          tar -C toolchain -xzf "toolchain-archive/${TOOLCHAIN_ARTIFACT}.tar.gz"
+          chmod +x toolchain/godot
+
+      - name: Install editor runtime dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            libx11-6 libxcursor1 libxinerama1 libxi6 libxrandr2 \
+            libgl1 libglu1-mesa libasound2 libpulse0 libudev1
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.0.x
+
+      # The wasm runtime pack is resolved for net9.0, so pin the SDK band.
+      - name: Pin .NET SDK
+        run: |
+          cat > global.json << 'EOF'
+          {
+            "sdk": {
+              "version": "9.0.100",
+              "rollForward": "latestFeature"
+            }
+          }
+          EOF
+
+      - name: Install wasm-tools
+        run: dotnet workload install wasm-tools
+
+      # The patched Godot.NET.Sdk / GodotSharp packages share their version number
+      # with the official ones on nuget.org, so map them explicitly to the local
+      # feed instead of relying on source probing order.
+      - name: Configure NuGet sources
+        run: |
+          set -euo pipefail
+          feed="$(readlink -f toolchain/nuget)"
+          cat > NuGet.config << EOF
+          <?xml version="1.0" encoding="utf-8"?>
+          <configuration>
+            <packageSources>
+              <clear />
+              <add key="godot-web-patched" value="${feed}" />
+              <add key="nuget.org" value="https://api.nuget.org/v3/index.json" protocolVersion="3" />
+            </packageSources>
+            <packageSourceMapping>
+              <packageSource key="godot-web-patched">
+                <package pattern="Godot.*" />
+                <package pattern="GodotSharp*" />
+              </packageSource>
+              <packageSource key="nuget.org">
+                <package pattern="*" />
+              </packageSource>
+            </packageSourceMapping>
+          </configuration>
+          EOF
+          ls "$feed"
+
+      - name: Install export templates
+        run: |
+          set -euo pipefail
+          template_dir="$HOME/.local/share/godot/export_templates/$(cat toolchain/template_dir.txt)"
+          mkdir -p "$template_dir"
+          cp toolchain/templates/*.zip "$template_dir/"
+          ls -l "$template_dir"
+
+      - name: Import resources
+        # A cold .godot/ can make the first headless export miss resources.
+        continue-on-error: true
+        run: |
+          cd $PROJECT_PATH
+          "$GITHUB_WORKSPACE/toolchain/godot" --headless --import
+
+      - name: Web Build
+        run: |
+          mkdir -v -p build/web
+          EXPORT_DIR="$(readlink -f build)"
+          cd $PROJECT_PATH
+          "$GITHUB_WORKSPACE/toolchain/godot" --headless --verbose --export-release "Web" "$EXPORT_DIR/web/index.html"
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: web
+          path: build/web

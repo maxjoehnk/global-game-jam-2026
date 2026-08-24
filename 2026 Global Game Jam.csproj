@@ -1,14 +1,50 @@
-<Project Sdk="Godot.NET.Sdk/4.6.0">
+<Project Sdk="Godot.NET.Sdk/4.6.3">
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <TargetFramework Condition=" '$(GodotTargetPlatform)' == 'android' ">net9.0</TargetFramework>
+    <!--
+      Experimental C# web export. Requires the patched engine from
+      https://github.com/ComplexRobot/godot-dotnet-web-export (godotengine/godot#106125),
+      the .NET 9 SDK and the `wasm-tools` workload. See .github/workflows/web-toolchain.yml.
+    -->
+    <TargetFramework Condition=" '$(GodotTargetPlatform)' == 'web' ">net9.0</TargetFramework>
     <EnableDynamicLoading>true</EnableDynamicLoading>
     <RootNamespace>GlobalGameJam</RootNamespace>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(GodotTargetPlatform)' == 'web' ">
+    <!-- The wasm publish needs an entry point, see Program.cs. -->
+    <OutputType>Exe</OutputType>
+    <!-- The web runtime is always built in invariant globalization mode. -->
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <!--
+      The web export templates are built with threads enabled. If the export fails
+      while resolving the runtime pack, uncomment this.
+    -->
+    <!-- <WasmEnableThreads>true</WasmEnableThreads> -->
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="HtmlAgilityPack" Version="1.11.46" />
   </ItemGroup>
+
+  <!--
+    Program.cs exists only to give the web build an entry point. Its top-level
+    statement is a compile error (CS8805) with the default `Library` output type,
+    so it must not take part in any other build.
+  -->
+  <ItemGroup Condition=" '$(GodotTargetPlatform)' != 'web' ">
+    <Compile Remove="Program.cs" />
+  </ItemGroup>
+
+  <!-- The wasm publish is trimmed; keep what is only reached via reflection. -->
+  <ItemGroup Condition=" '$(GodotTargetPlatform)' == 'web' ">
+    <TrimmerRootAssembly Include="System.Private.CoreLib" />
+    <TrimmerRootAssembly Include="System.Runtime" />
+    <TrimmerRootAssembly Include="HtmlAgilityPack" />
+  </ItemGroup>
+
   <ItemGroup>
     <Content Include="Scripts\Physics\cutable_ridgid_body.gd" />
     <Content Include="Scripts\Physics\CutAreas\cut_stencil.gd" />
