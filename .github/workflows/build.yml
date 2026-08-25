@@ -179,6 +179,13 @@ jobs:
       # The patched Godot.NET.Sdk / GodotSharp packages share their version number
       # with the official ones on nuget.org, so map them explicitly to the local
       # feed instead of relying on source probing order.
+      # Upstream traces "builds but misbehaves at runtime" to stale packages
+      # (ComplexRobot/godot-dotnet-web-export#8). The global packages folder is
+      # consulted ahead of every source, so source mapping alone cannot
+      # guarantee the patched GodotSharp is the one that gets linked.
+      - name: Clear NuGet caches
+        run: dotnet nuget locals all --clear
+
       - name: Configure NuGet sources
         run: |
           set -euo pipefail
@@ -203,6 +210,22 @@ jobs:
           </configuration>
           EOF
           ls "$feed"
+
+      # If the csproj and the toolchain disagree, restore silently falls back to
+      # the official package of that version and the game links against a
+      # GodotSharp that does not match the export template.
+      - name: Verify SDK version matches the toolchain
+        run: |
+          set -euo pipefail
+          toolchain_version="$(cut -d. -f1-3 toolchain/template_dir.txt)"
+          csproj_version="$(grep -o 'Godot.NET.Sdk/[0-9.]*' *.csproj | cut -d/ -f2)"
+          echo "toolchain=$toolchain_version csproj=$csproj_version"
+          if [ "$toolchain_version" != "$csproj_version" ]; then
+            echo "::error::csproj targets Godot.NET.Sdk/$csproj_version but the toolchain built $toolchain_version."
+            exit 1
+          fi
+          test -f "toolchain/nuget/Godot.NET.Sdk.${toolchain_version}.nupkg"
+          test -f "toolchain/nuget/GodotSharp.${toolchain_version}.nupkg"
 
       - name: Install export templates
         run: |

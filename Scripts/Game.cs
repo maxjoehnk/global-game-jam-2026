@@ -99,7 +99,35 @@ public partial class Game : Node2D
 		this.Player.ResetHeight = this.CameraBoundsY.Y + 100.0f;
 		this.Player.ItemChanged += this.Hud.UpdateItem;
 
+		this.LogWebDiagnostics();
+
 		this.PlayLevelLoadedQuote();
+	}
+
+	// Temporary: the web export completes levels on contact and spawns the player
+	// in the wrong place, neither of which reproduces on desktop. Positions are
+	// printed as ints because float formatting has been reported to abort the
+	// wasm runtime. Remove once the web build behaves.
+	private void LogWebDiagnostics()
+	{
+		if (!OS.HasFeature("web"))
+		{
+			return;
+		}
+
+		Godot.Vector2 playerPosition = this.Player.GlobalPosition;
+		GD.Print(
+			$"[web-diag] player=({(int)playerPosition.X},{(int)playerPosition.Y}) " +
+			$"mask={this.Player.CollisionMask} layers={this.LayerCount} active={this.activeLayerIndex}");
+
+		foreach (Node node in this.GetTree().GetNodesInGroup("LevelExits"))
+		{
+			string assigned = node is LevelFinish finish ? finish.AssignedLayer.ToString() : "n/a";
+			Godot.Vector2 position = node is Node2D node2D ? node2D.GlobalPosition : Godot.Vector2.Zero;
+			GD.Print(
+				$"[web-diag] exit={node.Name} type={node.GetType().Name} " +
+				$"assigned={assigned} pos=({(int)position.X},{(int)position.Y})");
+		}
 	}
 
 	private void PlayLevelLoadedQuote()
