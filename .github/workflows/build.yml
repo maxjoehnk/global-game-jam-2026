@@ -212,13 +212,6 @@ jobs:
           cp toolchain/templates/*.zip "$template_dir/"
           ls -l "$template_dir"
 
-      - name: Import resources
-        # A cold .godot/ can make the first headless export miss resources.
-        continue-on-error: true
-        run: |
-          cd $PROJECT_PATH
-          "$GITHUB_WORKSPACE/toolchain/godot" --headless --import
-
       - name: Web Build
         run: |
           mkdir -v -p build/web

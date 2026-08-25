@@ -24,12 +24,10 @@
     -->
     <!-- <WasmEnableThreads>true</WasmEnableThreads> -->
     <!--
-      Diagnostic: the desktop publish is untrimmed and works, the wasm publish is
-      trimmed and misbehaves at runtime. Trimming already silently emptied this
-      assembly once. Turn it back on once the web build is known good, then narrow
-      down with TrimmerRootAssembly entries or TrimMode=partial.
+      Do not set PublishTrimmed=false: the runtime aborts during startup
+      ("Aborted(native code called abort())") with an untrimmed assembly set.
+      Trimming is mandatory here, so breakage has to be fixed with roots below.
     -->
-    <PublishTrimmed>false</PublishTrimmed>
   </PropertyGroup>
 
   <ItemGroup>
