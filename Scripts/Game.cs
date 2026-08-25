@@ -124,9 +124,32 @@ public partial class Game : Node2D
 		{
 			string assigned = node is LevelFinish finish ? finish.AssignedLayer.ToString() : "n/a";
 			Godot.Vector2 position = node is Node2D node2D ? node2D.GlobalPosition : Godot.Vector2.Zero;
+			CollisionShape2D? collisionShape = node.GetNodeOrNull<CollisionShape2D>("CollisionShape2D");
+			string shapeSize = collisionShape?.Shape is RectangleShape2D rectangle
+				? $"({(int)rectangle.Size.X},{(int)rectangle.Size.Y})"
+				: "n/a";
 			GD.Print(
 				$"[web-diag] exit={node.Name} type={node.GetType().Name} " +
-				$"assigned={assigned} pos=({(int)position.X},{(int)position.Y})");
+				$"assigned={assigned} pos=({(int)position.X},{(int)position.Y}) " +
+				$"shape={shapeSize} expect=(158,106)");
+		}
+
+		// Which property types survive. Controls lay out with individual float
+		// offsets and are fine, Node2D placement is a packed Vector2 and is not,
+		// so check one value of each kind.
+		Camera2D camera = this.PlayerCam;
+		GD.Print(
+			$"[web-diag] int camera limits=({camera.LimitLeft},{camera.LimitTop}," +
+			$"{camera.LimitRight},{camera.LimitBottom}) expect=(0,0,1920,1080)");
+
+		Parallax2D? parallax = this.GetNodeOrNull<Parallax2D>("Parallax2D");
+		if (parallax != null)
+		{
+			Godot.Vector2 scroll = parallax.ScrollScale;
+			Godot.Vector2 repeat = parallax.RepeatSize;
+			GD.Print(
+				$"[web-diag] vec2 parallax scroll=({(int)(scroll.X * 100)},{(int)(scroll.Y * 100)}) " +
+				$"expect=(40,40) repeat=({(int)repeat.X},{(int)repeat.Y}) expect=(1920,1080)");
 		}
 	}
 
