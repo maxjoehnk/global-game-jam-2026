@@ -16,7 +16,18 @@ public partial class LevelFinish : Area2D, IAssignableLayer
 				return;
 			}
 
-			if ((player.CollisionMask & this.AssignedLayer) == this.AssignedLayer)
+			uint assignedLayer = this.AssignedLayer;
+			if (assignedLayer == 0)
+			{
+				// The scene ships with collision_layer = 0; Game._Ready() is what
+				// assigns the real layer. Without this guard the check below reads
+				// (mask & 0) == 0 and completes the level on any contact, which
+				// silently hides whatever kept the assignment from happening.
+				GD.PushError($"{this.GetPath()} has no layer assigned, ignoring player contact.");
+				return;
+			}
+
+			if ((player.CollisionMask & assignedLayer) == assignedLayer)
 			{
 				this.EmitSignalPlayerReachedGoal();
 			}

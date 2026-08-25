@@ -23,6 +23,13 @@
       while resolving the runtime pack, uncomment this.
     -->
     <!-- <WasmEnableThreads>true</WasmEnableThreads> -->
+    <!--
+      Diagnostic: the desktop publish is untrimmed and works, the wasm publish is
+      trimmed and misbehaves at runtime. Trimming already silently emptied this
+      assembly once. Turn it back on once the web build is known good, then narrow
+      down with TrimmerRootAssembly entries or TrimMode=partial.
+    -->
+    <PublishTrimmed>false</PublishTrimmed>
   </PropertyGroup>
 
   <ItemGroup>
