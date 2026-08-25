@@ -18,6 +18,12 @@ on:
         description: "Tag or branch of ComplexRobot/godot to build"
         required: false
         default: "4.6.3-stable"
+      template_source:
+        description: "Web export template: build it, or take upstream's prebuilt one"
+        required: false
+        type: choice
+        options: [build, prebuilt]
+        default: build
   push:
     paths:
       - ".github/workflows/web-toolchain.yml"
@@ -91,6 +97,7 @@ jobs:
     runs-on: ubuntu-22.04
     timeout-minutes: 300
     needs: build-editor
+    if: ${{ inputs.template_source != 'prebuilt' }}
 
     env:
       SCONS_FLAGS: >-
@@ -172,10 +179,54 @@ jobs:
             godot/bin/GodotSharp/**
             godot/bin/nuget/**
 
+  # Isolates whether a defect lives in our template build or in the upstream web
+  # support itself. Takes the template plus the matching GodotSharp and NuGet
+  # packages straight out of upstream's release, so only the editor stays ours.
+  fetch-template:
+    name: Web export template (upstream prebuilt)
+    runs-on: ubuntu-22.04
+    needs: build-editor
+    if: ${{ inputs.template_source == 'prebuilt' }}
+
+    steps:
+      - name: Download upstream release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          asset="Godot_v${GODOT_REF}_mono_web_export_win64.zip"
+          echo "Fetching $asset from ComplexRobot/godot-dotnet-web-export@${GODOT_REF}"
+          gh release download "$GODOT_REF" \
+            --repo ComplexRobot/godot-dotnet-web-export \
+            --pattern "$asset" \
+            --dir .
+          unzip -q "$asset" -d upstream
+          find upstream -maxdepth 2 -name 'web_release.zip'
+
+      - name: Lay out as a template build
+        run: |
+          set -euo pipefail
+          root="$(dirname "$(find upstream -name web_release.zip | head -1)")"
+          mkdir -p godot/bin
+          cp "$root/web_release.zip" godot/bin/godot.web.template_release.wasm32.mono.zip
+          cp -r "$root/GodotSharp" godot/bin/GodotSharp
+          cp -r "$root/nuget" godot/bin/nuget
+          ls -l godot/bin && ls godot/bin/nuget
+
+      - name: Upload template
+        uses: actions/upload-artifact@v4
+        with:
+          name: toolchain-template
+          path: |
+            godot/bin/godot.web.template_release.wasm32.mono.zip
+            godot/bin/GodotSharp/**
+            godot/bin/nuget/**
+
   package:
     name: Package toolchain
     runs-on: ubuntu-22.04
-    needs: build-template
+    needs: [build-template, fetch-template]
+    if: ${{ !cancelled() && !failure() }}
 
     steps:
       - name: Download build outputs
