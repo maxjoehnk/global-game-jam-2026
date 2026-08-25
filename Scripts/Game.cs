@@ -53,6 +53,9 @@ public partial class Game : Node2D
 
 	public override void _Ready()
 	{
+		// Before anything below mutates the tree, in particular RespawnPoint.
+		this.LogWebDiagnostics();
+
 		int physicsLayer = PhysicsBaseLayer;
 		Array<Node> layers = this.LayerContainer.GetChildren();
 		this.Hud.SetLayers(layers.Count, LayerColorList);
@@ -99,15 +102,15 @@ public partial class Game : Node2D
 		this.Player.ResetHeight = this.CameraBoundsY.Y + 100.0f;
 		this.Player.ItemChanged += this.Hud.UpdateItem;
 
-		this.LogWebDiagnostics();
-
 		this.PlayLevelLoadedQuote();
 	}
 
-	// Temporary: the web export completes levels on contact and spawns the player
-	// in the wrong place, neither of which reproduces on desktop. Positions are
-	// printed as ints because float formatting has been reported to abort the
-	// wasm runtime. Remove once the web build behaves.
+	// Temporary: instanced nodes lose their position overrides on web while plain
+	// nodes keep theirs. Every node observed broken so far is both instanced and
+	// C# scripted, so log both attributes for every Node2D to tell which one
+	// actually predicts the failure. SceneFilePath is non-empty exactly on the
+	// root of an instanced scene. Positions print as ints to keep float
+	// formatting out of it. Remove once the web build behaves.
 	private void LogWebDiagnostics()
 	{
 		if (!OS.HasFeature("web"))
@@ -115,41 +118,32 @@ public partial class Game : Node2D
 			return;
 		}
 
-		Godot.Vector2 playerPosition = this.Player.GlobalPosition;
-		GD.Print(
-			$"[web-diag] player=({(int)playerPosition.X},{(int)playerPosition.Y}) " +
-			$"mask={this.Player.CollisionMask} layers={this.LayerCount} active={this.activeLayerIndex}");
+		int logged = 0;
+		LogNode(this, ref logged);
 
-		foreach (Node node in this.GetTree().GetNodesInGroup("LevelExits"))
+		static void LogNode(Node node, ref int logged)
 		{
-			string assigned = node is LevelFinish finish ? finish.AssignedLayer.ToString() : "n/a";
-			Godot.Vector2 position = node is Node2D node2D ? node2D.GlobalPosition : Godot.Vector2.Zero;
-			CollisionShape2D? collisionShape = node.GetNodeOrNull<CollisionShape2D>("CollisionShape2D");
-			string shapeSize = collisionShape?.Shape is RectangleShape2D rectangle
-				? $"({(int)rectangle.Size.X},{(int)rectangle.Size.Y})"
-				: "n/a";
-			GD.Print(
-				$"[web-diag] exit={node.Name} type={node.GetType().Name} " +
-				$"assigned={assigned} pos=({(int)position.X},{(int)position.Y}) " +
-				$"shape={shapeSize} expect=(158,106)");
-		}
+			if (logged >= 40)
+			{
+				return;
+			}
 
-		// Which property types survive. Controls lay out with individual float
-		// offsets and are fine, Node2D placement is a packed Vector2 and is not,
-		// so check one value of each kind.
-		Camera2D camera = this.PlayerCam;
-		GD.Print(
-			$"[web-diag] int camera limits=({camera.LimitLeft},{camera.LimitTop}," +
-			$"{camera.LimitRight},{camera.LimitBottom}) expect=(0,0,1920,1080)");
+			if (node is Node2D node2D)
+			{
+				logged++;
+				bool instanced = !string.IsNullOrEmpty(node.SceneFilePath);
+				bool scripted = node.GetScript().VariantType != Variant.Type.Nil;
+				Godot.Vector2 local = node2D.Position;
+				GD.Print(
+					$"[web-diag] {node.Name} type={node.GetType().Name} " +
+					$"instanced={instanced} scripted={scripted} " +
+					$"pos=({(int)local.X},{(int)local.Y})");
+			}
 
-		Parallax2D? parallax = this.GetNodeOrNull<Parallax2D>("Parallax2D");
-		if (parallax != null)
-		{
-			Godot.Vector2 scroll = parallax.ScrollScale;
-			Godot.Vector2 repeat = parallax.RepeatSize;
-			GD.Print(
-				$"[web-diag] vec2 parallax scroll=({(int)(scroll.X * 100)},{(int)(scroll.Y * 100)}) " +
-				$"expect=(40,40) repeat=({(int)repeat.X},{(int)repeat.Y}) expect=(1920,1080)");
+			foreach (Node child in node.GetChildren())
+			{
+				LogNode(child, ref logged);
+			}
 		}
 	}
 
