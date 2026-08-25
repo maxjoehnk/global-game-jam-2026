@@ -224,3 +224,16 @@ jobs:
         with:
           name: web
           path: build/web
+
+  deploy-web:
+    name: Web Deploy
+    runs-on: self-hosted
+    continue-on-error: true
+    needs: export-web
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: web
+          path: build/web
+      - run: |
+          mv build/web/* ~/sites/maxjoehnk.me/www/games/maske-kann-auch-geil-sein/
