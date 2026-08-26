@@ -259,4 +259,9 @@ jobs:
           name: web
           path: build/web
       - run: |
-          mv build/web/* ~/sites/maxjoehnk.me/www/games/maske-kann-auch-geil-sein/
+          # Replace rather than merge: mv leaves stale files behind, and a
+          # stale index.wasm next to a fresh index.js is an ABI mismatch that
+          # corrupts memory instead of failing cleanly.
+          dest=~/sites/maxjoehnk.me/www/games/maske-kann-auch-geil-sein
+          rm -rf "$dest" && mkdir -p "$dest"
+          mv build/web/* "$dest/"

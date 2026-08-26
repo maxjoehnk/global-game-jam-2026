@@ -103,11 +103,15 @@ jobs:
     if: ${{ inputs.template_source != 'prebuilt' }}
 
     env:
+      # DEFAULT_LIBRARY_FUNCS_TO_INCLUDE pins three syscalls that went missing
+      # from the emitted JS in one build while the wasm kept importing them,
+      # which left the module unable to instantiate. Belt and braces alongside
+      # the bracket-matching fix to the DOTNET.setup erasure.
       SCONS_FLAGS: >-
         optimize=speed
         lto=full
         ccflags="-DNDEBUG"
-        linkflags="-sMALLOC=mimalloc"
+        linkflags="-sMALLOC=mimalloc -sDEFAULT_LIBRARY_FUNCS_TO_INCLUDE=__syscall_linkat,__syscall_setsockopt,__syscall_shutdown"
 
     steps:
       - name: Clone Godot fork
