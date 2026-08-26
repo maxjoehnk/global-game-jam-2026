@@ -19,7 +19,7 @@ on:
         required: false
         default: "4.6.3-stable"
       template_source:
-        description: "Web export template: build it, or take upstream's prebuilt one"
+        description: "Web export template: build it, or take upstream's prebuilt one (prebuilt ignores any patches, and needs godot_ref to be a released tag)"
         required: false
         type: choice
         options: [build, prebuilt]
@@ -33,9 +33,12 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  GODOT_FORK: https://github.com/ComplexRobot/godot.git
-  # Keep in sync with GODOT_VERSION in build.yml.
-  GODOT_REF: ${{ inputs.godot_ref || '4.6.3-stable' }}
+  # Our fork of ComplexRobot/godot, carrying the fix for property overrides
+  # being dropped on C# scripted nodes.
+  GODOT_FORK: https://github.com/maxjoehnk/godot.git
+  # Keep the version in sync with GODOT_VERSION in build.yml. The patch branch
+  # is 4.6.3-stable plus that one commit.
+  GODOT_REF: ${{ inputs.godot_ref || 'web-dotnet/bridge-set-out-param-4.6' }}
   # emsdk 6.0.6/6.0.7 run out of memory with LTO, per upstream.
   EMSDK_VERSION: 6.0.5
   TOOLCHAIN_ARTIFACT: godot-web-toolchain-linux-x86_64
@@ -194,6 +197,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
+          # Only valid for released tags, not for our patch branches.
           asset="Godot_v${GODOT_REF}_mono_web_export_win64.zip"
           echo "Fetching $asset from ComplexRobot/godot-dotnet-web-export@${GODOT_REF}"
           gh release download "$GODOT_REF" \
