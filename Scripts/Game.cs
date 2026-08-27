@@ -53,9 +53,6 @@ public partial class Game : Node2D
 
 	public override void _Ready()
 	{
-		// Before anything below mutates the tree, in particular RespawnPoint.
-		this.LogWebDiagnostics();
-
 		int physicsLayer = PhysicsBaseLayer;
 		Array<Node> layers = this.LayerContainer.GetChildren();
 		this.Hud.SetLayers(layers.Count, LayerColorList);
@@ -103,48 +100,6 @@ public partial class Game : Node2D
 		this.Player.ItemChanged += this.Hud.UpdateItem;
 
 		this.PlayLevelLoadedQuote();
-	}
-
-	// Temporary: instanced nodes lose their position overrides on web while plain
-	// nodes keep theirs. Every node observed broken so far is both instanced and
-	// C# scripted, so log both attributes for every Node2D to tell which one
-	// actually predicts the failure. SceneFilePath is non-empty exactly on the
-	// root of an instanced scene. Positions print as ints to keep float
-	// formatting out of it. Remove once the web build behaves.
-	private void LogWebDiagnostics()
-	{
-		if (!OS.HasFeature("web"))
-		{
-			return;
-		}
-
-		int logged = 0;
-		LogNode(this, ref logged);
-
-		static void LogNode(Node node, ref int logged)
-		{
-			if (logged >= 40)
-			{
-				return;
-			}
-
-			if (node is Node2D node2D)
-			{
-				logged++;
-				bool instanced = !string.IsNullOrEmpty(node.SceneFilePath);
-				bool scripted = node.GetScript().VariantType != Variant.Type.Nil;
-				Godot.Vector2 local = node2D.Position;
-				GD.Print(
-					$"[web-diag] {node.Name} type={node.GetType().Name} " +
-					$"instanced={instanced} scripted={scripted} " +
-					$"pos=({(int)local.X},{(int)local.Y})");
-			}
-
-			foreach (Node child in node.GetChildren())
-			{
-				LogNode(child, ref logged);
-			}
-		}
 	}
 
 	private void PlayLevelLoadedQuote()

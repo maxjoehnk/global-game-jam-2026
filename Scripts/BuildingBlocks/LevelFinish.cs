@@ -34,22 +34,6 @@ public partial class LevelFinish : Area2D, IAssignableLayer
 		};
 	}
 
-	// Temporary probe. Object::set consults the script instance before the
-	// built-in setter and returns as soon as the script claims the property, so
-	// a scripted node that wrongly claims "position" loses it silently. The
-	// bridge reaches _Set only when the generated SetGodotClassPropertyValue
-	// declined, so seeing this log for "position" narrows where the true is
-	// coming from. Remove once the web build behaves.
-	public override bool _Set(StringName property, Variant value)
-	{
-		if (OS.HasFeature("web"))
-		{
-			GD.Print($"[web-diag] _Set {property} variant={value.VariantType}");
-		}
-
-		return false;
-	}
-
 	public void LevelDone()
 	{
 		this.EmitSignalPlayerReachedGoal();
